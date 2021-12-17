@@ -23,6 +23,7 @@
 .main {
   height: calc(100% - var(--header-height) - var(--footer-height));
   padding: var(--main-padding);
+  padding-top: calc(2 * var(--main-padding));
   box-sizing: border-box;
   background-color: whitesmoke;
   overflow-y: auto;
@@ -38,6 +39,5 @@
 
   &__logo-wrapper {
     font-size: 12px;
-    // background-color: grey;
   }
 }

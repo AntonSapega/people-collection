@@ -48,6 +48,7 @@ function App() {
           <Route index element={<HomePage />}/>
           <Route path="/company" element={<CompanyPage />}/>
           <Route path={'users'} element={<UsersPage />}/>
+          <Route path={'users/:page'} element={<UsersPage />}/>
           <Route path={'settings'} element={<SettingsPage />}/>
         </Route>
 

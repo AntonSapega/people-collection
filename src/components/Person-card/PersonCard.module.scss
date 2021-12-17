@@ -1,0 +1,31 @@
+.person-id-card {
+  font-family: Fira Sans, sans-serif;
+  width: 340px;
+  border-radius: 6px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  box-sizing: border-box;
+  color: var(--primary-text-color);
+
+  &__main-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 1.4rem;
+  }
+
+  &__full-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  &__img {
+    border-radius: 9999px;
+    height: 120px;
+    width: 120px;
+    margin-right: 16px;
+  }
+}

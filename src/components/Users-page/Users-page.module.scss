@@ -1,27 +1,33 @@
 .users-page {
+  font-family: Fira Sans, sans-serif;
+  color: var(--primary-text-color);
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    
+    font-weight: 600;
+    font-size: 2.5rem;
+  }
+
+  &__description {
+    font-size: 0.9rem;
+  }
 
   &__users {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 1.4rem;
   }
-}
 
-.users-page__title {
-  margin-bottom: 18px;
-}
+  &__user {
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
 
-.person-id-card {
-  height: 180px;
-  width: 320px;
-  border-radius: 6px;
-  background-color: #fff;
-  margin-right: 14px;
-  margin-bottom: 14px;
-  display: flex;
-
-  &__img {
-    border-radius: 9999px;
-    height: 66px;
-    width: 66px;
+  &__pagination {
+    align-self: end;
+    display: flex;
+    flex-direction: row;
   }
 }
