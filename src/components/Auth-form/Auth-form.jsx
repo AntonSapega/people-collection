@@ -6,8 +6,8 @@ import PrimaryButton from '../Primary-button/Primary-button';
 
 export default class AuthForm extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.validators = this.validators.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -32,7 +32,7 @@ export default class AuthForm extends React.Component {
   }
 
   submitForm(submitEvent) {
-    console.log(submitEvent)
+    this.props.onGetForm(submitEvent);
   }
 
   handleForgotPassword() {

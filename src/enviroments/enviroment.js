@@ -1,0 +1,1 @@
+export const reqResUrl = 'https://reqres.in/';
