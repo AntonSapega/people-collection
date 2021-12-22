@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './PersonCard.module.scss';
 
-const PersonCard = ({user}) => {
+const PersonCard = ({user, onCardClick}) => {
   return (
-    <div className={styles['person-id-card']}>
+    <div className={styles['person-id-card']} onClick={() => onCardClick(user.id)}>
       <section className={styles['person-id-card__main-info']}>
         <img className={styles['person-id-card__img']} src={user.avatar} alt="person" />
         <h2 className={styles['person-id-card__full-name']}>{user.first_name} {user.last_name}</h2>

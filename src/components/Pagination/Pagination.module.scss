@@ -1,0 +1,45 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+
+  &__btn {
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 6px;
+    background-color: #fff;
+    padding: 4px 8px;
+    cursor: pointer;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:active {
+      outline: 0;
+      box-shadow: 0 0 2px 1px rgba(0, 123, 255, .5);
+    }
+
+    &:hover {
+      background-color: rgb(247, 247, 247);
+    }
+  }
+
+  &__btn_active {
+    background-color: tomato;
+    color: #fff;
+    &:hover {
+      background-color: rgb(233, 91, 66);
+    }
+  }
+
+  &__btn-title {
+    font-size: 16px;
+
+  }
+
+  &__btn-img {
+    font-size: 18px;
+  }
+}

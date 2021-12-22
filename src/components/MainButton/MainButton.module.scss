@@ -1,0 +1,15 @@
+.main-button {
+  font-family: 'Roboto', sans-serif;
+  border: none;
+  color: #fff;
+  background-color: var(--orange-color);
+  padding: 6px 12px;
+  box-sizing: border-box;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 120ms ease;
+  
+  &:hover {
+    background-color: var(--orange-color-hover);
+  }
+}

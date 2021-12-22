@@ -4,12 +4,12 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Logo from '../Logo/Logo';
 
-const Layout = () => {
+const Layout = ( {userId} ) => {
   
   return (
     <div className={styles['main-wrapper']}>
       <div className={styles['main-wrapper__content']}>
-        <Header />
+        <Header userId={userId} />
 
         <main className={styles["main"]}>
           <Outlet />

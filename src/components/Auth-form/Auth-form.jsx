@@ -85,9 +85,11 @@ export default class AuthForm extends React.Component {
             <StringButton handleClick={this.handleForgotPassword}>forgot password?</StringButton>
           </div>
 
-          <PrimaryButton type={'submit'} isDisable={errors.email || errors.password || values.email.length === 0 || values.password.length === 0}>
-            Login
-          </PrimaryButton>
+          <div className={styles['auth-form__primary-button-wrapper']}>
+            <PrimaryButton type={'submit'} isDisable={errors.email || errors.password || values.email.length === 0 || values.password.length === 0}>
+              Login
+            </PrimaryButton>
+          </div>
         </form>
       )
     }

@@ -2,52 +2,58 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from './Users-page.module.scss';
 import axios from "axios";
 import PersonCard from "../Person-card/PersonCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import Pagination from '../Pagination/Pagination';
 
 const UsersPage = () => {
 
   const [users, setUsers] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const routeParams = useParams();
 
   useEffect(() => {
-    console.log('Component did mount')
-    if (pageNumber === 1) {
-      navigate(`/users/${pageNumber}`, {replace: false});
-    }
+    getUsersPage(routeParams.page)
+  }, [routeParams])
 
-    const request = async () => {
-      await getUsersPage(pageNumber);
-      // await getUsersPage(2);
-    }
+  useEffect(() => {
+  }, [location])
 
-    request();
-  }, [])
 
-  // useRef(() => {
-  //   getUsersPage(pageNumber)
-  // }, [pageNumber])
 
   const getUsersPage = (number) => {
     return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
-      setUsers(state => {
-        return [...state, ...response.data.data];
+      setUsers(() => {
+        setTotalPages(() => response.data.total_pages)
+        return [...response.data.data];
       })
     })
   }
 
-  function nextPage() {
-    console.log(pageNumber)
-    setPageNumber(state => state + 1)
-    console.log(pageNumber)
-    navigate(`/users/${pageNumber}`, {replace: false});
+  function increasePageNumber() {
+    const nextPage = Number(routeParams.page) + 1;
+    navigate(`/users/${nextPage}`, {replace: false});
+  }
+
+  function decreasePageNumber() {
+    const prevPage = Number(routeParams.page) - 1;
+    navigate(`/users/${prevPage}`, {replace: false});
+  }
+
+  function handleChosenPage(num) {
+    navigate(`/users/${num}`, {replace: false});
+  }
+
+  function openPersonDetailsPage(id) {
+    navigate(`/users/user/${id}`)
   }
 
   const renderUsers = users.map(user => {
     return (
       <div className={styles['users-page__user']} key={user.id.toString()}>
-        <PersonCard user={user} />
+        <PersonCard user={user} onCardClick={openPersonDetailsPage} />
       </div>
     )
   })
@@ -59,13 +65,17 @@ const UsersPage = () => {
 
       <div className={styles['users-page__users']}>
         {renderUsers}
+        {/* {<ListPersonCards />} */}
       </div>
-
-      <nav className={styles['users-page__pagination']}>
-        <button>previous</button>
-        <button>1</button>
-        <button onClick={nextPage}>next</button>
-      </nav>
+      <div className={styles['users-page__pagination-wrapper']}>
+        <Pagination
+          activePage={routeParams.page}
+          totalPages={totalPages}
+          onBtnNumber={handleChosenPage}
+          onIncreasePage={increasePageNumber}
+          onDecreasePageNumber={decreasePageNumber}
+        />
+      </div>
     </div>
   )
 }

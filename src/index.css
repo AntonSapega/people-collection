@@ -28,8 +28,9 @@ html {
   --hover-turquoise: rgb(8, 219, 173);
   --main-padding: 20px;
   --orange-color: #ff8a5c;
+  --orange-color-hover: #f08257;
 
-  --header-height: 60px;
+  --header-height: 74px;
   --footer-height: 35px;
 }
 

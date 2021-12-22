@@ -1,0 +1,121 @@
+.person-details {
+  font-family: 'Roboto', sans-serif;
+  color: var(--primary-text-color);
+  background-color: #fff;
+  border: 2px solid rgb(226, 226, 226);
+  border-radius: 10px;
+  padding: 1rem;
+
+  &__img {
+    height: 150px;
+    border-radius: 50%;
+  }
+
+  &__main-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+  }
+
+  &__necessary-info {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__full-name {
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+
+  
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  font-size: 0.78rem;
+  margin-top: 0.4rem;
+
+  &__icon {
+    font-size: 1rem;
+    transform: translateY(1px);
+    margin-right: 10px;
+  }
+
+  &__path {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.favorite-color {
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
+
+  & * {
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  &__name, &__code, &__date {
+    text-transform: capitalize;
+    display: inline;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  &__sample-wrapper {
+    display: flex;
+    & span {
+      margin-bottom: 0;
+    }
+  }
+
+  &__sample {
+    display: block;
+    height: 16px;
+    width: 100px;
+    margin-left: 14px;
+  }
+}
+
+.go-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--orange-color);
+  border-radius: 50%;
+  width: fit-content;
+  padding: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-bottom: 1.4rem;
+  transition: all 140ms ease;
+
+  &:hover {
+    background-color: var(--orange-color-hover);
+  }
+
+  &__arrow {
+    font-size: 1.2rem;
+    color: #fff;
+    transform: translate(-1px, 0px);
+  }
+}
+
+.delete-person {
+  font-size: 1.4rem;
+  user-select: none;
+  cursor: pointer;
+}

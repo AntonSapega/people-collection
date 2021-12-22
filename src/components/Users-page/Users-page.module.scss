@@ -25,9 +25,7 @@
     margin-bottom: 2rem;
   }
 
-  &__pagination {
-    align-self: end;
-    display: flex;
-    flex-direction: row;
+  &__pagination-wrapper {
+    align-self: flex-end;
   }
 }

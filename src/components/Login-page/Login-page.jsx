@@ -1,23 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from '../Login-form/Login-form';
 import styles from './Login-page.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
-const LoginPage = () => {
+const LoginPage = ( {onUserInfo} ) => {
 
   const [formTitle] = useState('People Collection');
   const [formDescription] = useState("Try to find someone you really want to find");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  function handleForm(data) {
-    if (data.email === 'test@mail.com' && data.password === '123456') {
-      sessionStorage.setItem('token', 'true');
-    } else {
-      sessionStorage.setItem('token', 'false');
+  async function handleForm(formValue) {
+    const userData = await getToken(formValue);
+    console.log(userData);
+
+    if (userData) {
+      sessionStorage.setItem('token', userData.token);
+      console.log('userID: ', userData)
+      sessionStorage.setItem('userId', userData.id);
+      console.log(location.state)
+      navigate(location.state.from.pathname, {replace: true});
     }
+  }
 
-    navigate('/', {replace: true});
+  async function getToken(credentials) {
+    let userInfo = null;
+    await axios.post(`${process.env.REACT_APP_REQ_RES_URL}api/register`, credentials)
+    .then(response => {
+      console.log(response);
+      userInfo = response.data
+      onUserInfo(response.data);
+    })
+    .catch((error) => {
+      if (error.response.status === 400) {
+        alert('User was not found')
+      }
+    })
+
+    return userInfo;
   }
 
   return (
