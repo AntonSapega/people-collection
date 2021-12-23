@@ -1,0 +1,14 @@
+$main-bgc: rgb(8, 255, 200);
+
+.login-form {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--primary-bgc-color);
+  position: relative;
+
+  &__left-side {
+    background-color: $main-bgc;
+    width: 40%;
+  }
+}
