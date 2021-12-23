@@ -1,0 +1,53 @@
+.auth-form {
+  font-family: Fira Sans, sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+  width: 74%;
+
+  &__title {
+    font-size: 1.11rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 2rem;
+    align-self: center;
+  }
+
+  &__label {
+    font-size: 0.778rem;
+    margin-top: 1.7rem;
+    margin-bottom: 0.56rem;
+    font-weight: 600;
+    position: relative;
+
+    &:first-of-type {
+      margin: 0;
+    }
+  }
+
+  &__input {
+    margin-top: 10px;
+    width: 100%;
+    padding: 0.556rem 0.667rem;
+    box-sizing: border-box;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 4px;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px rgba(0, 162, 255, 0.5);
+    }
+  }
+
+  &__warning-message {
+    font-size: 0.56rem;
+    color: red;
+    position: absolute;
+    bottom: -0.78rem;
+    left: 0;
+  }
+
+  &__tip-btn {
+    align-self: flex-end;
+  }
+}

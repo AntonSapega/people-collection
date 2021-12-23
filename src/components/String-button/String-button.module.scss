@@ -1,0 +1,12 @@
+.string-btn {
+  font-family: Fira Sans, sans-serif;
+  font-size: 0.889rem;
+  width: fit-content;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    color:rgb(0, 123, 255);
+  }
+}
