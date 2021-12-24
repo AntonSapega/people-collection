@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styles from './Users-page.module.scss';
 import axios from "axios";
 import PersonCard from "../Person-card/PersonCard";

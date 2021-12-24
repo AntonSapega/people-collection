@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import UserProfile from '../UserProfile/UserProfile';
 
-const Header = ( {userId} ) => {
+const Header = () => {
   const isActiveConditional = ({isActive}) => styles['header__link'] + (isActive ? ` ${styles['header__link_active']}` : '');
 
   return (
@@ -18,7 +18,7 @@ const Header = ( {userId} ) => {
         <NavLink className={isActiveConditional} to="/settings">Settings</NavLink>
 
         <div className={styles['header__user-profile']}>
-          <UserProfile userId={userId} />
+          <UserProfile />
         </div>
       </nav>
 

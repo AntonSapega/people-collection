@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from './UserProfile.module.scss';
 import { useState } from "react/cjs/react.development";
 import axios from 'axios';
 import Logout from '../Logout/Logout';
+import { UsersContextProvider, UsersContext } from "../../utils/UsersContext";
 
-const UserProfile = ( {userId} ) => {
+const UserProfile = () => {
 
   const [userInfo, setUserInfo] = useState(null);
+  const {usersDB} = useContext(UsersContext);
 
   useState(() => {
-    console.log('userIdentifier: ', userId);
+    const id = sessionStorage.getItem('userId');
+
+    if (id.length > 3) {
+      const foundUser = usersDB.find(user => user.id === Number(id));
+      setUserInfo(foundUser);
+      return
+    }
+
     const userIdentifier = sessionStorage.getItem('userId');
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${userIdentifier}`)
     .then(response => setUserInfo(response.data.data))
