@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styles from './UserProfile.module.scss';
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 import axios from 'axios';
 import Logout from '../Logout/Logout';
 import { UsersContextProvider, UsersContext } from "../../utils/UsersContext";
@@ -9,6 +9,7 @@ const UserProfile = () => {
 
   const [userInfo, setUserInfo] = useState(null);
   const {usersDB} = useContext(UsersContext);
+  const [imgPlaceholder, setImgPlaceholder] = useState(null);
 
   useState(() => {
     const id = sessionStorage.getItem('userId');
@@ -24,9 +25,22 @@ const UserProfile = () => {
     .then(response => setUserInfo(response.data.data))
   }, []);
 
+  useEffect(() => {
+    if (!userInfo.avatar) {
+      setImgPlaceholder(userInfo.first_name)
+    }
+  }, [userInfo])
+
   return (
     <div className={styles["user-profile"]}>
-      <img className={styles["user-profile__image"]} src={userInfo?.avatar} alt="me"></img>
+      {userInfo?.avatar &&
+        <img className={styles["user-profile__image"]} src={userInfo?.avatar} alt="me"></img>
+      }
+      {!userInfo?.avatar &&
+        <div className={styles["image-placeholder"]}>
+          <span className={styles["image-placeholder__text"]}>{imgPlaceholder}</span>
+        </div>
+      }
       <div className={styles["user-profile__description"]}>
         <span className={styles["user-profile__full-name"]}>{userInfo?.first_name} {userInfo?.last_name}</span>
         <span className={styles["user-profile__email"]}>{userInfo?.email}</span>
