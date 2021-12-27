@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from './Users-page.module.scss';
 import axios from "axios";
 import PersonCard from "../Person-card/PersonCard";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Pagination from '../Pagination/Pagination';
+import { UsersContext } from '../../utils/UsersContext';
 
 const UsersPage = () => {
 
@@ -11,15 +12,12 @@ const UsersPage = () => {
   const [totalPages, setTotalPages] = useState(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
   const routeParams = useParams();
+  const {usersDB} = useContext(UsersContext);
 
   useEffect(() => {
     getUsersPage(routeParams.page)
   }, [routeParams])
-
-  useEffect(() => {
-  }, [location])
 
 
 
@@ -27,7 +25,15 @@ const UsersPage = () => {
     return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
       setUsers(() => {
         setTotalPages(() => response.data.total_pages)
-        return [...response.data.data];
+
+        const checkedUsersArray = response.data.data.filter(user => {
+          const isExistUser = usersDB.find(userFromDB => userFromDB.id === user.id);
+          if (isExistUser) {
+            return isExistUser;
+          }
+        })
+        
+        return [...checkedUsersArray];
       })
     })
   }

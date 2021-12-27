@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './PersonDetailsPage.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import axios from 'axios';
+import { UsersContext } from "../../utils/UsersContext";
 
 const PersonDetailsPage = () => {
 
@@ -11,10 +12,13 @@ const PersonDetailsPage = () => {
 
   const routeParams = useParams();
   const navigate = useNavigate();
+
+  const { usersDB, deleteUserFromDB } = useContext(UsersContext);
   
   useEffect(() => {
     Promise.all([getPersonInfo(), getPersonFavoriteColor()])
     .then(response => {
+      console.log('useEffect works')
       setPersonInfo(response[0].data.data)
       setFavoriteColor(response[1].data.data)
     })
@@ -36,8 +40,15 @@ const PersonDetailsPage = () => {
   function deleteActivePerson() {
     axios.delete(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
     .then(response => {
-      console.log('Delete result ', response);
-      goToPrevPage();
+      if (response.status === 204) {
+        console.log(personInfo);
+        console.log(usersDB);
+
+        deleteUserFromDB(personInfo);
+        // console.log(usersDB)
+
+        goToPrevPage();
+      }
     })
   }
 

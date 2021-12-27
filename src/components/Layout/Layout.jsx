@@ -11,24 +11,20 @@ const Layout = () => {
   console.log(usersContext)
 
   return (
-    <UsersContext.Consumer>
-      {context => (
-        <div className={styles['main-wrapper']}>
-          <div className={styles['main-wrapper__content']}>
-            <Header />
-            <main className={styles["main"]}>
-              <Outlet />
-            </main>
+    <div className={styles['main-wrapper']}>
+      <div className={styles['main-wrapper__content']}>
+        <Header />
+        <main className={styles["main"]}>
+          <Outlet />
+        </main>
 
-            <footer className={styles["footer"]}>
-              <div className={styles["footer__logo-wrapper"]}>
-                <Logo />
-              </div>
-            </footer>
+        <footer className={styles["footer"]}>
+          <div className={styles["footer__logo-wrapper"]}>
+            <Logo />
           </div>
-        </div>
-      )}
-    </UsersContext.Consumer>
+        </footer>
+      </div>
+    </div>
   )
 }
 

@@ -1,0 +1,15 @@
+.image-placeholder {
+  height: 50px;
+  width: 50px;
+  background-color: var(--orange-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text {
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: inherit;
+  }
+}

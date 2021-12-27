@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { UsersContext } from '../../utils/UsersContext';
 
-const LoginPage = ( {onUserInfo} ) => {
+const LoginPage = () => {
 
   const [formTitle] = useState('People Collection');
   const [formDescription] = useState("Try to find someone you really want to find");
@@ -14,6 +14,7 @@ const LoginPage = ( {onUserInfo} ) => {
   const location = useLocation();
 
   async function handleForm(formValue, setUserFn) {
+    console.log(formValue)
     const userData = formValue.confirmPassword ? await createNewUser(formValue, setUserFn) : await getToken(formValue);
 
     if (userData) {
@@ -29,10 +30,9 @@ const LoginPage = ( {onUserInfo} ) => {
     await axios.post(`${process.env.REACT_APP_REQ_RES_URL}api/register`, credentials)
     .then(response => {
       userInfo = response.data
-      // onUserInfo(response.data);
     })
     .catch((error) => {
-      if (error.response.status === 400) {
+      if (error.response?.status === 400) {
         alert('User was not found')
       }
     })
@@ -67,7 +67,7 @@ const LoginPage = ( {onUserInfo} ) => {
           <LoginForm
             title={formTitle}
             description={formDescription}
-            onGetForm={event => handleForm(event, context.setUsersDB)}
+            onGetForm={event => handleForm(event, context.addNewUser)}
           />
         </article>
       )}

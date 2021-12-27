@@ -14,41 +14,45 @@ import { UsersContext } from './utils/UsersContext';
 
 
 function App() {
-  // useEffect(() => {
-  //   axios.interceptors.request.use(function (config) {
-  //     // Do something before request is sent
-  //     console.log('Request Interceptor')
-  //     return config;
-  //   }, function (error) {
-  //     // Do something with request error
-  //     return Promise.reject(error);
-  //   });
+  useEffect(() => {
+    // axios.interceptors.request.use(config => {
+    //   // Do something before request is sent
+    //   const getUserUrlParams = config.url.split("https://reqres.in/api/unknown/");
 
-  //   // Add a response interceptor
-  //   axios.interceptors.response.use(function (response) {
-  //     // Any status code that lie within the range of 2xx cause this function to trigger
-  //     // Do something with response data
-  //     console.log('Response')
-  //     return response;
-  //   }, function (error) {
-  //     // Any status codes that falls outside the range of 2xx cause this function to trigger
-  //     // Do something with response error
-  //     return Promise.reject(error);
-  //   });
-  // }, [])
+    //   if (!getUserUrlParams[0] && JSON.parse(sessionStorage.getItem('createdUser')).id === Number(getUserUrlParams[1])) {
+    //     console.log('Got it')
+    //     throw new axios.Cancel('Operation canceled by the user.')
+    //     return;
+    //   }
+
+    //   return config;
+    // }, function (error) {
+    //   // Do something with request error
+    //   return Promise.reject(error);
+    // });
+
+    // Add a response interceptor
+    axios.interceptors.response.use(response => {
+      if (sessionStorage.getItem('createdUser') &&
+          JSON.parse(sessionStorage.getItem('createdUser')) &&
+          response.request.responseURL.split('=')[0] === 'https://reqres.in/api/users?page') {
+        if (response.data.total_pages === response.data.page) {
+          response.data.data.push(JSON.parse(sessionStorage.getItem('createdUser')));
+        }
+        response.data.total_pages++;
+      }
+      return response;
+    }, function (error) {
+      // Any status codes that falls outside the range of 2xx cause this function to trigger
+      // Do something with response error
+      return Promise.reject(error);
+    });
+  }, [])
 
   //*************** */
 
-  // const [userId, setUserId] = useState(null);
 
-  // function handleUserInfo(info) {
-  //   console.log('handleUserInfo', info);
-  //   setUserId(info);
-  //   console.log(userId);
-  // }
-
-  // const [usersDB, setUsersDB] = useState([]);
-  const {setUsersDB} = useContext(UsersContext);
+  const {initUsersDB, addNewUser} = useContext(UsersContext);
 
   useEffect(() => {
     getAllUsers(1);
@@ -56,21 +60,22 @@ function App() {
 
   async function getAllUsers(pageNumber) {
     await usersRequest(pageNumber).then(response => {
-      setUsersDB(response.data.data);
+      initUsersDB(response.data.data);
 
       if (response.data.page < response.data.total_pages) {
         getAllUsers(pageNumber + 1)
+      }
+
+      if (response.data.page === response.data.total_pages && JSON.parse(sessionStorage.getItem('createdUser'))) {
+        console.log('Work')
+        const user = JSON.parse(sessionStorage.getItem('createdUser'));
+        addNewUser([user]);
       }
     })
   }
 
   function usersRequest(pageNumber) {
     return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${pageNumber}`)
-  }
-
-  function addNewUser(user) {
-    console.log('User: ', user);
-    setUsersDB(prevState => [...prevState, user]);
   }
 
   return (
@@ -90,7 +95,7 @@ function App() {
           <Route path="*" element={<HomePage />} />
         </Route>
 
-        <Route path={'login'} element={<LoginPage onUserInfo={addNewUser} />} />
+        <Route path={'login'} element={<LoginPage />} />
         {/* <Route path={'login'} element={<LoginPage onUserInfo={handleUserInfo} />} /> */}
       </Routes>
     </>

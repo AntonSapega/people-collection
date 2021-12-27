@@ -10,6 +10,7 @@ const Logout = () => {
   const handleLogoutClick = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('createdUser');
     navigate('/', {replace: true});
   }
 
