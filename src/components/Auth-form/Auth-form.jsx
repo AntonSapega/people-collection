@@ -3,6 +3,8 @@ import styles from './Auth-form.module.scss';
 import { Formik } from 'formik';
 import StringButton from '../String-button/String-button';
 import PrimaryButton from '../Primary-button/Primary-button';
+import FormInput from './FormInput';
+import FormikForm from './FormikForm';
 
 export default class AuthForm extends React.Component {
 
@@ -48,6 +50,10 @@ export default class AuthForm extends React.Component {
       errors.confirmPassword = "Password doesn't match";
     }
 
+    if (!values.firstName && this.state.isRegistrationMode) {
+      errors.firstName = 'You forgot specify first name';
+    }
+
     return errors;
   }
 
@@ -72,7 +78,6 @@ export default class AuthForm extends React.Component {
   }
 
   render() {
-
     const authForm = ({
       values,
       errors,
@@ -81,87 +86,81 @@ export default class AuthForm extends React.Component {
       handleBlur,
       handleSubmit,
     }) => {
+      const inputFields = [
+        {
+          isVisible: true,
+          labelTitle: 'Email',
+          inputType: 'email',
+          inputName:'email',
+          inputValue: values.email,
+          inputPlaceholder: 'joe@email.com',
+          handleBlur: handleBlur,
+          handleChange: handleChange,
+          warningMessage: touched.email && errors.email
+        },
+        {
+          isVisible: true,
+          labelTitle: 'Password',
+          inputType: 'password',
+          inputName: 'password',
+          inputValue: values.password,
+          inputPlaceholder: 'Enter your Password',
+          handleBlur: handleBlur,
+          handleChange: handleChange,
+          warningMessage: touched.password && errors.password
+        },
+        {
+          isVisible: this.state.isRegistrationMode,
+          labelTitle: 'Confirm Password',
+          inputType: 'password',
+          inputName: 'confirmPassword',
+          inputValue: values.confirmPassword,
+          inputPlaceholder: 'Confirm password',
+          handleBlur: handleBlur,
+          handleChange: handleChange,
+          warningMessage: touched.confirmPassword && errors.confirmPassword
+        },
+        {
+          isVisible: this.state.isRegistrationMode,
+          labelTitle: 'First Name',
+          inputType: 'text',
+          inputName: 'firstName',
+          inputValue: values.firstName,
+          inputPlaceholder: 'Input your name',
+          handleBlur: handleBlur,
+          handleChange: handleChange,
+          warningMessage: touched.firstName && errors.firstName
+        },
+        {
+          isVisible: this.state.isRegistrationMode,
+          labelTitle: 'Last Name',
+          inputType: 'text',
+          inputName: 'lastName',
+          inputValue: values.lastName,
+          inputPlaceholder: 'Input your last name',
+          handleBlur: handleBlur,
+          handleChange: handleChange,
+          warningMessage: touched.lastName && errors.lastName
+        }
+      ]
       return (
         <form className={styles['auth-form']} onSubmit={handleSubmit}>
           <h2 className={styles['auth-form__title']}>{this.getFormValue('formTitle')}</h2>
-  
-          <label className={styles['auth-form__label']}>
-            Email
-            <input
-              className={styles['auth-form__input']}
-              type="email"
-              name="email"
-              placeholder='joe@email.com'
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.email}
+
+          {inputFields.map(inputField => (
+            <FormInput 
+              key={inputField.inputName}
+              isVisible={inputField.isVisible}
+              labelTitle={inputField.labelTitle}
+              inputType={inputField.inputType}
+              inputName={inputField.inputName}
+              inputValue={inputField.inputValue}
+              inputPlaceholder={inputField.inputPlaceholder}
+              handleBlur={inputField.handleBlur}
+              handleChange={inputField.handleChange}
+              warningMessage={inputField.warningMessage}
             />
-            <small className={styles['auth-form__warning-message']}>{ errors.email && touched.email && errors.email }</small>
-          </label>
-  
-          <label className={styles['auth-form__label']} htmlFor='password'>
-            Password
-            <input
-              className={styles['auth-form__input']}
-              type="password"
-              name="password"
-              placeholder='Enter your Password'
-              id="password"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.password}
-            />
-            <small className={styles['auth-form__warning-message']}>{ errors.password && touched.password && errors.password }</small>
-          </label>
-
-          {this.state.isRegistrationMode && 
-            <>
-              <label className={`${styles['auth-form__label']} ${styles['auth-form__confirm-password']}`} htmlFor='confirm-password'>
-                Confirm Password
-                <input
-                  className={styles['auth-form__input']}
-                  type="password"
-                  name="confirmPassword"
-                  placeholder='Confirm password'
-                  id="confirm-password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.confirmPassword}
-                />
-                <small className={styles['auth-form__warning-message']}>{ errors.confirmPassword && touched.confirmPassword && errors.confirmPassword }</small>
-              </label>
-
-              <label className={`${styles['auth-form__label']} ${styles['auth-form__confirm-password']}`} htmlFor='first-name'>
-                First Name
-                <input
-                  className={styles['auth-form__input']}
-                  type="text"
-                  name="firstName"
-                  placeholder='Confirm password'
-                  id="first-name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.firstName}
-                />
-                <small className={styles['auth-form__warning-message']}>{ errors.confirmPassword && touched.confirmPassword && errors.confirmPassword }</small>
-              </label>
-
-              <label className={`${styles['auth-form__label']} ${styles['auth-form__confirm-password']}`} htmlFor='last-name'>
-                Last Name
-                <input
-                  className={styles['auth-form__input']}
-                  type="text"
-                  name="lastName"
-                  placeholder='Confirm password'
-                  id="last-name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                />
-                <small className={styles['auth-form__warning-message']}>{ errors.confirmPassword && touched.confirmPassword && errors.confirmPassword }</small>
-              </label>
-            </>
-          }
+          ))}
           
           <div className={styles['auth-form__tip-btn']}>
             <StringButton handleClick={this.switchFormMode}>{this.getFormValue('formOptions')}</StringButton>
