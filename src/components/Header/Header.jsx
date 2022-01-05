@@ -13,7 +13,7 @@ const Header = () => {
 
       <nav className={styles['header__nav']}>
         <NavLink className={isActiveConditional} to="/">Home</NavLink>
-        <NavLink className={isActiveConditional} to="/company">Company</NavLink>
+        <NavLink className={isActiveConditional} to="/colors/1">Colors</NavLink>
         <NavLink className={isActiveConditional} to="/users/1">Users</NavLink>
         <NavLink className={isActiveConditional} to="/settings">Settings</NavLink>
 

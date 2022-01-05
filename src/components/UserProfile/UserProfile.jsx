@@ -12,12 +12,10 @@ const UserProfile = () => {
   const {usersDB} = useContext(UsersContext);
 
   useEffect(() => {
-    console.log('Use State: ', usersDB)
     const id = sessionStorage.getItem('userId');
 
     if (sessionStorage.getItem('createdUser')) {
       const foundUser = usersDB.find(user => user.id === Number(id));
-      console.log(foundUser)
       setUserInfo(foundUser);
       return;
     }

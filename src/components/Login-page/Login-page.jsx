@@ -14,7 +14,6 @@ const LoginPage = () => {
   const location = useLocation();
 
   async function handleForm(formValue, setUserFn) {
-    console.log(formValue)
     const userData = formValue.confirmPassword ? await createNewUser(formValue, setUserFn) : await getToken(formValue);
 
     if (userData) {

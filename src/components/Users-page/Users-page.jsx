@@ -22,7 +22,7 @@ const UsersPage = () => {
 
 
   const getUsersPage = (number) => {
-    return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
+    axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
       setUsers(() => {
         setTotalPages(() => response.data.total_pages)
 

@@ -1,0 +1,23 @@
+.color-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 260px;
+  width: 440px;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 140ms ease;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  &__description {
+    background-color: rgb(58, 55, 55);
+    padding: 1rem;
+    box-sizing: border-box;
+    color: #fff;
+    text-transform: capitalize;
+  }
+}
