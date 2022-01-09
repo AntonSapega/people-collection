@@ -18,7 +18,6 @@ const PersonDetailsPage = () => {
   useEffect(() => {
     Promise.all([getPersonInfo(), getPersonFavoriteColor()])
     .then(response => {
-      console.log('useEffect works')
       setPersonInfo(response[0].data.data)
       setFavoriteColor(response[1].data.data)
     })
@@ -41,15 +40,14 @@ const PersonDetailsPage = () => {
     axios.delete(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
     .then(response => {
       if (response.status === 204) {
-        console.log(personInfo);
-        console.log(usersDB);
-
         deleteUserFromDB(personInfo);
-        // console.log(usersDB)
-
         goToPrevPage();
       }
     })
+  }
+
+  function goToColorPage() {
+    navigate(`/colors/color-details/${routeParams.id}`)
   }
 
   const avatarPlaceholder = `${personInfo?.first_name} ${personInfo?.last_name}`;
@@ -83,7 +81,8 @@ const PersonDetailsPage = () => {
                 <span>Color code: <span className={styles['favorite-color__code']}>{favoriteColor.color}</span></span>
                 <span>Foundation date: <span className={styles['favorite-color__date']}>{favoriteColor.year} year</span></span>
                 <div className={styles['favorite-color__sample-wrapper']}>
-                  <span>Sample: </span><span className={styles['favorite-color__sample']} style={{backgroundColor: favoriteColor.color}}></span>
+                  <span>Sample: </span>
+                  <span className={styles['favorite-color__sample']} style={{backgroundColor: favoriteColor.color}} onClick={goToColorPage}></span>
                 </div>
               </article>
             </div>

@@ -11,6 +11,7 @@ import PersonDetailsPage from './components/PersonDetailsPage/PersonDetailsPage'
 import axios from 'axios';
 import { UsersContext } from './utils/UsersContext';
 import ColorsPage from './components/ColorsPage/ColorsPage';
+import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
 
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
         }>
           <Route index element={<HomePage />} />
           <Route path="/colors/:page" element={<ColorsPage />} />
+          <Route path="/colors/color-details/:id" element={<ColorDetailsPage />} />
           <Route path={'users/:page'} element={<UsersPage />} />
           <Route path={'users/user/:id'} element={<PersonDetailsPage />}/>
           <Route path={'settings'} element={<SettingsPage />} />

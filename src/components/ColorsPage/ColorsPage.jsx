@@ -20,17 +20,10 @@ const ColorsPage = () => {
   function requestColors(pageNumber) {
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown?page=${pageNumber}`)
     .then(response => {
-      setColors(response.data.data)
-      setTotalPages(response.data.total_pages)
-      console.log(response.data)
+      setColors(response.data.data);
+      setTotalPages(response.data.total_pages);
     });
   }
-
-  const renderColors = colors?.map(color => {
-    return (
-      <ColorCard key={color.name} color={color.color} name={color.name} style={{margin: '0 1.6rem 1.6rem 0'}} />
-    )
-  })
 
   function increasePageNumber() {
     const nextPage = Number(routeParams.page) + 1;
@@ -45,6 +38,21 @@ const ColorsPage = () => {
   function handleChosenPage(num) {
     navigate(`/colors/${num}`, {replace: false});
   }
+
+  function openColorDetails(colorId) {
+    navigate(`/colors/color-details/${colorId}`)
+  }
+
+  const renderColors = colors?.map(color => {
+    return (
+      <ColorCard
+        key={color.name}
+        color={color.color}
+        name={color.name}
+        style={{margin: '0 1.6rem 1.6rem 0'}}
+        onColorCard={() => openColorDetails(color.id)} />
+    )
+  })
 
   return (
     <div className={styles['colors-page']}>
