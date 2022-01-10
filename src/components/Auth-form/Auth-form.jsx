@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import StringButton from '../String-button/String-button';
 import PrimaryButton from '../Primary-button/Primary-button';
 import FormInput from './FormInput';
-import FormikForm from './FormikForm';
 
 export default class AuthForm extends React.Component {
 

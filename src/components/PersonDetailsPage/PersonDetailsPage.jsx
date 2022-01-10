@@ -13,7 +13,7 @@ const PersonDetailsPage = () => {
   const routeParams = useParams();
   const navigate = useNavigate();
 
-  const { usersDB, deleteUserFromDB } = useContext(UsersContext);
+  const { deleteUserFromDB } = useContext(UsersContext);
   
   useEffect(() => {
     Promise.all([getPersonInfo(), getPersonFavoriteColor()])

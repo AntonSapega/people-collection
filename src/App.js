@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import classes from './App.module.scss';
+import React, { useEffect, useContext } from 'react';
 import LoginPage from './components/Login-page/Login-page';
 import { Routes, Route, } from 'react-router-dom';
 import RequireAuth from './hoc/RequireAuth';
@@ -12,50 +11,15 @@ import axios from 'axios';
 import { UsersContext } from './utils/UsersContext';
 import ColorsPage from './components/ColorsPage/ColorsPage';
 import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
+import addNewUserToUsersDB from './interceptors/CheckOnCreatedUser.interceptor';
 
 
 function App() {
-  useEffect(() => {
-    // axios.interceptors.request.use(config => {
-    //   // Do something before request is sent
-    //   const getUserUrlParams = config.url.split("https://reqres.in/api/unknown/");
-
-    //   if (!getUserUrlParams[0] && JSON.parse(sessionStorage.getItem('createdUser')).id === Number(getUserUrlParams[1])) {
-    //     console.log('Got it')
-    //     throw new axios.Cancel('Operation canceled by the user.')
-    //     return;
-    //   }
-
-    //   return config;
-    // }, function (error) {
-    //   // Do something with request error
-    //   return Promise.reject(error);
-    // });
-
-    // Add a response interceptor
-    axios.interceptors.response.use(response => {
-      if (sessionStorage.getItem('createdUser') &&
-          JSON.parse(sessionStorage.getItem('createdUser')) &&
-          response.request.responseURL.split('=')[0] === 'https://reqres.in/api/users?page') {
-        if (response.data.total_pages === response.data.page) {
-          response.data.data.push(JSON.parse(sessionStorage.getItem('createdUser')));
-        }
-        // response.data.total_pages++;
-      }
-      return response;
-    }, function (error) {
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      // Do something with response error
-      return Promise.reject(error);
-    });
-  }, [])
-
-  //*************** */
-
 
   const {initUsersDB, addNewUser} = useContext(UsersContext);
 
   useEffect(() => {
+    addNewUserToUsersDB();
     getAllUsers(1);
   }, [])
 
@@ -68,7 +32,6 @@ function App() {
       }
 
       if (response.data.page === response.data.total_pages && JSON.parse(sessionStorage.getItem('createdUser'))) {
-        console.log('Work')
         const user = JSON.parse(sessionStorage.getItem('createdUser'));
         addNewUser([user]);
       }
@@ -84,7 +47,6 @@ function App() {
       <Routes>
         <Route path={'/'} element={
           <RequireAuth>
-            {/* <Layout userId={userId} /> */}
             <Layout />
           </RequireAuth>
         }>
@@ -98,7 +60,6 @@ function App() {
         </Route>
 
         <Route path={'login'} element={<LoginPage />} />
-        {/* <Route path={'login'} element={<LoginPage onUserInfo={handleUserInfo} />} /> */}
       </Routes>
     </>
   );
