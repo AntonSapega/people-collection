@@ -8,8 +8,6 @@ const ImagePlaceholder = ({ firstWord, secondWord, imgStyles }) => {
   useEffect(() => {
     const textPlaceholder = firstWord[0] + secondWord[0];
     setPlaceholder(() => textPlaceholder.toUpperCase());
-
-    console.log(imgStyles)
   }, [])
 
   return (

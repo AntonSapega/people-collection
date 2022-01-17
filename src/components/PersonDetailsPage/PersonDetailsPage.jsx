@@ -4,6 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import axios from 'axios';
 import { UsersContext } from "../../utils/UsersContext";
+import { useDispatch } from 'react-redux';
+import { deletePerson } from '../../redux/actions';
 
 const PersonDetailsPage = () => {
 
@@ -13,7 +15,8 @@ const PersonDetailsPage = () => {
   const routeParams = useParams();
   const navigate = useNavigate();
 
-  const { deleteUserFromDB } = useContext(UsersContext);
+  // const { deleteUserFromDB } = useContext(UsersContext);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     Promise.all([getPersonInfo(), getPersonFavoriteColor()])
@@ -40,7 +43,8 @@ const PersonDetailsPage = () => {
     axios.delete(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
     .then(response => {
       if (response.status === 204) {
-        deleteUserFromDB(personInfo);
+        // deleteUserFromDB(personInfo);
+        dispatch(deletePerson(personInfo))
         goToPrevPage();
       }
     })

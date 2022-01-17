@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styles from './Users-page.module.scss';
 import axios from "axios";
 import PersonCard from "../Person-card/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from '../Pagination/Pagination';
-import { UsersContext } from '../../utils/UsersContext';
+import { useSelector } from "react-redux";
 
 const UsersPage = () => {
 
@@ -13,13 +13,11 @@ const UsersPage = () => {
 
   const navigate = useNavigate();
   const routeParams = useParams();
-  const {usersDB} = useContext(UsersContext);
+  const peopleCollection = useSelector(state => state.peopleCollection.people);
 
   useEffect(() => {
-    getUsersPage(routeParams.page)
-  }, [routeParams])
-
-
+    getUsersPage(routeParams.page);
+  }, [routeParams, peopleCollection])
 
   const getUsersPage = (number) => {
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
@@ -27,12 +25,14 @@ const UsersPage = () => {
         setTotalPages(() => response.data.total_pages)
 
         const checkedUsersArray = response.data.data.filter(user => {
-          const isExistUser = usersDB.find(userFromDB => userFromDB.id === user.id);
+          const isExistUser = peopleCollection.find(userFromDB => userFromDB.id === user.id);
           if (isExistUser) {
+            console.log(isExistUser);
             return isExistUser;
           }
         })
-        
+        console.log(checkedUsersArray)
+
         return [...checkedUsersArray];
       })
     })

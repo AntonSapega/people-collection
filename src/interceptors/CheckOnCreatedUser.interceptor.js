@@ -3,7 +3,7 @@ import axios from "axios";
 const addNewUserToUsersDB = () => {
   axios.interceptors.response.use(response => {
     if (sessionStorage.getItem('createdUser') &&
-        response.request.responseURL.split('=')[0] === 'https://reqres.in/api/users?page') {
+        response.request.responseURL.split('=')[0] === `${process.env.REACT_APP_REQ_RES_URL}api/users?page`) {
       if (response.data.total_pages === response.data.page) {
         response.data.data.push(JSON.parse(sessionStorage.getItem('createdUser')));
       }

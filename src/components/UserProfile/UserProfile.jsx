@@ -5,17 +5,20 @@ import axios from 'axios';
 import Logout from '../Logout/Logout';
 import { UsersContext } from "../../utils/UsersContext";
 import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
+import { useSelector } from "react-redux";
 
 const UserProfile = () => {
 
   const [userInfo, setUserInfo] = useState(null);
-  const {usersDB} = useContext(UsersContext);
+  // const {usersDB} = useContext(UsersContext);
+  const usersState = useSelector(state => state.user.info);
+  const peopleCollection = useSelector(state => state.peopleCollection.people);
 
   useEffect(() => {
     const id = sessionStorage.getItem('userId');
 
     if (sessionStorage.getItem('createdUser')) {
-      const foundUser = usersDB.find(user => user.id === Number(id));
+      const foundUser = peopleCollection.find(user => user.id === Number(id));
       setUserInfo(foundUser);
       return;
     }
@@ -23,7 +26,7 @@ const UserProfile = () => {
     const userIdentifier = sessionStorage.getItem('userId');
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${userIdentifier}`)
     .then(response => setUserInfo(response.data.data))
-  }, [usersDB]);
+  }, [peopleCollection]);
 
   return (
     <div className={styles["user-profile"]}>
