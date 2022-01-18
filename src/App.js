@@ -10,17 +10,20 @@ import PersonDetailsPage from './components/PersonDetailsPage/PersonDetailsPage'
 import ColorsPage from './components/ColorsPage/ColorsPage';
 import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
 import addNewUserToUsersDB from './interceptors/CheckOnCreatedUser.interceptor';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initPeopleCollection } from './redux/actions';
+import retrieveUser from './interceptors/retrieveUser';
 
 
 function App() {
 
+  const user = useSelector(state => state.user.info);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(initPeopleCollection());
     addNewUserToUsersDB();
+    retrieveUser(dispatch);
   }, [])
 
   return (

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { INIT_LIST_OF_PEOPLE, CREATE_NEW_USER, ADD_NEW_USER, DELETE_PERSON } from './types';
+import { INIT_LIST_OF_PEOPLE, SET_USER, DELETE_PERSON, ADD_NEW_PERSON, REMOVE_USER } from './types';
 
 export const initPeopleCollection = () => {
   return async dispatch => {
-    await fetchUsers(dispatch, 1);
+    await fetchPeople(dispatch, 1);
   }
 }
 
@@ -13,24 +13,54 @@ export const createUser = (payload) => {
   }
 }
 
-export const addNewUser = (payload) => {
-  return {
-    type: ADD_NEW_USER,
-    payload
+export const getLoggedUser = (paramsForLogin) => {
+    return async dispatch => {
+      const user = await userRequest(paramsForLogin);
+      console.log(user);
+      dispatch(setUser(user));
+      dispatch(addNewPerson(user));
   }
 }
 
-export const deletePerson = (payload) => {
+export const setUser = (user) => {
+  sessionStorage.setItem('token', JSON.stringify(user.token));
+  delete user.token;
+  sessionStorage.setItem('user', JSON.stringify(user));
+
+  return {
+    type: SET_USER,
+    payload: user
+  }
+}
+
+export const removeUser = () => {
+  sessionStorage.removeItem('user');
+  sessionStorage.removeItem('token');
+  return {
+    type: REMOVE_USER
+  }
+}
+
+export const addNewPerson = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: ADD_NEW_PERSON,
+      payload
+    })
+  }
+}
+
+export const deletePerson = (personId) => {
   return {
     type: DELETE_PERSON,
-    payload
+    payload: personId
   }
 }
 
 
 
 // Auxiliary functions:
-function fetchUsers(dispatchFn, pageNumber) {
+function fetchPeople(dispatchFn, pageNumber) {
   usersRequest(pageNumber).then(response => {
     dispatchFn({
       type: INIT_LIST_OF_PEOPLE,
@@ -38,7 +68,7 @@ function fetchUsers(dispatchFn, pageNumber) {
     })
 
     if (response.data.page < response.data.total_pages) {
-      fetchUsers(dispatchFn, pageNumber + 1);
+      fetchPeople(dispatchFn, pageNumber + 1);
     }
 
     // if (response.data.page === response.data.total_pages && JSON.parse(sessionStorage.getItem('createdUser'))) {
@@ -65,10 +95,23 @@ async function createMockUser(userData, dispatchFn) {
     }, 1000)
   })
 
-  await newUser.then(user => {
-    dispatchFn({
-      type: CREATE_NEW_USER,
-      payload: user
-    })
+   await newUser.then(user => {
+    dispatchFn(setUser(user));
+    dispatchFn(addNewPerson(user));
   })
+}
+
+async function userRequest(credentials) {
+  let userInfo = null;
+  const baseUserInfo = await axios.post(`${process.env.REACT_APP_REQ_RES_URL}api/register`, credentials);
+  await axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${baseUserInfo.data.id}`)
+    .then(result => {
+      userInfo = {...result.data.data, token: baseUserInfo.data.token};
+    })
+    .catch((error) => {
+      if (error.response?.status === 400) {
+        alert('User was not found');
+      }
+    })
+  return userInfo;
 }

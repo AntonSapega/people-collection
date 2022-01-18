@@ -16,8 +16,9 @@ const UsersPage = () => {
   const peopleCollection = useSelector(state => state.peopleCollection.people);
 
   useEffect(() => {
+    console.log('USERS_PAGE', routeParams.page)
     getUsersPage(routeParams.page);
-  }, [routeParams, peopleCollection])
+  }, [routeParams])
 
   const getUsersPage = (number) => {
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
@@ -27,11 +28,11 @@ const UsersPage = () => {
         const checkedUsersArray = response.data.data.filter(user => {
           const isExistUser = peopleCollection.find(userFromDB => userFromDB.id === user.id);
           if (isExistUser) {
-            console.log(isExistUser);
+            // console.log(isExistUser);
             return isExistUser;
           }
         })
-        console.log(checkedUsersArray)
+        // console.log(checkedUsersArray)
 
         return [...checkedUsersArray];
       })

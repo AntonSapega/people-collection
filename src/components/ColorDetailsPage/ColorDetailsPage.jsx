@@ -14,6 +14,7 @@ const ColorDetailsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('ColorsPage useEffect')
     Promise.all([fetchColorDetails(), fetchCreator(), fetchTextPlaceholder()])
     .then(response => {
       setColorInfo(response[0].data.data);

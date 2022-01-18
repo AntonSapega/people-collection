@@ -44,7 +44,7 @@ const PersonDetailsPage = () => {
     .then(response => {
       if (response.status === 204) {
         // deleteUserFromDB(personInfo);
-        dispatch(deletePerson(personInfo))
+        dispatch(deletePerson(personInfo.id))
         goToPrevPage();
       }
     })

@@ -1,32 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from './UserProfile.module.scss';
 import { useEffect, useState } from "react/cjs/react.development";
-import axios from 'axios';
 import Logout from '../Logout/Logout';
-import { UsersContext } from "../../utils/UsersContext";
 import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
 import { useSelector } from "react-redux";
 
 const UserProfile = () => {
 
   const [userInfo, setUserInfo] = useState(null);
-  // const {usersDB} = useContext(UsersContext);
-  const usersState = useSelector(state => state.user.info);
+  const user = useSelector(state => state.user.info);
   const peopleCollection = useSelector(state => state.peopleCollection.people);
 
   useEffect(() => {
-    const id = sessionStorage.getItem('userId');
-
-    if (sessionStorage.getItem('createdUser')) {
-      const foundUser = peopleCollection.find(user => user.id === Number(id));
-      setUserInfo(foundUser);
-      return;
+    if (user && peopleCollection.length) {
+      const foundUser = peopleCollection.find(person => person.id === user.id);
+      if (foundUser) {
+        setUserInfo(foundUser);
+      }
     }
-
-    const userIdentifier = sessionStorage.getItem('userId');
-    axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${userIdentifier}`)
-    .then(response => setUserInfo(response.data.data))
-  }, [peopleCollection]);
+  }, [user, peopleCollection]);
 
   return (
     <div className={styles["user-profile"]}>
