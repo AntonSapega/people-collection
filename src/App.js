@@ -4,15 +4,15 @@ import { Routes, Route, } from 'react-router-dom';
 import RequireAuth from './hoc/RequireAuth';
 import Layout from './components/Layout/Layout';
 import HomePage from './components/Home-page/Home-page';
-import UsersPage from './components/Users-page/Users-page';
+import PeoplePage from './components/People-page/People-page';
 import SettingsPage from './components/Settings-page/Settings-page';
 import PersonDetailsPage from './components/PersonDetailsPage/PersonDetailsPage';
 import ColorsPage from './components/ColorsPage/ColorsPage';
 import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
-import addNewUserToUsersDB from './interceptors/CheckOnCreatedUser.interceptor';
 import { useDispatch, useSelector } from 'react-redux';
 import { initPeopleCollection } from './redux/actions';
 import retrieveUser from './interceptors/retrieveUser';
+import loaderController from './interceptors/loaderController';
 
 
 function App() {
@@ -22,9 +22,14 @@ function App() {
 
   useEffect(() => {
     dispatch(initPeopleCollection());
-    addNewUserToUsersDB();
-    retrieveUser(dispatch);
+    loaderController(dispatch);
   }, [])
+
+  useEffect(() => {
+    if (!user) {
+      retrieveUser(dispatch);
+    }
+  }, [user]);
 
   return (
     <>
@@ -37,8 +42,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/colors/:page" element={<ColorsPage />} />
           <Route path="/colors/color-details/:id" element={<ColorDetailsPage />} />
-          <Route path={'users/:page'} element={<UsersPage />} />
-          <Route path={'users/user/:id'} element={<PersonDetailsPage />}/>
+          <Route path={'people/:page'} element={<PeoplePage />} />
+          <Route path={'people/person/:id'} element={<PersonDetailsPage />}/>
           <Route path={'settings'} element={<SettingsPage />} />
           <Route path="*" element={<HomePage />} />
         </Route>

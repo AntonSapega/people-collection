@@ -7,7 +7,10 @@ const user = {
 export const userReducer = (state = user, action) => {
   switch (action.type) {
     case SET_USER:
-      return {...state, info: action.payload};
+      if (!state.info) {
+        return {...state, info: action.payload};
+      }
+      return state;
     case REMOVE_USER:
       return {...state, info: null};
     default:

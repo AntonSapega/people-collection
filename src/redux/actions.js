@@ -1,5 +1,17 @@
 import axios from 'axios';
-import { INIT_LIST_OF_PEOPLE, SET_USER, DELETE_PERSON, ADD_NEW_PERSON, REMOVE_USER } from './types';
+import { ADD_LOADER_REQUEST, DECREASE_LOADER_REQUEST, INIT_LIST_OF_PEOPLE, SET_USER, DELETE_PERSON, ADD_NEW_PERSON, REMOVE_USER } from './types';
+
+export const onLoader = () => {
+  return {
+    type: ADD_LOADER_REQUEST,
+  }
+}
+
+export const offLoader = () => {
+  return {
+    type: DECREASE_LOADER_REQUEST,
+  }
+}
 
 export const initPeopleCollection = () => {
   return async dispatch => {
@@ -23,9 +35,11 @@ export const getLoggedUser = (paramsForLogin) => {
 }
 
 export const setUser = (user) => {
-  sessionStorage.setItem('token', JSON.stringify(user.token));
-  delete user.token;
-  sessionStorage.setItem('user', JSON.stringify(user));
+  if (!sessionStorage.getItem('token')) {
+    sessionStorage.setItem('token', JSON.stringify(user.token));
+    delete user.token;
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
 
   return {
     type: SET_USER,
@@ -42,11 +56,9 @@ export const removeUser = () => {
 }
 
 export const addNewPerson = (payload) => {
-  return dispatch => {
-    dispatch({
-      type: ADD_NEW_PERSON,
-      payload
-    })
+  return {
+    type: ADD_NEW_PERSON,
+    payload
   }
 }
 
@@ -97,7 +109,7 @@ async function createMockUser(userData, dispatchFn) {
 
    await newUser.then(user => {
     dispatchFn(setUser(user));
-    dispatchFn(addNewPerson(user));
+    // dispatchFn(addNewPerson(user));
   })
 }
 

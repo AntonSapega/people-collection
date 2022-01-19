@@ -11,6 +11,7 @@
   height: var(--header-height);
   padding: 0 var(--main-padding);
   box-sizing: border-box;
+  position: relative;
 
   &__nav {
     display: flex;
