@@ -5,11 +5,13 @@ import { useEffect } from 'react/cjs/react.development';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { deletePerson } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 
 const PersonDetailsPage = () => {
 
   const [personInfo, setPersonInfo] = useState();
   const [favoriteColor, setFavoriteColor] = useState();
+  const mainUser = useSelector(state => state.user.info);
 
   const routeParams = useParams();
   const navigate = useNavigate();
@@ -21,7 +23,13 @@ const PersonDetailsPage = () => {
       setPersonInfo(response[0].data.data)
       setFavoriteColor(response[1].data.data)
     })
-    .catch(error => console.log(error.message))
+    .catch(error => {
+      if (error.response.status === 404) {
+        console.log(mainUser)
+        setPersonInfo(mainUser);
+        setFavoriteColor(true);
+      }
+    })
   }, [])
 
   function getPersonInfo() {
@@ -43,6 +51,8 @@ const PersonDetailsPage = () => {
         dispatch(deletePerson(personInfo.id))
         goToPrevPage();
       }
+    }).catch(error => {
+      console.log('error', error)
     })
   }
 

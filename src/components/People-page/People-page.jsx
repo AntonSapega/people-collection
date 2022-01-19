@@ -94,34 +94,3 @@ const PeoplePage = () => {
 }
 
 export default PeoplePage;
-
-
-
-
-//555555555555555555555555
-
-
-// const getUsersPage = (number) => {
-//   axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
-//     setUsers(() => {
-//       setTotalPages(() => response.data.total_pages);
-//       const filteredByMockUser = filterByMockUser(response);
-//       return filterByDeletedPeople(filteredByMockUser);
-//     })
-//   })
-// }
-
-// function filterByMockUser(peopleData) {
-//   const userIsExistInPeopleState = peopleCollection.find(person => person.id === mainUser.id)
-//   if (peopleData.data.total_pages === peopleData.data.page && !userIsExistInPeopleState) {
-//     console.log('userIsExistInPeopleState', userIsExistInPeopleState)
-//     return peopleData.data.data.concat([mainUser]);
-//   }
-//   return peopleData.data.data;
-// }
-
-// function filterByDeletedPeople(array) {
-//   return peopleCollection.filter(personFromDB => {
-//     return array.find(personFromServer => personFromServer.id === personFromDB.id);
-//   })
-// }

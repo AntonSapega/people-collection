@@ -16,7 +16,13 @@ const loaderController = (dispatchFn) => {
       dispatchFn(offLoader());
     }, 1500)
     return response;
-  });
+  }, (error) => {
+    setTimeout(() => {
+      dispatchFn(offLoader());
+    }, 1000)
+    return Promise.reject(error);
+  }
+  );
 }
 
 export default loaderController;
