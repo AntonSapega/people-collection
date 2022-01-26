@@ -5,13 +5,23 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import { rootReducer } from './redux/rootReducer';
 import thunk from 'redux-thunk';
+import rootSaga from './redux/sagas/rootSaga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+    applyMiddleware(
+      thunk,
+      sagaMiddleware
+      )
+    )
 ))
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>

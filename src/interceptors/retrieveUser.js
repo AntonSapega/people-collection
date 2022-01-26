@@ -6,7 +6,7 @@ const retrieveUser = (dispatchFn) => {
     const savedUser = JSON.parse(sessionStorage.getItem('user'));
     if (savedUser) {
       // dispatchFn(addNewPerson(savedUser)); // случай когда пользователь получен с сервера и уже существует в массиве не обрабатывается
-      dispatchFn(setUser(savedUser));
+      // dispatchFn(setUser(savedUser));
     }
     return response;
   });

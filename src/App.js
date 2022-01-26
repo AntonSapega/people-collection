@@ -21,15 +21,15 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(initPeopleCollection());
+    // dispatch(initPeopleCollection());
     loaderController(dispatch);
   }, [])
 
-  useEffect(() => {
-    if (!user) {
-      retrieveUser(dispatch);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     retrieveUser(dispatch);
+  //   }
+  // }, [user]);
 
   return (
     <>

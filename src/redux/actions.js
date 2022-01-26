@@ -1,5 +1,15 @@
 import axios from 'axios';
-import { ADD_LOADER_REQUEST, DECREASE_LOADER_REQUEST, INIT_LIST_OF_PEOPLE, SET_USER, DELETE_PERSON, ADD_NEW_PERSON, REMOVE_USER } from './types';
+import {
+  ADD_LOADER_REQUEST,
+  DECREASE_LOADER_REQUEST,
+  INIT_LIST_OF_PEOPLE,
+  SET_USER,
+  DELETE_PERSON,
+  CREATE_USER,
+  AUTH_USER,
+  ADD_NEW_PERSON,
+  REMOVE_USER
+} from './types';
 
 export const onLoader = () => {
   return {
@@ -13,15 +23,36 @@ export const offLoader = () => {
   }
 }
 
-export const initPeopleCollection = () => {
-  return async dispatch => {
-    await fetchPeople(dispatch, 1);
+// export const initPeopleCollection = () => {
+//   return async dispatch => {
+//     await fetchPeople(dispatch, 1);
+//   }
+// }
+
+export const initPeopleCollection = (payload) => {
+  return {
+    type: INIT_LIST_OF_PEOPLE,
+    payload
   }
 }
 
-export const createUser = (payload) => {
-  return async dispatch => {
-    await createMockUser(payload, dispatch);
+// export const createUser = (payload) => {
+//   return async dispatch => {
+//     await createMockUser(payload, dispatch);
+//   }
+// }
+
+export const authUser = (userCredentials) => {
+  return {
+    type: AUTH_USER,
+    payload: userCredentials
+  }
+}
+
+export const createUserWithSaga = (userCredentials) => {
+  return {
+    type: CREATE_USER,
+    payload: userCredentials
   }
 }
 
@@ -82,11 +113,6 @@ function fetchPeople(dispatchFn, pageNumber) {
     if (response.data.page < response.data.total_pages) {
       fetchPeople(dispatchFn, pageNumber + 1);
     }
-
-    // if (response.data.page === response.data.total_pages && JSON.parse(sessionStorage.getItem('createdUser'))) {
-    //   const user = JSON.parse(sessionStorage.getItem('createUser'));
-    //   dispatchFn(addNewUser(user))
-    // }
   })
 }
 

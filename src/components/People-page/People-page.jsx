@@ -22,6 +22,7 @@ const PeoplePage = () => {
   }, [routeParams, mainUser])
 
   const getUsersPage = (number) => {
+    console.log('routeParams:', routeParams);
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
       setUsers(() => {
         setTotalPages(() => response.data.total_pages);
