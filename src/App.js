@@ -9,27 +9,16 @@ import SettingsPage from './components/Settings-page/Settings-page';
 import PersonDetailsPage from './components/PersonDetailsPage/PersonDetailsPage';
 import ColorsPage from './components/ColorsPage/ColorsPage';
 import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
-import { useDispatch, useSelector } from 'react-redux';
-import { initPeopleCollection } from './redux/actions';
-import retrieveUser from './interceptors/retrieveUser';
+import { useDispatch } from 'react-redux';
 import loaderController from './interceptors/loaderController';
 
 
 function App() {
-
-  const user = useSelector(state => state.user.info);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(initPeopleCollection());
     loaderController(dispatch);
   }, [])
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     retrieveUser(dispatch);
-  //   }
-  // }, [user]);
 
   return (
     <>

@@ -1,13 +1,8 @@
 import { call, put, take } from "redux-saga/effects";
 import { CREATE_USER } from '../types';
-import axios from "axios";
 import { setUser } from "../actions";
 import setPeopleCollection from "./setPeopleCollection";
-
-function* createNewUserRequest(userParams) {
-  console.log('request: ', userParams)
-  return yield axios.post(`${process.env.REACT_APP_REQ_RES_URL}api/users`, userParams);
-}
+import { createNewUser } from '../../httpAPIs/reqresApi';
 
 function* createMockUser(user) {
   return yield new Promise((resolve) => {
@@ -30,7 +25,7 @@ export default function* createUser() {
       email: newUser.payload.email,
       job: 'unknown'
     }
-    const createUserRequest = yield call(createNewUserRequest, credentials);
+    const createUserRequest = yield call(createNewUser, credentials);
     newUser.payload.id = createUserRequest.data.id;
     const user = yield call(createMockUser, newUser.payload);
     yield put(setUser(user));

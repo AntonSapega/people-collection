@@ -10,7 +10,6 @@ export const peopleReducer = (state = peopleCollection, action) => {
       return {...state, people: state.people.concat(action.payload)}; // REWRiTE
     case ADD_NEW_PERSON:
       const isAlreadyAdded = state.people.find(person => person.id === action.payload.id);
-      // console.log('Already exist: ', isAlreadyAdded)
       if (!isAlreadyAdded) {
         return {...state, people: state.people.concat([action.payload])};
       }

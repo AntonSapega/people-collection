@@ -5,6 +5,8 @@ import PersonCard from "../Person-card/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from '../Pagination/Pagination';
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loadPeopleSetMiddleware } from '../../redux/actions';
 
 const PeoplePage = () => {
   const [users, setUsers] = useState([]);
@@ -14,23 +16,33 @@ const PeoplePage = () => {
   const routeParams = useParams();
   const mainUser = useSelector(state => state.user.info);
   const peopleCollection = useSelector(state => state.peopleCollection.people);
+  const dispatch = useDispatch();
+  const peopleForRender = useSelector(state => state.peoplePage.people);
+
+  // useEffect(() => {
+  //   if (mainUser) {
+  //     getUsersPage(routeParams.page);
+  //   }
+  // }, [routeParams, mainUser])
 
   useEffect(() => {
-    if (mainUser) {
-      getUsersPage(routeParams.page);
-    }
-  }, [routeParams, mainUser])
+    dispatch(loadPeopleSetMiddleware(routeParams.page));
+  }, [routeParams]);
 
-  const getUsersPage = (number) => {
-    console.log('routeParams:', routeParams);
-    axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
-      setUsers(() => {
-        setTotalPages(() => response.data.total_pages);
-        const filteredByDeletedPeople = filterByDeletedPeople(response.data.data);
-        return filterByUser(filteredByDeletedPeople, response.data.page, response.data.total_pages);
-      })
-    })
-  }
+  useEffect(() => {
+    
+  }, [peopleForRender]);
+
+  // const getUsersPage = (number) => {
+  //   console.log('routeParams:', routeParams);
+  //   axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
+  //     setUsers(() => {
+  //       setTotalPages(() => response.data.total_pages);
+  //       const filteredByDeletedPeople = filterByDeletedPeople(response.data.data);
+  //       return filterByUser(filteredByDeletedPeople, response.data.page, response.data.total_pages);
+  //     })
+  //   })
+  // }
 
   function filterByDeletedPeople(array) {
     return peopleCollection.filter(personFromDB => {
@@ -64,7 +76,7 @@ const PeoplePage = () => {
     navigate(`/people/person/${id}`)
   }
 
-  const renderUsers = users.map(user => {
+  const renderUsers = peopleForRender.map(user => {
     return (
       <div className={styles['users-page__user']} key={user.id.toString()}>
         <PersonCard user={user} onCardClick={openPersonDetailsPage} />

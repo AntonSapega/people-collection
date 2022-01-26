@@ -1,15 +1,12 @@
 import { call, fork, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { initPeopleCollection } from '../actions';
-
-function usersRequest(page) {
-  return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${page}`);
-}
+import { getPeoplePage } from '../../httpAPIs/reqresApi';
 
 function* getPeopleCollection(pageNumber = 1) {
   const isUserExistInState = yield select(state => state.user.info);
   if (isUserExistInState) {
-    const req = yield call(usersRequest, pageNumber);
+    const req = yield call(getPeoplePage, pageNumber);
     yield put(initPeopleCollection(req.data.data));
 
     if (req.data.page < req.data.total_pages) {
