@@ -8,8 +8,8 @@ import {
   AUTH_USER,
   ADD_NEW_PERSON,
   REMOVE_USER,
-  LOAD_PEOPLE_SET,
-  ADD_PEOPLE_ON_PAGE
+  ADD_PEOPLE_ON_PAGE,
+  ADD_COLORS_SET
 } from './types';
 
 export const onLoader = () => {
@@ -38,7 +38,7 @@ export const authUser = (userCredentials) => {
   }
 }
 
-export const createUserWithSaga = (userCredentials) => {
+export const createUser = (userCredentials) => {
   return {
     type: CREATE_USER,
     payload: userCredentials
@@ -80,16 +80,16 @@ export const deletePerson = (personId) => {
   }
 }
 
-export const loadPeopleSetMiddleware = (pageNumber) => {
-  return {
-    type: LOAD_PEOPLE_SET,
-    payload: pageNumber
-  }
-}
-
 export const loadPeoplePage = (people) => {
   return {
     type: ADD_PEOPLE_ON_PAGE,
     payload: people
+  }
+}
+
+export const addColorsOnPage = (colors) => {
+  return {
+    type: ADD_COLORS_SET,
+    payload: colors
   }
 }

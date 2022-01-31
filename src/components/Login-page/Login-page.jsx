@@ -3,7 +3,7 @@ import LoginForm from '../Login-form/Login-form';
 import styles from './Login-page.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser, createUserWithSaga, getLoggedUser, authUser } from '../../redux/actions';
+import { createUser, authUser } from '../../redux/actions';
 
 const LoginPage = () => {
   const [formTitle] = useState('People Collection');
@@ -21,18 +21,9 @@ const LoginPage = () => {
     }
   }, [user])
 
-  // async function handleForm(formValue) {
-  //   if (formValue.confirmPassword) {
-  //     await dispatch(createUser(formValue));
-  //   } else {
-  //     await dispatch(getLoggedUser(formValue));
-  //   }
-  //   navigate(location.state.from.pathname, {replace: true});
-  // }
-
-  function handleFormWithSaga(formValue) {
+  function handleForm(formValue) {
     if (formValue.confirmPassword) {
-      dispatch(createUserWithSaga(formValue));
+      dispatch(createUser(formValue));
       return;
     }
     dispatch(authUser(formValue));
@@ -44,7 +35,7 @@ const LoginPage = () => {
       <LoginForm
         title={formTitle}
         description={formDescription}
-        onGetForm={event => handleFormWithSaga(event)}
+        onGetForm={event => handleForm(event)}
       />
     </div>
   )

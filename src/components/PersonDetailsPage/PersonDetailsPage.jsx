@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { deletePerson } from '../../redux/actions';
 import { useSelector } from 'react-redux';
+import DeletedStamp from '../DeletedStamp/DeletedStamp';
 
 const PersonDetailsPage = () => {
 
@@ -16,12 +17,17 @@ const PersonDetailsPage = () => {
   const routeParams = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
+  const peopleCollection = useSelector(state => state.peopleCollection.people);
+  const [isDeleted, setIsDeleted] = useState(false);
   
   useEffect(() => {
     Promise.all([getPersonInfo(), getPersonFavoriteColor()])
     .then(response => {
-      setPersonInfo(response[0].data.data)
-      setFavoriteColor(response[1].data.data)
+      setPersonInfo(response[0].data.data);
+      setFavoriteColor(response[1].data.data);
+      checkPersonOnExist(response[0].data.data);
     })
     .catch(error => {
       if (error.response.status === 404) {
@@ -30,7 +36,20 @@ const PersonDetailsPage = () => {
         setFavoriteColor(true);
       }
     })
+
+    // const isDelete = peopleCollection?.find(person => person.id === personInfo.id);
+    
+    // if (isDelete) {
+    //   console.log('asdfasfdasf')
+    // }
   }, [])
+
+  function checkPersonOnExist(person) {
+    const isDelete = peopleCollection?.find(human => human.id === person.id);
+    if (!isDelete) {
+      setIsDeleted(true);
+    }
+  }
 
   function getPersonInfo() {
     return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
@@ -84,6 +103,7 @@ const PersonDetailsPage = () => {
                 </section>
               </article>
               <span className={deleteStyle} onClick={deleteActivePerson}>highlight_off</span>
+              {isDeleted && <DeletedStamp positionStyles={{position: 'absolute', bottom: '62px', right: '78px'}} />}
             </div>
             <div>
               <article className={styles['favorite-color']}>

@@ -1,6 +1,6 @@
 import { call, put, take } from "redux-saga/effects";
 import { CREATE_USER } from '../types';
-import { setUser } from "../actions";
+import setUserToState from "./setUser";
 import setPeopleCollection from "./setPeopleCollection";
 import { createNewUser } from '../../httpAPIs/reqresApi';
 
@@ -28,7 +28,7 @@ export default function* createUser() {
     const createUserRequest = yield call(createNewUser, credentials);
     newUser.payload.id = createUserRequest.data.id;
     const user = yield call(createMockUser, newUser.payload);
-    yield put(setUser(user));
+    yield call(setUserToState, user);
     yield call(setPeopleCollection)
   }
 }

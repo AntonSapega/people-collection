@@ -1,5 +1,4 @@
 import { call, fork, put, select } from 'redux-saga/effects';
-import axios from 'axios';
 import { initPeopleCollection } from '../actions';
 import { getPeoplePage } from '../../httpAPIs/reqresApi';
 

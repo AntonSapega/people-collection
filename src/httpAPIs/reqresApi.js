@@ -15,3 +15,7 @@ export function createNewUser(userParams) {
 export function getPeoplePage(page) {
   return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${page}`);
 }
+
+export function getColorsPage(page) {
+  return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown?page=${page}`);
+}
