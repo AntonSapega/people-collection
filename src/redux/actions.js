@@ -9,7 +9,8 @@ import {
   ADD_NEW_PERSON,
   REMOVE_USER,
   ADD_PEOPLE_ON_PAGE,
-  ADD_COLORS_SET
+  ADD_COLORS_SET,
+  GET_PERSON_DETAILS,
 } from './types';
 
 export const onLoader = () => {
@@ -91,5 +92,12 @@ export const addColorsOnPage = (colors) => {
   return {
     type: ADD_COLORS_SET,
     payload: colors
+  }
+}
+
+export const getPersonDetails = (details) => {
+  return {
+    type: GET_PERSON_DETAILS,
+    payload: details
   }
 }

@@ -32,7 +32,6 @@ const PeoplePage = () => {
 
       const isUserExistInPeopleCollection = peopleCollection.find(person => person.id === userFromStorage.id);
       if (!isUserExistInPeopleCollection) {
-        console.log('Try to set user')
         setPeople(people => people.concat([userFromStorage]));
       }
     }

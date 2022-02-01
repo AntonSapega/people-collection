@@ -19,3 +19,7 @@ export function getPeoplePage(page) {
 export function getColorsPage(page) {
   return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown?page=${page}`);
 }
+
+export function getColor(identifier) {
+  return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown/${identifier}`);
+}

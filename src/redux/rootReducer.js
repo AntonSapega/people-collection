@@ -4,6 +4,7 @@ import { peopleReducer } from "./peopleReducer";
 import { userReducer } from "./userReducer";
 import { peoplePageReducer } from './peoplePageReducer';
 import { colorsPageReducer } from './colorsPageReducer';
+import { personPageReducer } from './personPageReducer';
 
 // export const rootReducer = combineReducers({
 //   app: appReducer,
@@ -20,5 +21,6 @@ export const rootReducer = (router) => {
     user: userReducer,
     peoplePage: peoplePageReducer,
     colorsPage: colorsPageReducer,
+    personDetails: personPageReducer,
   })
 }

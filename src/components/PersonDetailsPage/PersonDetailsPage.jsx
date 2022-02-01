@@ -4,14 +4,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { deletePerson } from '../../redux/actions';
+import { deletePerson, getPersonDetails } from '../../redux/actions';
 import { useSelector } from 'react-redux';
 import DeletedStamp from '../DeletedStamp/DeletedStamp';
+import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
 
 const PersonDetailsPage = () => {
 
-  const [personInfo, setPersonInfo] = useState();
-  const [favoriteColor, setFavoriteColor] = useState();
+  // const [personInfo, setPersonInfo] = useState();
+  // const [favoriteColor, setFavoriteColor] = useState();
   const mainUser = useSelector(state => state.user.info);
 
   const routeParams = useParams();
@@ -21,42 +22,32 @@ const PersonDetailsPage = () => {
 
   const peopleCollection = useSelector(state => state.peopleCollection.people);
   const [isDeleted, setIsDeleted] = useState(false);
-  
-  useEffect(() => {
-    Promise.all([getPersonInfo(), getPersonFavoriteColor()])
-    .then(response => {
-      setPersonInfo(response[0].data.data);
-      setFavoriteColor(response[1].data.data);
-      checkPersonOnExist(response[0].data.data);
-    })
-    .catch(error => {
-      if (error.response.status === 404) {
-        console.log(mainUser)
-        setPersonInfo(mainUser);
-        setFavoriteColor(true);
-      }
-    })
 
-    // const isDelete = peopleCollection?.find(person => person.id === personInfo.id);
-    
-    // if (isDelete) {
-    //   console.log('asdfasfdasf')
-    // }
+  const personInfo = useSelector(state => state.personDetails.mainInfo);
+  const favoriteColor = useSelector(state => state.personDetails.favoriteColor);
+
+  useEffect(() => {
+      if (personInfo) {
+        checkPersonOnExist();
+      }
+  }, [personInfo])
+
+  useEffect(() => {
+    return () => {
+      dispatch(getPersonDetails({
+        mainInfo: null,
+        favoriteColor: null}))
+    }
   }, [])
 
-  function checkPersonOnExist(person) {
-    const isDelete = peopleCollection?.find(human => human.id === person.id);
-    if (!isDelete) {
+
+
+  function checkPersonOnExist() {
+    const wasPersonDeleted = peopleCollection?.find(human => human.id === personInfo.id);
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (!wasPersonDeleted && personInfo.id !== user.id) {
       setIsDeleted(true);
     }
-  }
-
-  function getPersonInfo() {
-    return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
-  }
-
-  function getPersonFavoriteColor() {
-    return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown/${routeParams.id}`)
   }
 
   function goToPrevPage() {
@@ -94,7 +85,12 @@ const PersonDetailsPage = () => {
         {personInfo && favoriteColor &&
           <>
             <div className={styles['person-details__main-info']}>
-              <img className={styles['person-details__img']} src={personInfo.avatar} alt={avatarPlaceholder} />
+              {personInfo.avatar && <img className={styles['person-details__img']} src={personInfo.avatar} alt={avatarPlaceholder} />}
+              {!personInfo.avatar &&
+                <ImagePlaceholder
+                  firstWord={personInfo.first_name}
+                  secondWord={personInfo.last_name}
+                  imgStyles={{height: '150px', width: '150px', fontSize: '2.6rem'}} />}
               <article className={styles['person-details__necessary-info']}>
                 <h1 className={styles['person-details__full-name']}>{personInfo.first_name} {personInfo.last_name}</h1>
                 <section className={styles['email']}>
@@ -102,7 +98,7 @@ const PersonDetailsPage = () => {
                   <h5 className={styles['email__path']}>{personInfo.email}</h5>
                 </section>
               </article>
-              <span className={deleteStyle} onClick={deleteActivePerson}>highlight_off</span>
+              {!isDeleted && <span className={deleteStyle} onClick={deleteActivePerson}>highlight_off</span>}
               {isDeleted && <DeletedStamp positionStyles={{position: 'absolute', bottom: '62px', right: '78px'}} />}
             </div>
             <div>

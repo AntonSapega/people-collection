@@ -34,13 +34,11 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <BrowserRouter> */}
       <Provider store={store}>
         <HistoryRouter history={history}>
           <App />
         </HistoryRouter>
       </Provider>
-    {/* </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
