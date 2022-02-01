@@ -4,6 +4,7 @@ import {
   INIT_LIST_OF_PEOPLE,
   SET_USER,
   DELETE_PERSON,
+  DELETE_PERSON_MIDDLEWARE,
   CREATE_USER,
   AUTH_USER,
   ADD_NEW_PERSON,
@@ -99,5 +100,12 @@ export const getPersonDetails = (details) => {
   return {
     type: GET_PERSON_DETAILS,
     payload: details
+  }
+}
+
+export const deletePersonMiddleware = (id) => {
+  return {
+    type: DELETE_PERSON_MIDDLEWARE,
+    payload: id
   }
 }

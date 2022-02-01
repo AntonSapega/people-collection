@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import styles from './PersonDetailsPage.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { deletePerson, getPersonDetails } from '../../redux/actions';
+import { deletePersonMiddleware, getPersonDetails } from '../../redux/actions';
 import { useSelector } from 'react-redux';
 import DeletedStamp from '../DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
@@ -34,6 +33,15 @@ const PersonDetailsPage = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (personInfo) {
+      const isStillExistInCollection = !!peopleCollection.find(person => person.id === personInfo.id);
+      if (!isStillExistInCollection) {
+        goToPrevPage();
+      }
+    }
+  }, [peopleCollection])
+
 
 
   function checkPersonOnExist() {
@@ -48,15 +56,7 @@ const PersonDetailsPage = () => {
   }
 
   function deleteActivePerson() {
-    axios.delete(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
-    .then(response => {
-      if (response.status === 204) {
-        dispatch(deletePerson(personInfo.id))
-        goToPrevPage();
-      }
-    }).catch(error => {
-      console.log('error', error)
-    })
+    dispatch(deletePersonMiddleware(personInfo.id))
   }
 
   function goToColorPage() {

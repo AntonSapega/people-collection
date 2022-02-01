@@ -10,7 +10,6 @@ import { createBrowserHistory } from 'history';
 import { createReduxHistoryContext } from "redux-first-history";
 import { HistoryRouter } from "redux-first-history/rr6";
 import { rootReducer } from './redux/rootReducer';
-import thunk from 'redux-thunk';
 import rootSaga from './redux/sagas/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -23,7 +22,6 @@ export const store = createStore(rootReducer(routerReducer), compose(
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
     applyMiddleware(
       routerMiddleware,
-      thunk,
       sagaMiddleware
       )
     )
