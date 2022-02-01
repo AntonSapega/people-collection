@@ -10,19 +10,13 @@ import DeletedStamp from '../DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
 
 const PersonDetailsPage = () => {
-
-  // const [personInfo, setPersonInfo] = useState();
-  // const [favoriteColor, setFavoriteColor] = useState();
-  const mainUser = useSelector(state => state.user.info);
-
   const routeParams = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-  const peopleCollection = useSelector(state => state.peopleCollection.people);
   const [isDeleted, setIsDeleted] = useState(false);
-
+  const mainUser = useSelector(state => state.user.info);
+  const peopleCollection = useSelector(state => state.peopleCollection.people);
   const personInfo = useSelector(state => state.personDetails.mainInfo);
   const favoriteColor = useSelector(state => state.personDetails.favoriteColor);
 
@@ -44,8 +38,7 @@ const PersonDetailsPage = () => {
 
   function checkPersonOnExist() {
     const wasPersonDeleted = peopleCollection?.find(human => human.id === personInfo.id);
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    if (!wasPersonDeleted && personInfo.id !== user.id) {
+    if (!wasPersonDeleted && personInfo.id !== mainUser.id) {
       setIsDeleted(true);
     }
   }

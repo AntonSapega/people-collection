@@ -23,3 +23,7 @@ export function getColorsPage(page) {
 export function getColor(identifier) {
   return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown/${identifier}`);
 }
+
+export function deletePerson(identifier) {
+  return axios.delete(`${process.env.REACT_APP_REQ_RES_URL}api/users/${identifier}`);
+}
