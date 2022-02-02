@@ -3,7 +3,7 @@ import LoginForm from '../Login-form/Login-form';
 import styles from './Login-page.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser, authUser } from '../../redux/actions';
+import { createUser, authUser, resetUserWasNotFoundField } from '../../redux/actions';
 import Popup from '../Popup/Popup';
 
 const LoginPage = () => {
@@ -40,7 +40,7 @@ const LoginPage = () => {
   }
 
   function handleConfirmation() {
-    // dispatch
+    dispatch(resetUserWasNotFoundField())
     setPopupStatus(false)
   }
 
@@ -58,7 +58,7 @@ const LoginPage = () => {
         <Popup
           type={'confirmation'}
           question={`User was not found`}
-          userChoice={() => handleConfirmation}
+          userChoice={() => handleConfirmation()}
         />
       }
     </>

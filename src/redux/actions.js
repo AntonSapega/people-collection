@@ -8,6 +8,7 @@ import {
   CREATE_USER,
   AUTH_USER,
   USER_WAS_NOT_FOUND,
+  RESET_USER_WAS_NOT_FOUND_FIELD,
   ADD_NEW_PERSON,
   REMOVE_USER,
   ADD_PEOPLE_ON_PAGE,
@@ -46,6 +47,12 @@ export const authUser = (userCredentials) => {
 export const userWasNotFound = () => {
   return {
     type: USER_WAS_NOT_FOUND
+  }
+}
+
+export const resetUserWasNotFoundField = () => {
+  return {
+    type: RESET_USER_WAS_NOT_FOUND_FIELD
   }
 }
 

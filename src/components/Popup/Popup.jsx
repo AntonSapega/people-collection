@@ -13,10 +13,10 @@ const Popup = ({ question, type, userChoice }) => {
           {type === 'clarifying' &&
             <>
               <MainButton btnStyles={
-                {width: '32%', borderRadius: '4px', backgroundColor: 'red', marginRight: '12px', color: '#000'}
+                {width: '32%', borderRadius: '4px', backgroundColor: 'var(--primary-turquoise)', marginRight: '12px', color: '#000'}
                 } onCustomClick={() => userChoice(false)}>No</MainButton>
               <MainButton btnStyles={
-                {width: '32%', borderRadius: '4px', backgroundColor: 'var(--primary-turquoise)', color: '#000'}
+                {width: '32%', borderRadius: '4px', backgroundColor: 'red', color: '#000'}
                 } onCustomClick={() => userChoice(true)}>Yes</MainButton>
             </>
           }
