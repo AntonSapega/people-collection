@@ -4,6 +4,7 @@ import styles from './Login-page.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, authUser } from '../../redux/actions';
+import Popup from '../Popup/Popup';
 
 const LoginPage = () => {
   const [formTitle] = useState('People Collection');
@@ -13,13 +14,22 @@ const LoginPage = () => {
   const location = useLocation();
 
   const user = useSelector(state => state.user.info);
+  const userNotFound = useSelector(state => state.user.userNotFound)
   const dispatch = useDispatch();
+
+  const [isPopupVisible, setPopupStatus] = useState(false);
 
   useEffect(() => {
     if (user) {
       navigate(location.state.from.pathname, {replace: true});
     }
   }, [user])
+
+  useEffect(() => {
+    if (userNotFound) {
+      setPopupStatus(true);
+    }
+  }, [userNotFound])
 
   function handleForm(formValue) {
     if (formValue.confirmPassword) {
@@ -29,15 +39,29 @@ const LoginPage = () => {
     dispatch(authUser(formValue));
   }
 
+  function handleConfirmation() {
+    // dispatch
+    setPopupStatus(false)
+  }
+
   return (
-    <div className={styles['login-form']}>
-      <aside className={styles['login-form__left-side']}></aside>
-      <LoginForm
-        title={formTitle}
-        description={formDescription}
-        onGetForm={event => handleForm(event)}
-      />
-    </div>
+    <>
+      <div className={styles['login-form']}>
+        <aside className={styles['login-form__left-side']}></aside>
+        <LoginForm
+          title={formTitle}
+          description={formDescription}
+          onGetForm={event => handleForm(event)}
+        />
+      </div>
+      {isPopupVisible &&
+        <Popup
+          type={'confirmation'}
+          question={`User was not found`}
+          userChoice={() => handleConfirmation}
+        />
+      }
+    </>
   )
 }
 

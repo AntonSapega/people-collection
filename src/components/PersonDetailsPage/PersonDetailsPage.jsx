@@ -3,10 +3,11 @@ import styles from './PersonDetailsPage.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { useDispatch } from 'react-redux';
-import { deletePersonMiddleware, getPersonDetails } from '../../redux/actions';
+import { deletePersonMiddleware, getPersonDetails, showPopup } from '../../redux/actions';
 import { useSelector } from 'react-redux';
 import DeletedStamp from '../DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
+import Popup from '../Popup/Popup';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();
@@ -18,6 +19,7 @@ const PersonDetailsPage = () => {
   const peopleCollection = useSelector(state => state.peopleCollection.people);
   const personInfo = useSelector(state => state.personDetails.mainInfo);
   const favoriteColor = useSelector(state => state.personDetails.favoriteColor);
+  const [isPopupVisible, setPopupStatus] = useState(false)
 
   useEffect(() => {
       if (personInfo) {
@@ -56,7 +58,15 @@ const PersonDetailsPage = () => {
   }
 
   function deleteActivePerson() {
-    dispatch(deletePersonMiddleware(personInfo.id))
+    setPopupStatus(true);
+  }
+
+  function handlePopupAction(actionResult) {
+    if (actionResult) {
+      dispatch(deletePersonMiddleware(personInfo.id));
+      return;
+    }
+    setPopupStatus(false);
   }
 
   function goToColorPage() {
@@ -108,6 +118,13 @@ const PersonDetailsPage = () => {
           </>
         }
       </div>
+      {isPopupVisible &&
+        <Popup
+          type={'clarifying'}
+          question={`Are you sure you want to delete of ${personInfo.first_name} ${personInfo.last_name}?`}
+          userChoice={(result) => handlePopupAction(result)}
+        />
+      }
     </>
   )
 }

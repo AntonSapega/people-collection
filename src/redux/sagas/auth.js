@@ -1,5 +1,6 @@
-import { call, take } from 'redux-saga/effects';
+import { call, take, put } from 'redux-saga/effects';
 import { AUTH_USER } from '../types';
+import { userWasNotFound } from '../actions';
 import setUserToState from './setUser';
 import { authUser, getPerson } from '../../httpAPIs/reqresApi';
 import setPeopleCollection from './setPeopleCollection';
@@ -13,8 +14,10 @@ function* requestLoggedUser(credentials) {
     yield call(setPeopleCollection)
   } catch (error) {
     if (error.response.status) {
-      alert('User was not found');
+      yield put(userWasNotFound());
+      return;
     }
+    throw new Error(error);
   }
 }
 

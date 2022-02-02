@@ -7,13 +7,14 @@ import {
   DELETE_PERSON_MIDDLEWARE,
   CREATE_USER,
   AUTH_USER,
+  USER_WAS_NOT_FOUND,
   ADD_NEW_PERSON,
   REMOVE_USER,
   ADD_PEOPLE_ON_PAGE,
   ADD_COLORS_SET,
   GET_PERSON_DETAILS,
   LOAD_COLOR_DETAILS_MIDDLEWARE,
-  SET_COLOR_DETAILS
+  SET_COLOR_DETAILS,
 } from './types';
 
 export const onLoader = () => {
@@ -39,6 +40,12 @@ export const authUser = (userCredentials) => {
   return {
     type: AUTH_USER,
     payload: userCredentials
+  }
+}
+
+export const userWasNotFound = () => {
+  return {
+    type: USER_WAS_NOT_FOUND
   }
 }
 

@@ -1,7 +1,8 @@
-import { SET_USER, REMOVE_USER } from './types';
+import { SET_USER, REMOVE_USER, USER_WAS_NOT_FOUND } from './types';
 
 const user = {
   info: null,
+  userNotFound: false,
 };
 
 export const userReducer = (state = user, action) => {
@@ -13,6 +14,8 @@ export const userReducer = (state = user, action) => {
       return state;
     case REMOVE_USER:
       return {...state, info: null};
+    case USER_WAS_NOT_FOUND:
+      return {...state, userNotFound: true}
     default:
       return state;
   }
