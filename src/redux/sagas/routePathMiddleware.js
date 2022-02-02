@@ -53,7 +53,6 @@ function* personPageDetailsRequest(id) {
 function* handlePath({ payload }) {
   const { location } = yield payload;
   const pathPieces = location.pathname.split('/').filter(string => string.length > 0);
-  console.log(pathPieces[pathPieces.length-2])
   switch (pathPieces[pathPieces.length-2]) {
     case 'people':
       yield call(peoplePageRequest, pathPieces[pathPieces.length-1]);

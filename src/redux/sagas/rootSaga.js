@@ -4,6 +4,7 @@ import createUser from './createUser';
 import Auth from './auth';
 import routePathMiddleware from './routePathMiddleware';
 import removePersonFromCollection from './removePersonFromCollection';
+import colorDetailsPage from './colorDetailsPage';
 
 export default function* rootSaga() {
   const sagas = [
@@ -11,7 +12,8 @@ export default function* rootSaga() {
     createUser,
     Auth,
     routePathMiddleware,
-    removePersonFromCollection
+    removePersonFromCollection,
+    colorDetailsPage
   ];
 
   const retrySagas = yield sagas.map(saga => {

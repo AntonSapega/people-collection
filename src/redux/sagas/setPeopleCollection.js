@@ -10,7 +10,7 @@ function* getPeopleCollection(pageNumber = 1) {
 
     if (req.data.page < req.data.total_pages) {
       const nextPage = req.data.page + 1;
-      yield call(getPeopleCollection, nextPage);
+      yield call(getPeopleCollection, [nextPage]);
     }
   }
 }
