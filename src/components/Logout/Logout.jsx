@@ -3,7 +3,7 @@ import styles from './Logout.module.scss';
 import MainButton from '../MainButton/MainButton';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePerson, removeUser } from "../../redux/actions";
+import { deletePerson, removeUser, clearPeopleCollection } from "../../redux/actions";
 
 const Logout = () => {
   const user = useSelector(state => state.user.info);
@@ -13,6 +13,7 @@ const Logout = () => {
   const handleLogoutClick = () => {
     dispatch(removeUser())
     dispatch(deletePerson(user.id));
+    dispatch(clearPeopleCollection());
     navigate('/', {replace: true});
   }
 

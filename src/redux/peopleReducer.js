@@ -7,7 +7,7 @@ const peopleCollection = {
 export const peopleReducer = (state = peopleCollection, action) => {
   switch (action.type) {
     case INIT_LIST_OF_PEOPLE:
-      return {...state, people: state.people.concat(action.payload)}; // REWRiTE
+      return {...state, people: state.people.concat(action.payload)};
     case ADD_NEW_PERSON:
       const isAlreadyAdded = state.people.find(person => person.id === action.payload.id);
       if (!isAlreadyAdded) {

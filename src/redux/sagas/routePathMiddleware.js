@@ -62,6 +62,7 @@ function* handlePath({ payload }) {
       break;
     case 'person':
       yield call(personPageDetailsRequest, pathPieces[pathPieces.length-1]);
+      break;
     default:
       return;
   }

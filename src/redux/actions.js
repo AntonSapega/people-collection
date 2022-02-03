@@ -2,6 +2,7 @@ import {
   ADD_LOADER_REQUEST,
   DECREASE_LOADER_REQUEST,
   INIT_LIST_OF_PEOPLE,
+  CLEAR_LIST_OF_PEOPLE,
   SET_USER,
   DELETE_PERSON,
   DELETE_PERSON_MIDDLEWARE,
@@ -34,6 +35,12 @@ export const initPeopleCollection = (payload) => {
   return {
     type: INIT_LIST_OF_PEOPLE,
     payload
+  }
+}
+
+export const clearPeopleCollection = () => {
+  return {
+    type: CLEAR_LIST_OF_PEOPLE,
   }
 }
 
