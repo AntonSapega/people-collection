@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import LoginForm from '../Login-form/Login-form';
+import LoginForm from '../../components/Login-form/Login-form';
 import styles from './Login-page.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, authUser, resetUserWasNotFoundField } from '../../redux/actions';
-import Popup from '../Popup/Popup';
+import Popup from '../../components/Popup/Popup';
 
 const LoginPage = () => {
   const [formTitle] = useState('People Collection');

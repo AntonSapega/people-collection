@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from './People-page.module.scss';
-import PersonCard from "../Person-card/PersonCard";
+import PersonCard from "../../components/Person-card/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
-import Pagination from '../Pagination/Pagination';
+import Pagination from '../../components/Pagination/Pagination';
 import { useSelector } from "react-redux";
 
 const PeoplePage = () => {
@@ -11,18 +11,18 @@ const PeoplePage = () => {
   const navigate = useNavigate();
   const routeParams = useParams();
   const peopleCollection = useSelector(state => state.peopleCollection.people);
-  const peopleForPage = useSelector(state => state.peoplePage.people);
+  const peopleFromServer = useSelector(state => state.peoplePage.people);
   const totalPages = useSelector(state => state.peoplePage.pagesAmount);
 
   useEffect(() => {
-    const filteredArray = filterByDeletedPeople(peopleForPage);
+    const filteredArray = filterByDeletedPeople();
     setPeople(filteredArray);
     filterByUser();
-  }, [peopleForPage]);
+  }, [peopleFromServer]);
 
-  function filterByDeletedPeople(array) {
+  function filterByDeletedPeople() {
     return peopleCollection.filter(personFromDB => {
-      return array.find(personFromServer => personFromServer.id === personFromDB.id);
+      return peopleFromServer.find(personFromServer => personFromServer.id === personFromDB.id);
     })
   }
 

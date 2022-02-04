@@ -5,9 +5,9 @@ import { useEffect } from 'react/cjs/react.development';
 import { useDispatch } from 'react-redux';
 import { deletePersonMiddleware, getPersonDetails, showPopup } from '../../redux/actions';
 import { useSelector } from 'react-redux';
-import DeletedStamp from '../DeletedStamp/DeletedStamp';
-import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
-import Popup from '../Popup/Popup';
+import DeletedStamp from '../../components/DeletedStamp/DeletedStamp';
+import ImagePlaceholder from '../../components/ImagePlaceholder/ImagePlaceholder';
+import Popup from '../../components/Popup/Popup';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();

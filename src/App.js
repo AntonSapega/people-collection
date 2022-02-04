@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import LoginPage from './components/Login-page/Login-page';
+import LoginPage from './pages/Login-page/Login-page';
 import { Routes, Route, } from 'react-router-dom';
 import RequireAuth from './hoc/RequireAuth';
 import Layout from './components/Layout/Layout';
-import HomePage from './components/Home-page/Home-page';
-import PeoplePage from './components/People-page/People-page';
-import SettingsPage from './components/Settings-page/Settings-page';
-import PersonDetailsPage from './components/PersonDetailsPage/PersonDetailsPage';
-import ColorsPage from './components/ColorsPage/ColorsPage';
-import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
+import HomePage from './pages/Home-page/Home-page';
+import PeoplePage from './pages/People-page/People-page';
+import SettingsPage from './pages/Settings-page/Settings-page';
+import PersonDetailsPage from './pages/PersonDetailsPage/PersonDetailsPage';
+import ColorsPage from './pages/ColorsPage/ColorsPage';
+import ColorDetailsPage from './pages/ColorDetailsPage/ColorDetailsPage';
 import { useDispatch } from 'react-redux';
 import loaderController from './interceptors/loaderController';
 

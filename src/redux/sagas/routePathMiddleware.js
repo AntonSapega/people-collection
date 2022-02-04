@@ -51,6 +51,7 @@ function* personPageDetailsRequest(id) {
 }
 
 function* handlePath({ payload }) {
+  console.log('handlePath');
   const { location } = yield payload;
   const pathPieces = location.pathname.split('/').filter(string => string.length > 0);
   switch (pathPieces[pathPieces.length-2]) {
@@ -70,12 +71,13 @@ function* handlePath({ payload }) {
 
 
 export default function* routePathMiddleware() {
+  console.log('routePathMiddleware');
   yield takeEvery(LOCATION_CHANGE, handlePath);
 
   // while(true) {
   //   const action = yield all([
   //     take(LOCATION_CHANGE),
-  //     take(INIT_LIST_OF_PEOPLE)
+  //     // take('@@INIT')
   //   ])
 
   //   console.log('action', action)
