@@ -1,5 +1,6 @@
 import axios from "axios";
+import { postsPath } from '../routes-variables/jsonPlaceholder';
 
 export function getTextPlaceholder(identifier) {
-  return axios.get(`${process.env.REACT_APP_JSON_PLACEHOLDER}posts/${identifier}`);
+  return axios.get(`${postsPath}/${identifier}`);
 }

@@ -1,0 +1,1 @@
+export const postsPath = `${process.env.REACT_APP_JSON_PLACEHOLDER}posts`;
