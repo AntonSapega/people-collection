@@ -1,4 +1,10 @@
-import { INIT_LIST_OF_PEOPLE, CLEAR_LIST_OF_PEOPLE, ADD_NEW_PERSON, DELETE_PERSON } from '../types';
+import {
+  INIT_LIST_OF_PEOPLE,
+  CLEAR_LIST_OF_PEOPLE,
+  ADD_NEW_PERSON,
+  DELETE_PERSON,
+  DELETE_PERSON_MIDDLEWARE
+} from '../types';
 
 export const initPeopleCollection = (payload) => {
   return {
@@ -17,6 +23,13 @@ export const addNewPerson = (payload) => {
   return {
     type: ADD_NEW_PERSON,
     payload
+  }
+}
+
+export const deletePersonMiddleware = (id) => {
+  return {
+    type: DELETE_PERSON_MIDDLEWARE,
+    payload: id
   }
 }
 

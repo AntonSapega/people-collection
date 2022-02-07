@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from './ColorDetailsPage.module.scss';
-import { loadColorDetailsMiddleware } from '../../redux/actions';
+import { loadColorDetailsMiddleware } from '../../store/colorDetailsPage/actions';
 import { useSelector } from "react-redux";
 
 const ColorDetailsPage = () => {

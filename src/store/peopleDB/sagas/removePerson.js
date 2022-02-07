@@ -1,7 +1,7 @@
-import { call, fork, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { deletePerson } from '../../../httpAPIs/reqresApi';
+import { DELETE_PERSON_MIDDLEWARE } from '../../types';
 import { deletePerson as deletePersonAction } from '../actions';
-import { DELETE_PERSON_MIDDLEWARE } from '../types';
-import { deletePerson } from '../../httpAPIs/reqresApi';
 
 function* removePersonWorker({ payload: id }) {
   try {
@@ -15,6 +15,6 @@ function* removePersonWorker({ payload: id }) {
   }
 }
 
-export default function* removePersonFromCollection() {
+export default function* removePerson() {
   yield takeEvery(DELETE_PERSON_MIDDLEWARE, removePersonWorker)
 }

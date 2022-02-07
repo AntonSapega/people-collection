@@ -1,9 +1,9 @@
 import { call, take, put } from 'redux-saga/effects';
-import { AUTH_USER } from '../types';
+import { AUTH_USER } from '../../types';
+import { authUser, getPerson } from '../../../httpAPIs/reqresApi';
+import setUserToState from './setUserToState';
+import setPeopleCollection from '../../peopleDB/sagas/setPeopleCollection';
 import { userWasNotFound } from '../actions';
-import setUserToState from './setUser';
-import { authUser, getPerson } from '../../httpAPIs/reqresApi';
-import setPeopleCollection from './setPeopleCollection';
 
 function* requestLoggedUser(credentials) {
   try {
@@ -21,7 +21,7 @@ function* requestLoggedUser(credentials) {
   }
 }
 
-export default function* Auth() {
+export default function* auth() {
   while(true) {
     const action = yield take(AUTH_USER);
 

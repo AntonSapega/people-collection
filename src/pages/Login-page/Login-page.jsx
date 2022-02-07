@@ -3,7 +3,7 @@ import LoginForm from '../../components/Login-form/Login-form';
 import styles from './Login-page.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser, authUser, resetUserWasNotFoundField } from '../../redux/actions';
+import { createUser, authUser, resetUserWasNotFoundField } from '../../store/user/actions';
 import Popup from '../../components/Popup/Popup';
 
 const LoginPage = () => {

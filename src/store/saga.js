@@ -1,18 +1,18 @@
 import { all, call, spawn } from 'redux-saga/effects';
-import setMainDataSaga from './setMainData';
-import createUser from './createUser';
-import Auth from './auth';
-import routePathMiddleware from './routePathMiddleware';
-import removePersonFromCollection from './removePersonFromCollection';
-import colorDetailsPage from './colorDetailsPage';
+import createUser from './user/sagas/createUser';
+import auth from './user/sagas/auth';
+import setMainData from './app/sagas/setMainData';
+import routePathWatcher from './app/sagas/routePathWatcher';
+import removePerson from './peopleDB/sagas/removePerson';
+import colorDetailsPage from './colorDetailsPage/sagas';
 
 export default function* rootSaga() {
   const sagas = [
-    setMainDataSaga,
+    setMainData,
     createUser,
-    Auth,
-    routePathMiddleware,
-    removePersonFromCollection,
+    auth,
+    routePathWatcher,
+    removePerson,
     colorDetailsPage
   ];
 

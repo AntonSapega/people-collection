@@ -1,6 +1,6 @@
 import { call, fork, put, select } from 'redux-saga/effects';
 import { initPeopleCollection } from '../actions';
-import { getPeoplePage } from '../../httpAPIs/reqresApi';
+import { getPeoplePage } from '../../../httpAPIs/reqresApi';
 
 function* getPeopleCollection(pageNumber = 1) {
   const isUserExistInState = yield select(state => state.user.info);

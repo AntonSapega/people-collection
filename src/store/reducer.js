@@ -1,10 +1,17 @@
 import { combineReducers } from "redux";
+import { appReducer } from './app/reducers';
+import { peopleDBReducer } from './peopleDB/reducers';
+import { userReducer } from './user/reducers';
+import { peoplePageReducer } from './peoplePage/reducers';
+import { colorsPageReducer } from './colorsPage/reducers';
+import { personPageReducer } from './personDetailsPage/reducers';
+import { colorDetailsReducer } from './colorDetailsPage/reducers';
 
-const reducer = (router) => {
+const rootReducer = (router) => {
   return combineReducers({
     router,
     app: appReducer,
-    peopleCollection: peopleReducer,
+    peopleCollection: peopleDBReducer,
     user: userReducer,
     peoplePage: peoplePageReducer,
     colorsPage: colorsPageReducer,
@@ -13,4 +20,4 @@ const reducer = (router) => {
   })
 }
 
-export default reducer;
+export default rootReducer;

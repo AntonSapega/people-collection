@@ -1,8 +1,8 @@
-import { call, put, take } from "redux-saga/effects";
-import { CREATE_USER } from '../types';
-import setUserToState from "./setUser";
-import setPeopleCollection from "./setPeopleCollection";
-import { createNewUser } from '../../httpAPIs/reqresApi';
+import { call, take } from "redux-saga/effects";
+import { CREATE_USER } from '../../types';
+import setUserToState from "./setUserToState";
+import setPeopleCollection from "../../peopleDB/sagas/setPeopleCollection";
+import { createNewUser } from '../../../httpAPIs/reqresApi';
 
 function* createMockUser(user) {
   return yield new Promise((resolve) => {
@@ -29,6 +29,6 @@ export default function* createUser() {
     newUser.payload.id = createUserRequest.data.id;
     const user = yield call(createMockUser, newUser.payload);
     yield call(setUserToState, user);
-    yield call(setPeopleCollection)
+    yield call(setPeopleCollection);
   }
 }

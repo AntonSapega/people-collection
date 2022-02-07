@@ -3,7 +3,8 @@ import styles from './Logout.module.scss';
 import MainButton from '../MainButton/MainButton';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePerson, removeUser, clearPeopleCollection } from "../../redux/actions";
+import { removeUser } from '../../store/user/actions';
+import { clearPeopleCollection, deletePerson } from '../../store/peopleDB/actions';
 
 const Logout = () => {
   const user = useSelector(state => state.user.info);
