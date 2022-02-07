@@ -1,6 +1,6 @@
 import { call, take, put } from 'redux-saga/effects';
 import { AUTH_USER } from '../../types';
-import { authUser, getPerson } from '../../../httpAPIs/reqresApi';
+import { authUser, getPerson } from '../../../services/api/reqresApi';
 import setUserToState from './setUserToState';
 import setPeopleCollection from '../../peopleDB/sagas/setPeopleCollection';
 import { userWasNotFound } from '../actions';

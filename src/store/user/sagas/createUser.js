@@ -2,7 +2,7 @@ import { call, take } from "redux-saga/effects";
 import { CREATE_USER } from '../../types';
 import setUserToState from "./setUserToState";
 import setPeopleCollection from "../../peopleDB/sagas/setPeopleCollection";
-import { createNewUser } from '../../../httpAPIs/reqresApi';
+import { createNewUser } from '../../../services/api/reqresApi';
 
 function* createMockUser(user) {
   return yield new Promise((resolve) => {

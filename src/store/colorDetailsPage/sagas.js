@@ -1,7 +1,7 @@
 import { fork, join, put, takeEvery } from 'redux-saga/effects';
 import  { LOAD_COLOR_DETAILS_MIDDLEWARE } from '../types';
-import { getColor, getPerson } from '../../httpAPIs/reqresApi';
-import { getTextPlaceholder } from '../../httpAPIs/jsonPlaceholderApi';
+import { getColor, getPerson } from '../../services/api/reqresApi';
+import { getTextPlaceholder } from '../../services/api/jsonPlaceholderApi';
 import { setColorDetails } from './actions';
 
 function* getDetailsWorker({ payload: colorId }) {

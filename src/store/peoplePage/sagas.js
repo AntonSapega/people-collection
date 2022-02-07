@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects';
-import { getPeoplePage } from '../../httpAPIs/reqresApi';
+import { getPeoplePage } from '../../services/api/reqresApi';
 import { loadPeoplePage } from './actions';
 
 export function* peoplePageWorker(pageNumber) {

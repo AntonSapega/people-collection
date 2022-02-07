@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { getColorsPage } from '../../httpAPIs/reqresApi';
+import { getColorsPage } from '../../services/api/reqresApi';
 import { addColorsOnPage } from './actions';
 
 export function* colorsPageWorker(pageNumber) {

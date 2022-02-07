@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { getPerson, getColor } from '../../httpAPIs/reqresApi';
+import { getPerson, getColor } from '../../services/api/reqresApi';
 import { getPersonDetails } from './actions';
 
 export function* personPageDetailsWorker(id) {
