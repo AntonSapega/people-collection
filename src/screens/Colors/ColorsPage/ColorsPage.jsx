@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './ColorsPage.module.scss';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import ColorCard from '../../components/ColorCard/ColorCard';
-import Pagination from '../../components/Pagination/Pagination';
+import ColorCard from '../ColorCard/ColorCard';
+import Pagination from '../../../components/Pagination/Pagination';
 import { useSelector } from 'react-redux';
 
 const ColorsPage = () => {

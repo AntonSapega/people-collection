@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from './Settings-page.module.scss';
+// import styles from './SettingsPage.module.scss';
 
 const SettingsPage = () => {
   return (

@@ -3,12 +3,12 @@ import styles from './PersonDetailsPage.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { useDispatch } from 'react-redux';
-import { getPersonDetails } from '../../store/personDetailsPage/actions';
-import { deletePersonMiddleware } from '../../store/peopleDB/actions';
+import { getPersonDetails } from '../../../store/personDetailsPage/actions';
+import { deletePersonMiddleware } from '../../../store/peopleDB/actions';
 import { useSelector } from 'react-redux';
-import DeletedStamp from '../../components/DeletedStamp/DeletedStamp';
-import ImagePlaceholder from '../../components/ImagePlaceholder/ImagePlaceholder';
-import Popup from '../../components/Popup/Popup';
+import DeletedStamp from '../../../components/DeletedStamp/DeletedStamp';
+import ImagePlaceholder from '../../../components/ImagePlaceholder/ImagePlaceholder';
+import Popup from '../../../components/Popup/Popup';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();

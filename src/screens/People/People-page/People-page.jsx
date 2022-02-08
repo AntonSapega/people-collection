@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from './People-page.module.scss';
-import PersonCard from "../../components/Person-card/PersonCard";
+import PersonCard from "../../../components/Person-card/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
-import Pagination from '../../components/Pagination/Pagination';
+import Pagination from '../../../components/Pagination/Pagination';
 import { useSelector } from "react-redux";
 
 const PeoplePage = () => {
