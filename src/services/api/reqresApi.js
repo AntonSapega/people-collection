@@ -1,30 +1,30 @@
 import axios from "axios";
-import { ROUTES } from "../../enums/ROUTES";
+import { httpRoutes } from "../http/routes";
 
 export function authUser(cred) {
-  return axios.post(ROUTES.authPath, cred);
+  return axios.post(httpRoutes.authPath, cred);
 }
 
 export function getPerson(identifier) {
-  return axios.get(`${ROUTES.personPath}/${identifier}`);
+  return axios.get(`${httpRoutes.personPath}/${identifier}`);
 }
 
 export function createNewUser(userParams) {
-  return axios.post(ROUTES.createUserPath, userParams);
+  return axios.post(httpRoutes.createUserPath, userParams);
 }
 
 export function getPeoplePage(page) {
-  return axios.get(`${ROUTES.peoplePagePath}?page=${page}`);
+  return axios.get(`${httpRoutes.peoplePagePath}?page=${page}`);
 }
 
 export function getColorsPage(page) {
-  return axios.get(`${ROUTES.colorsPagePath}?page=${page}`);
+  return axios.get(`${httpRoutes.colorsPagePath}?page=${page}`);
 }
 
 export function getColor(identifier) {
-  return axios.get(`${ROUTES.colorPath}/${identifier}`);
+  return axios.get(`${httpRoutes.colorPath}/${identifier}`);
 }
 
 export function deletePerson(identifier) {
-  return axios.delete(`${ROUTES.deletePersonPath}/${identifier}`);
+  return axios.delete(`${httpRoutes.deletePersonPath}/${identifier}`);
 }

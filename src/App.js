@@ -11,6 +11,7 @@ import ColorsPage from './screens/Colors/ColorsPage/ColorsPage';
 import ColorDetailsPage from './screens/ColorDetails/ColorDetailsPage/ColorDetailsPage';
 import { useDispatch } from 'react-redux';
 import loaderController from './interceptors/loaderController';
+import { ROUTES } from './enums/ROUTES';
 
 
 function App() {
@@ -23,18 +24,18 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={'/'} element={
+        <Route path={ROUTES.initial} element={
           <RequireAuth>
             <Layout />
           </RequireAuth>
         }>
           <Route index element={<HomePage />} />
-          <Route path="/colors/:page" element={<ColorsPage />} />
-          <Route path="/colors/color-details/:id" element={<ColorDetailsPage />} />
-          <Route path={'people/:page'} element={<PeoplePage />} />
-          <Route path={'people/person/:id'} element={<PersonDetailsPage />}/>
-          <Route path={'settings'} element={<SettingsPage />} />
-          <Route path="*" element={<HomePage />} />
+          <Route path={ROUTES.colors} element={<ColorsPage />} />
+          <Route path={ROUTES.color} element={<ColorDetailsPage />} />
+          <Route path={ROUTES.people} element={<PeoplePage />} />
+          <Route path={ROUTES.person} element={<PersonDetailsPage />}/>
+          <Route path={ROUTES.settings} element={<SettingsPage />} />
+          <Route path={ROUTES.notFound} element={<HomePage />} />
         </Route>
 
         <Route path={'login'} element={<LoginPage />} />
