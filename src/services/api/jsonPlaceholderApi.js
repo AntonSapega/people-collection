@@ -1,6 +1,6 @@
 import axios from "axios";
-import { postsPath } from '../routes-variables/jsonPlaceholder';
+import { ROUTES } from "../../enums/ROUTES";
 
 export function getTextPlaceholder(identifier) {
-  return axios.get(`${postsPath}/${identifier}`);
+  return axios.get(`${ROUTES.postsPath}/${identifier}`);
 }
