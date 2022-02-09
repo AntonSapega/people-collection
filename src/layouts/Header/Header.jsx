@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
-import Logo from '../../components/Logo/Logo';
-import UserProfile from '../../components/UserProfile/UserProfile';
+import Logo from '../../components/shared/Logo/Logo';
+import Dashboard from '../../components/Dashboard/Dashboard';
 import ProgressLoader from '../../components/ProgressLoader/ProgressLoader';
 import { ROUTES } from '../../enums/ROUTES';
 
@@ -20,7 +20,7 @@ const Header = () => {
         <NavLink className={isActiveConditional} to={ROUTES.settings}>Settings</NavLink>
 
         <div className={styles['header__user-profile']}>
-          <UserProfile />
+          <Dashboard />
         </div>
       </nav>
 

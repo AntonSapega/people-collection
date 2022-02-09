@@ -1,7 +1,7 @@
 import styles from './ColorsPage.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import ColorCard from '../ColorCard/ColorCard';
-import Pagination from '../../../components/Pagination/Pagination';
+import Pagination from '../../../components/shared/Pagination/Pagination';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../enums/ROUTES';
 

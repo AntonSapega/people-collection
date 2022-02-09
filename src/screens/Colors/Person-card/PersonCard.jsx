@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './PersonCard.module.scss';
-import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
+import ImagePlaceholder from '../../../components/shared/ImagePlaceholder/ImagePlaceholder';
 
 const PersonCard = ({user, onCardClick}) => {
   const pictureStyles = {

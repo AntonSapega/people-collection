@@ -1,12 +1,10 @@
 import React from "react";
-import styles from './UserProfile.module.scss';
-import { useEffect, useState } from "react/cjs/react.development";
-import Logout from '../Logout/Logout';
-import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder';
+import styles from './Dashboard.module.scss';
+import Logout from './Logout/Logout';
+import ImagePlaceholder from '../shared/ImagePlaceholder/ImagePlaceholder';
 import { useSelector } from "react-redux";
 
-const UserProfile = () => {
-
+const Dashboard = () => {
   const user = useSelector(state => state.user.info);
 
   return (
@@ -29,4 +27,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile;
+export default Dashboard;

@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux';
 import { getPersonDetails } from '../../../store/personDetailsPage/actions';
 import { deletePersonMiddleware } from '../../../store/peopleDB/actions';
 import { useSelector } from 'react-redux';
-import DeletedStamp from '../../../components/DeletedStamp/DeletedStamp';
-import ImagePlaceholder from '../../../components/ImagePlaceholder/ImagePlaceholder';
+import DeletedStamp from '../../../components/shared/DeletedStamp/DeletedStamp';
+import ImagePlaceholder from '../../../components/shared/ImagePlaceholder/ImagePlaceholder';
 import Popup from '../../../components/Popup/Popup';
 import { ROUTES } from '../../../enums/ROUTES';
 

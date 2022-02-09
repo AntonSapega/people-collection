@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Logout.module.scss';
-import MainButton from '../MainButton/MainButton';
+import MainButton from '../../shared/MainButton/MainButton';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from '../../store/user/actions';
-import { clearPeopleCollection, deletePerson } from '../../store/peopleDB/actions';
-import { ROUTES } from "../../enums/ROUTES";
+import { removeUser } from '../../../store/user/actions';
+import { clearPeopleCollection, deletePerson } from '../../../store/peopleDB/actions';
+import { ROUTES } from "../../../enums/ROUTES";
 
 const Logout = () => {
   const user = useSelector(state => state.user.info);

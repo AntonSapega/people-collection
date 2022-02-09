@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Logo.module.scss';
 import { NavLink } from "react-router-dom";
-import { ROUTES } from "../../enums/ROUTES";
+import { ROUTES } from "../../../enums/ROUTES";
 
 const Logo = ({ logoStyle = 'positive' }) => {
   const negativeStyle = {

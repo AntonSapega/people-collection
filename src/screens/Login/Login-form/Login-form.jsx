@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Login-form.module.scss';
 import AuthForm from '../Auth-form/Auth-form';
-import StringButton from '../../../components/String-button/String-button';
+import StringButton from '../../../components/shared/String-button/String-button';
 import Popup from '../../../components/Popup/Popup';
 
 export default class LoginForm extends React.Component {

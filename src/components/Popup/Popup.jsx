@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Popup.module.scss';
-import MainButton from '../MainButton/MainButton';
+import MainButton from '../shared/MainButton/MainButton';
 
 const Popup = ({ question, type, userChoice }) => {
 
