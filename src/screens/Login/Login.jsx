@@ -20,7 +20,6 @@ const Login = () => {
   const [isPopupVisible, setPopupStatus] = useState(false);
 
   useEffect(() => {
-    console.log('user: ', user);
     if (user) {
       navigate(location.state.from.pathname, {replace: true});
     }

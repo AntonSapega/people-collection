@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import Login from './screens/Login/Login';
+import Login from '../screens/Login/Login';
 import { Routes, Route, } from 'react-router-dom';
-import RequireAuth from './hoc/RequireAuth';
-import Layout from './layouts/Layout/Layout';
-import Home from './screens/Home/Home';
-import People from './screens/People/People';
-import Settings from './screens/Settings/Settings';
-import PersonDetails from './screens/PersonDetails/PersonDetails';
-import Colors from './screens/Colors/Colors';
-import ColorDetails from './screens/ColorDetails/ColorDetails';
+import RequireAuth from '../hoc/RequireAuth';
+import Layout from '../layouts/Layout/Layout';
+import Home from '../screens/Home/Home';
+import People from '../screens/People/People';
+import Settings from '../screens/Settings/Settings';
+import PersonDetails from '../screens/PersonDetails/PersonDetails';
+import Colors from '../screens/Colors/Colors';
+import ColorDetails from '../screens/ColorDetails/ColorDetails';
 import { useDispatch } from 'react-redux';
-import loaderController from './interceptors/loaderController';
-import { ROUTES } from './enums/ROUTES';
+import loaderController from '../interceptors/loaderController';
+import { ROUTES } from '../enums/ROUTES';
 
 
 function App() {
