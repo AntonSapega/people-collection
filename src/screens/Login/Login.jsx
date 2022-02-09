@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import LoginForm from '../Login-form/Login-form';
-import styles from './LoginPage.module.scss';
+import LoginForm from './LoginForm/LoginForm';
+import styles from './Login.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser, authUser, resetUserWasNotFoundField } from '../../../store/user/actions';
-import Popup from '../../../components/Popup/Popup';
+import { createUser, authUser, resetUserWasNotFoundField } from '../../store/user/actions';
+import Popup from '../../components/Popup/Popup';
 
-const LoginPage = () => {
+const Login = () => {
   const [formTitle] = useState('People Collection');
   const [formDescription] = useState("Try to find someone you really want to find");
 
@@ -65,4 +65,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage;
+export default Login;

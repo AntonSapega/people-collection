@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Auth-form.module.scss';
+import styles from './AuthForm.module.scss';
 
 const FormInput = ({
   labelTitle,

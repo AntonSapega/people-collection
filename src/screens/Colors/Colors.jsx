@@ -1,11 +1,12 @@
-import styles from './ColorsPage.module.scss';
+import React from 'react';
+import styles from './Colors.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
-import ColorCard from '../ColorCard/ColorCard';
-import Pagination from '../../../components/shared/Pagination/Pagination';
+import ColorCard from './ColorCard/ColorCard';
+import Pagination from '../../components/shared/Pagination/Pagination';
 import { useSelector } from 'react-redux';
-import { ROUTES } from '../../../enums/ROUTES';
+import { ROUTES } from '../../enums/ROUTES';
 
-const ColorsPage = () => {
+const Colors = () => {
   const routeParams = useParams();
   const navigate = useNavigate();
 
@@ -61,4 +62,4 @@ const ColorsPage = () => {
   )
 }
 
-export default ColorsPage;
+export default Colors;

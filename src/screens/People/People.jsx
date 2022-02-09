@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from './People-page.module.scss';
-import PersonCard from "../../Colors/Person-card/PersonCard";
+import styles from './People.module.scss';
+import PersonCard from "./PersonCard/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
-import Pagination from '../../../components/shared/Pagination/Pagination';
+import Pagination from '../../components/shared/Pagination/Pagination';
 import { useSelector } from "react-redux";
-import { ROUTES } from "../../../enums/ROUTES";
+import { ROUTES } from "../../enums/ROUTES";
 
-const PeoplePage = () => {
+const People = () => {
   const [people, setPeople] = useState([]);
 
   const navigate = useNavigate();
@@ -86,4 +86,4 @@ const PeoplePage = () => {
   )
 }
 
-export default PeoplePage;
+export default People;

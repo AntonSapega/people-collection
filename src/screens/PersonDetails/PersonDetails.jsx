@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import styles from './PersonDetailsPage.module.scss';
+import styles from './PersonDetails.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { useDispatch } from 'react-redux';
-import { getPersonDetails } from '../../../store/personDetailsPage/actions';
-import { deletePersonMiddleware } from '../../../store/peopleDB/actions';
+import { getPersonDetails } from '../../store/personDetailsPage/actions';
+import { deletePersonMiddleware } from '../../store/peopleDB/actions';
 import { useSelector } from 'react-redux';
-import DeletedStamp from '../../../components/shared/DeletedStamp/DeletedStamp';
-import ImagePlaceholder from '../../../components/shared/ImagePlaceholder/ImagePlaceholder';
-import Popup from '../../../components/Popup/Popup';
-import { ROUTES } from '../../../enums/ROUTES';
+import DeletedStamp from '../../components/shared/DeletedStamp/DeletedStamp';
+import ImagePlaceholder from '../../components/shared/ImagePlaceholder/ImagePlaceholder';
+import Popup from '../../components/Popup/Popup';
+import { ROUTES } from '../../enums/ROUTES';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();

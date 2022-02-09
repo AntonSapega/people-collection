@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import styles from './ColorDetailsPage.module.scss';
-import { loadColorDetailsMiddleware } from '../../../store/colorDetailsPage/actions';
+import styles from './ColorDetails.module.scss';
+import { loadColorDetailsMiddleware } from '../../store/colorDetailsPage/actions';
 import { useSelector } from "react-redux";
-import { ROUTES } from "../../../enums/ROUTES";
+import { ROUTES } from "../../enums/ROUTES";
 
-const ColorDetailsPage = () => {
+const ColorDetails = () => {
   const routeParams = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,4 +56,4 @@ const ColorDetailsPage = () => {
   )
 }
 
-export default ColorDetailsPage;
+export default ColorDetails;

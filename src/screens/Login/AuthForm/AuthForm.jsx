@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './Auth-form.module.scss';
+import styles from './AuthForm.module.scss';
 import { Formik } from 'formik';
 import StringButton from '../../../components/shared/String-button/String-button';
 import PrimaryButton from '../../../components/shared/Primary-button/Primary-button';
 import FormInput from './FormInput';
 
 export default class AuthForm extends React.Component {
-
   constructor(props) {
     super(props);
 
