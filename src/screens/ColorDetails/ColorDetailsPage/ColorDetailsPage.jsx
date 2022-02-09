@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from './ColorDetailsPage.module.scss';
 import { loadColorDetailsMiddleware } from '../../../store/colorDetailsPage/actions';
 import { useSelector } from "react-redux";
+import { ROUTES } from "../../../enums/ROUTES";
 
 const ColorDetailsPage = () => {
   const routeParams = useParams();
@@ -19,7 +20,7 @@ const ColorDetailsPage = () => {
   }, []);
 
   function goToCreator() {
-    navigate(`/people/person/${routeParams.id}`)
+    navigate(`${ROUTES.person}/${routeParams.id}`);
   }
 
   return (

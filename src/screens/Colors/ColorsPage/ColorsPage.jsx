@@ -1,50 +1,33 @@
-import React, { useEffect, useState } from 'react';
 import styles from './ColorsPage.module.scss';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import ColorCard from '../ColorCard/ColorCard';
 import Pagination from '../../../components/Pagination/Pagination';
 import { useSelector } from 'react-redux';
+import { ROUTES } from '../../../enums/ROUTES';
 
 const ColorsPage = () => {
-
-  // const [colors, setColors] = useState(null);
-  // const [totalPages, setTotalPages] = useState(null);
-
   const routeParams = useParams();
   const navigate = useNavigate();
 
   const colors = useSelector(state => state.colorsPage.colors);
   const totalPages = useSelector(state => state.colorsPage.pagesAmount)
 
-  // useEffect(() => {
-  //   requestColors(routeParams.page)
-  // }, [routeParams])
-
-  // function requestColors(pageNumber) {
-  //   axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown?page=${pageNumber}`)
-  //   .then(response => {
-  //     setColors(response.data.data);
-  //     setTotalPages(response.data.total_pages);
-  //   });
-  // }
-
   function increasePageNumber() {
     const nextPage = Number(routeParams.page) + 1;
-    navigate(`/colors/${nextPage}`, {replace: false});
+    navigate(`${ROUTES.colors}/${nextPage}`, {replace: false});
   }
 
   function decreasePageNumber() {
     const prevPage = Number(routeParams.page) - 1;
-    navigate(`/colors/${prevPage}`, {replace: false});
+    navigate(`${ROUTES.colors}/${prevPage}`, {replace: false});
   }
 
   function handleChosenPage(num) {
-    navigate(`/colors/${num}`, {replace: false});
+    navigate(`${ROUTES.colors}/${num}`, {replace: false});
   }
 
   function openColorDetails(colorId) {
-    navigate(`/colors/color-details/${colorId}`)
+    navigate(`${ROUTES.color}/${colorId}`)
   }
 
   const renderColors = colors?.map(color => {

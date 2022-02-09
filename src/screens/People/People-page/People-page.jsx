@@ -4,6 +4,7 @@ import PersonCard from "../../../components/Person-card/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from '../../../components/Pagination/Pagination';
 import { useSelector } from "react-redux";
+import { ROUTES } from "../../../enums/ROUTES";
 
 const PeoplePage = () => {
   const [people, setPeople] = useState([]);
@@ -39,20 +40,20 @@ const PeoplePage = () => {
   
   function increasePageNumber() {
     const nextPage = Number(routeParams.page) + 1;
-    navigate(`/people/${nextPage}`, {replace: false});
+    navigate(`${ROUTES.people}/${nextPage}`, {replace: false});
   }
 
   function decreasePageNumber() {
     const prevPage = Number(routeParams.page) - 1;
-    navigate(`/people/${prevPage}`, {replace: false});
+    navigate(`${ROUTES.people}/${prevPage}`, {replace: false});
   }
 
   function handleChosenPage(num) {
-    navigate(`/people/${num}`, {replace: false});
+    navigate(`${ROUTES.people}/${num}`, {replace: false});
   }
 
   function openPersonDetailsPage(id) {
-    navigate(`/people/person/${id}`)
+    navigate(`${ROUTES.person}/${id}`);
   }
 
   const renderUsers = people.map(user => {

@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import DeletedStamp from '../../../components/DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../../../components/ImagePlaceholder/ImagePlaceholder';
 import Popup from '../../../components/Popup/Popup';
+import { ROUTES } from '../../../enums/ROUTES';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();
@@ -71,7 +72,7 @@ const PersonDetailsPage = () => {
   }
 
   function goToColorPage() {
-    navigate(`/colors/color-details/${routeParams.id}`)
+    navigate(`${ROUTES.color}/${routeParams.id}`);
   }
 
   const avatarPlaceholder = `${personInfo?.first_name} ${personInfo?.last_name}`;

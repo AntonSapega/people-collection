@@ -13,20 +13,31 @@
     justify-content: center;
     align-items: center;
     margin-right: 6px;
+
+    &_negative {
+      background-color: rgb(167, 167, 167);
+    }
   }
 
   &__img-icon {
     font-size: 18px;
     color: #fff;
+
+    &_negative {
+      color: rgb(207, 207, 207);
+    }
   }
 
   &__title {
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    // font-size: inherit;
+    font-size: inherit;
     font-weight: 600;
     color: var(--primary-text-color);
     text-transform: capitalize;
     vertical-align: middle;
+
+    &_negative {
+      color: rgb(192, 192, 192);
+    }
   }
 }

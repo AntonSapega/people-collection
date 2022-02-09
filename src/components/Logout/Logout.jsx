@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from '../../store/user/actions';
 import { clearPeopleCollection, deletePerson } from '../../store/peopleDB/actions';
+import { ROUTES } from "../../enums/ROUTES";
 
 const Logout = () => {
   const user = useSelector(state => state.user.info);
@@ -15,7 +16,7 @@ const Logout = () => {
     dispatch(removeUser())
     dispatch(deletePerson(user.id));
     dispatch(clearPeopleCollection());
-    navigate('/', {replace: true});
+    navigate(`${ROUTES.initial}`, {replace: true});
   }
 
   return (

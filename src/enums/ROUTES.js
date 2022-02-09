@@ -1,9 +1,10 @@
 export const ROUTES = {
   initial: '/',
-  colors: '/colors/:page',
-  color: '/colors/color-details/:id',
-  people: 'people/:page',
-  person: 'people/person/:id',
-  settings: 'settings',
+  colors: '/colors',
+  color: '/colors/color-details',
+  people: '/people',
+  person: '/people/person',
+  settings: '/settings',
+  authorization: '/login',
   notFound: '*'
 }
