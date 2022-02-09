@@ -1,9 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 import { getPerson, getColor } from '../../services/api/reqresApi';
 import { getPersonDetails } from './actions';
+import { sessionController } from '../../services/storage/sessionController';
 
 export function* personPageDetailsWorker(id) {
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const user = sessionController.getUser();
   try {
     const person = yield call(getPerson, id);
     const colorDetails = yield call(getColor, id);

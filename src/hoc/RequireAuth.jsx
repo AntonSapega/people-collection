@@ -1,10 +1,14 @@
+import { useDispatch } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
+import { sessionController } from "../services/storage/sessionController";
+import { removeUser } from '../store/user/actions';
 
 const RequireAuth = ( {children} ) => {
   const location = useLocation();
-  const token = sessionStorage.getItem('token');
+  const dispatch = useDispatch();
 
-  if (!token) {
+  if (!sessionController.getToken()) {
+    dispatch(removeUser()); // Influence on Logout component (case when user is deleted manually from storage);
     return <Navigate to='/login' state={{from: location}} />
   }
 

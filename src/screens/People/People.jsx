@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Pagination from '../../components/shared/Pagination/Pagination';
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../enums/ROUTES";
+import { sessionController } from "../../services/storage/sessionController";
 
 const People = () => {
   const [people, setPeople] = useState([]);
@@ -29,7 +30,7 @@ const People = () => {
 
   function filterByUser() {
     if (Number(totalPages) === Number(routeParams.page)) {
-      const userFromStorage = JSON.parse(sessionStorage.getItem('user'));
+      const userFromStorage = sessionController.getUser();
 
       const isUserExistInPeopleCollection = peopleCollection.find(person => person.id === userFromStorage.id);
       if (!isUserExistInPeopleCollection) {

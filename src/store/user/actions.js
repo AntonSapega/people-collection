@@ -6,6 +6,7 @@ import {
   USER_WAS_NOT_FOUND,
   RESET_USER_WAS_NOT_FOUND_FIELD
 } from '../types';
+import { sessionController } from '../../services/storage/sessionController';
 
 export const authUser = (userCredentials) => {
   return {
@@ -22,10 +23,9 @@ export const createUser = (userCredentials) => {
 }
 
 export const setUser = (user) => {
-  if (!sessionStorage.getItem('token')) {
-    sessionStorage.setItem('token', JSON.stringify(user.token));
-    delete user.token;
-    sessionStorage.setItem('user', JSON.stringify(user));
+  if (!sessionController.getToken()) {
+    sessionController.setToken(user.token);
+    sessionController.setUser(user);
   }
 
   return {
@@ -35,8 +35,9 @@ export const setUser = (user) => {
 }
 
 export const removeUser = () => {
-  sessionStorage.removeItem('user');
-  sessionStorage.removeItem('token');
+  sessionController.removeUser();
+  sessionController.removeToken();
+
   return {
     type: REMOVE_USER
   }

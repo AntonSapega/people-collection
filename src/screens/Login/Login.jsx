@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import LoginForm from './LoginForm/LoginForm';
 import styles from './Login.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -20,6 +20,7 @@ const Login = () => {
   const [isPopupVisible, setPopupStatus] = useState(false);
 
   useEffect(() => {
+    console.log('user: ', user);
     if (user) {
       navigate(location.state.from.pathname, {replace: true});
     }
