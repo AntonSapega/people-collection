@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginForm from './LoginForm/LoginForm';
 import styles from './Login.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -8,7 +8,7 @@ import Popup from '../../components/Popup/Popup';
 
 const Login = () => {
   const [formTitle] = useState('People Collection');
-  const [formDescription] = useState("Try to find someone you really want to find");
+  const [formDescription] = useState("Try to find someone you really want to");
 
   const navigate = useNavigate();
   const location = useLocation();
