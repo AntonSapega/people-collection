@@ -5,7 +5,7 @@ import { peoplePageWorker } from '../../peoplePage/sagas';
 import { personPageDetailsWorker } from '../../personDetailsPage/sagas';
 
 function* handlePath({ payload }) {
-  console.log('handlePath');
+  // console.log('handlePath');
   const { location } = yield payload;
   const pathPieces = location.pathname.split('/').filter(string => string.length > 0);
   switch (pathPieces[pathPieces.length-2]) {
@@ -25,6 +25,6 @@ function* handlePath({ payload }) {
 
 
 export default function* routePathWatcher() {
-  console.log('routePathWatcher');
+  // console.log('routePathWatcher');
   yield takeEvery(LOCATION_CHANGE, handlePath);
 }

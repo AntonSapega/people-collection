@@ -12,6 +12,8 @@ import ColorDetails from '../screens/ColorDetails/ColorDetails';
 import { useDispatch } from 'react-redux';
 import loaderController from '../interceptors/loaderController';
 import { ROUTES } from '../enums/ROUTES';
+import ColorsSet from '../screens/Colors/ColorsSet/ColorsSet';
+import PeopleSet from '../screens/People/PeopleSet/PeopleSet';
 
 
 function App() {
@@ -30,9 +32,13 @@ function App() {
           </RequireAuth>
         }>
           <Route index element={<Home />} />
-          <Route path={`${ROUTES.colors}/:page`} element={<Colors />} />
+          <Route path={`${ROUTES.colors}`} element={<Colors />}>
+            <Route path=':page' element={<ColorsSet />} />
+          </Route>
           <Route path={`${ROUTES.color}/:id`} element={<ColorDetails />} />
-          <Route path={`${ROUTES.people}/:page`} element={<People />} />
+          <Route path={`${ROUTES.people}`} element={<People />}>
+            <Route path=':page' element={<PeopleSet />} />
+          </Route>
           <Route path={`${ROUTES.person}/:id`} element={<PersonDetails />}/>
           <Route path={ROUTES.settings} element={<Settings />} />
           <Route path={ROUTES.notFound} element={<Home />} />

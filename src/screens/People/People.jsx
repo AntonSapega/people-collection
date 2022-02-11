@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from './People.module.scss';
 import PersonCard from "./PersonCard/PersonCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import Pagination from '../../components/shared/Pagination/Pagination';
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../enums/ROUTES";
@@ -15,6 +15,12 @@ const People = () => {
   const peopleCollection = useSelector(state => state.peopleCollection.people);
   const peopleFromServer = useSelector(state => state.peoplePage.people);
   const totalPages = useSelector(state => state.peoplePage.pagesAmount);
+
+  useEffect(() => {
+    if (!routeParams.page) {
+      navigate('1');
+    }
+  }, [routeParams])
 
   useEffect(() => {
     const filteredArray = filterByDeletedPeople();
@@ -57,13 +63,37 @@ const People = () => {
     navigate(`${ROUTES.person}/${id}`);
   }
 
-  const renderUsers = people.map(user => {
-    return (
-      <div className={styles['users-page__user']} key={user.id.toString()}>
-        <PersonCard user={user} onCardClick={openPersonDetailsPage} />
-      </div>
-    )
-  })
+
+
+
+  function goToNextPage() {
+    const nextPage = Number(routeParams.page) + 1;
+    navigate(`${nextPage}`, {replace: false});
+  }
+
+  function goToPrevPage() {
+    const prevPage = Number(routeParams.page) - 1;
+    navigate(`${prevPage}`, {replace: false});
+  }
+
+  function goToChosenPage(num) {
+    navigate(`${num}`, {replace: false});
+  }
+
+
+
+
+
+
+
+
+  // const renderUsers = people.map(user => {
+  //   return (
+  //     <div className={styles['users-page__user']} key={user.id.toString()}>
+  //       <PersonCard user={user} onCardClick={openPersonDetailsPage} />
+  //     </div>
+  //   )
+  // })
 
   return (
     <div className={styles['users-page']}>
@@ -71,16 +101,16 @@ const People = () => {
       <span className={styles['users-page__description']}>List of people</span>
 
       <div className={styles['users-page__users']}>
-        {renderUsers}
+        <Outlet />
         {/* {<ListPersonCards />} */}
       </div>
       <div className={styles['users-page__pagination-wrapper']}>
         <Pagination
           activePage={routeParams.page}
           totalPages={totalPages}
-          onBtnNumber={handleChosenPage}
-          onIncreasePage={increasePageNumber}
-          onDecreasePageNumber={decreasePageNumber}
+          onBtnNumber={goToChosenPage}
+          onIncreasePage={goToNextPage}
+          onDecreasePageNumber={goToPrevPage}
         />
       </div>
     </div>

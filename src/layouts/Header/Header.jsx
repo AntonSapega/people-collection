@@ -15,8 +15,8 @@ const Header = () => {
 
       <nav className={styles['header__nav']}>
         <NavLink className={isActiveConditional} to={ROUTES.initial}>Home</NavLink>
-        <NavLink className={isActiveConditional} to={`${ROUTES.colors}/1`}>Colors</NavLink>
-        <NavLink className={isActiveConditional} to={`${ROUTES.people}/1`}>People</NavLink>
+        <NavLink className={isActiveConditional} to={`${ROUTES.colors}`}>Colors</NavLink>
+        <NavLink className={isActiveConditional} to={`${ROUTES.people}`}>People</NavLink>
         <NavLink className={isActiveConditional} to={ROUTES.settings}>Settings</NavLink>
 
         <div className={styles['header__user-profile']}>
