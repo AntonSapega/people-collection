@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import styles from './ColorsSet.module.scss';
+import styles from './ColorsList.module.scss';
 import ColorCard from "../ColorCard/ColorCard";
 import { ROUTES } from "../../../enums/ROUTES";
 
-const ColorsSet = () => {
+const ColorsList = () => {
   const navigate = useNavigate();
   const colors = useSelector(state => state.colorsPage.colors);
 
@@ -31,4 +31,4 @@ const ColorsSet = () => {
   )
 }
 
-export default ColorsSet;
+export default ColorsList;

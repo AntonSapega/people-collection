@@ -12,8 +12,8 @@ import ColorDetails from '../screens/ColorDetails/ColorDetails';
 import { useDispatch } from 'react-redux';
 import loaderController from '../interceptors/loaderController';
 import { ROUTES } from '../enums/ROUTES';
-import ColorsSet from '../screens/Colors/ColorsSet/ColorsSet';
-import PeopleSet from '../screens/People/PeopleSet/PeopleSet';
+import ColorsList from '../screens/Colors/ColorsList/ColorsList';
+import PeopleList from '../screens/People/PeopleList/PeopleList';
 
 
 function App() {
@@ -33,11 +33,11 @@ function App() {
         }>
           <Route index element={<Home />} />
           <Route path={`${ROUTES.colors}`} element={<Colors />}>
-            <Route path=':page' element={<ColorsSet />} />
+            <Route path=':page' element={<ColorsList />} />
           </Route>
           <Route path={`${ROUTES.color}/:id`} element={<ColorDetails />} />
           <Route path={`${ROUTES.people}`} element={<People />}>
-            <Route path=':page' element={<PeopleSet />} />
+            <Route path=':page' element={<PeopleList />} />
           </Route>
           <Route path={`${ROUTES.person}/:id`} element={<PersonDetails />}/>
           <Route path={ROUTES.settings} element={<Settings />} />
