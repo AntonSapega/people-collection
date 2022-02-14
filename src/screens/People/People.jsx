@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import TitleWithPagination from "../../layouts/TitleWithPagination/TitleWithPagination";
+import TitlePaginationLayout from "../../layouts/TitlePaginationLayout/TitlePaginationLayout";
 
 const People = () => {
   const navigate = useNavigate();
@@ -15,9 +15,9 @@ const People = () => {
   }, [routeParams])
 
   return (
-    <TitleWithPagination page={routeParams.page} totalPages={totalPages}>
+    <TitlePaginationLayout page={routeParams.page} totalPages={totalPages}>
       <Outlet />
-    </TitleWithPagination>
+    </TitlePaginationLayout>
   )
 }
 

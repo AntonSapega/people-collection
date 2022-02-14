@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import TitleWithPagination from '../../layouts/TitleWithPagination/TitleWithPagination';
+import TitlePaginationLayout from '../../layouts/TitlePaginationLayout/TitlePaginationLayout';
 
 const Colors = () => {
   const routeParams = useParams();
@@ -16,9 +16,9 @@ const Colors = () => {
   }, [routeParams])
 
   return (
-    <TitleWithPagination page={routeParams.page} totalPages={totalPages}>
+    <TitlePaginationLayout page={routeParams.page} totalPages={totalPages}>
       <Outlet />
-    </TitleWithPagination>
+    </TitlePaginationLayout>
   )
 }
 

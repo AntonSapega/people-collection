@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from './TitleWithPagination.module.scss';
+import styles from './TitlePaginationLayout.module.scss';
 import Pagination from "../../components/shared/Pagination/Pagination";
 
-const TitleWithPagination = ( {children, page, totalPages} ) => {
+const TitlePaginationLayout = ( {children, page, totalPages} ) => {
   const navigate = useNavigate();
 
   function goToNextPage() {
@@ -41,4 +41,4 @@ const TitleWithPagination = ( {children, page, totalPages} ) => {
   )
 }
 
-export default TitleWithPagination;
+export default TitlePaginationLayout;
