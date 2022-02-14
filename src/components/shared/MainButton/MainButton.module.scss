@@ -1,15 +1,40 @@
-.main-button {
+.btn {
   font-family: 'Roboto', sans-serif;
   border: none;
   color: #fff;
-  background-color: var(--orange-color);
-  padding: 6px 12px;
+  padding: 8px 22px;
   box-sizing: border-box;
-  border-radius: 0;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 120ms ease;
+  font-size: 0.92rem;
   
   &:hover {
-    background-color: var(--orange-color-hover);
+    opacity: 0.8;
   }
+
+  &:active {
+    outline: 0;
+    box-shadow: 0 0 2px 2px rgba(0, 123, 255, .5);
+  }
+}
+
+.positive {
+  background-color: var(--positive-color);
+}
+
+.negative {
+  background-color: var(--negative-color);
+}
+
+.neutral {
+  background-color: var(--neutral-color);
+}
+
+.main_app {
+  background-color: var(--orange-color);
+}
+
+.alternative_app {
+  background-color: var(--primary-turquoise);
 }

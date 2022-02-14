@@ -23,7 +23,7 @@ const Logout = () => {
     <div className={styles["logout"]}>
       <div className={styles['logout__template']}>
         <span className={styles['logout__question']}>Do you want log out?</span>
-        <MainButton btnStyles={{width: '100%', borderRadius: '4px'}} onCustomClick={handleLogoutClick}>Logout</MainButton>
+        <MainButton colorStyle={'main_app'} btnStyles={{width: '100%', borderRadius: '4px'}} onCustomClick={handleLogoutClick}>Logout</MainButton>
       </div>
     </div>
   )

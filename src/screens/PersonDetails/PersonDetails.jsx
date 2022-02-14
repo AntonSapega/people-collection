@@ -10,6 +10,7 @@ import DeletedStamp from '../../components/shared/DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../../components/shared/ImagePlaceholder/ImagePlaceholder';
 import Popup from '../../components/Popup/Popup';
 import { ROUTES } from '../../enums/ROUTES';
+import Modal from '../../components/Modal/Modal';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();
@@ -120,12 +121,20 @@ const PersonDetailsPage = () => {
           </>
         }
       </div>
-      {isPopupVisible &&
+      {/* {isPopupVisible &&
         <Popup
           type={'clarifying'}
           question={`Are you sure you want to delete of ${personInfo.first_name} ${personInfo.last_name}?`}
           userChoice={(result) => handlePopupAction(result)}
         />
+      } */}
+      {isPopupVisible &&
+        <Modal
+          title="Please confirm your actions"
+          type={"action"}
+          userChoice={(result) => handlePopupAction(result)}>
+          {`Are you sure you want to delete of ${personInfo.first_name} ${personInfo.last_name}?`}
+        </Modal>
       }
     </>
   )
