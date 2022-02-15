@@ -4,7 +4,7 @@ import styles from './Login.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, authUser, resetUserWasNotFoundField } from '../../store/user/actions';
-import Popup from '../../components/Popup/Popup';
+import Modal from '../../components/Modal/Modal';
 
 const Login = () => {
   const [formTitle] = useState('People Collection');
@@ -55,11 +55,12 @@ const Login = () => {
         />
       </div>
       {isPopupVisible &&
-        <Popup
-          type={'confirmation'}
-          question={`User was not found`}
-          userChoice={() => handleConfirmation()}
-        />
+        <Modal
+          title="User was not found"
+          type={"confirm"}
+          userChoice={() => handleConfirmation()}>
+          {`Please check out your email and password. Or move on to "Create account" area if you steel don't have a account`}
+        </Modal>
       }
     </>
   )

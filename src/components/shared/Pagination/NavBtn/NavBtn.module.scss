@@ -1,0 +1,31 @@
+.navButton {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 6px;
+  background-color: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  height: 100%;
+
+  &:first-child {
+    margin: 0;
+  }
+
+  &:active {
+    outline: 0;
+    box-shadow: var(--outline-button);;
+  }
+
+  &:hover {
+    background-color: rgb(247, 247, 247);
+  }
+}
+
+.navButton_active {
+  background-color: var(--deep-orange);
+  color: #fff;
+  &:hover {
+    background-color: var(--deep-orange-hover);
+  }
+}

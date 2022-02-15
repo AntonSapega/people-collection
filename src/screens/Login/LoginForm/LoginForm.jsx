@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './LoginForm.module.scss';
 import AuthForm from '../AuthForm/AuthForm';
 import StringButton from '../../../components/shared/String-button/String-button';
-import Popup from '../../../components/Popup/Popup';
+import Modal from '../../../components/Modal/Modal';
 
 export default class LoginForm extends React.Component {
 
@@ -42,11 +42,12 @@ export default class LoginForm extends React.Component {
           </div>
         </div>
         {this.state.isPopupVisible &&
-          <Popup
-            type={'confirmation'}
-            question={`You must log in`}
-            userChoice={() => this.handleHelpCall()}
-          />
+          <Modal
+            title="Please choose one from two action"
+            type={"confirm"}
+            userChoice={() => this.handleHelpCall()}>
+            {`Put your email and password if you have or create new account`}
+          </Modal>
         }
       </>
     )

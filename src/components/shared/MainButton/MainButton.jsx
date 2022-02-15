@@ -5,7 +5,7 @@ const colorsEnum = [
   'positive',
   'negative',
   'neutral',
-  'main_app ',
+  'main_app',
   'alternative_app',
 ]
 
