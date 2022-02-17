@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './ColorsList.module.scss';
@@ -12,7 +12,7 @@ const ColorsList = () => {
   function openColorDetails(colorId) {
     navigate(`/${ROUTES.color}/${colorId}`);
   }
-  
+
   return (
     <>
       {

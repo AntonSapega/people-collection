@@ -16,7 +16,7 @@ const Colors = () => {
   }, [routeParams])
 
   return (
-    <TitlePaginationLayout page={routeParams.page} totalPages={totalPages}>
+    <TitlePaginationLayout title='Colors' description='Amazing colors here' page={routeParams.page} totalPages={totalPages}>
       <Outlet />
     </TitlePaginationLayout>
   )

@@ -15,7 +15,7 @@ const People = () => {
   }, [routeParams])
 
   return (
-    <TitlePaginationLayout page={routeParams.page} totalPages={totalPages}>
+    <TitlePaginationLayout title='People' description='Remarkable people' page={routeParams.page} totalPages={totalPages}>
       <Outlet />
     </TitlePaginationLayout>
   )

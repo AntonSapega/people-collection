@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './PersonDetails.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
@@ -10,6 +10,7 @@ import DeletedStamp from '../../components/shared/DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../../components/shared/ImagePlaceholder/ImagePlaceholder';
 import { ROUTES } from '../../enums/ROUTES';
 import Modal from '../../components/Modal/Modal';
+import useTip from '../../hooks/useTip';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();
@@ -22,6 +23,9 @@ const PersonDetailsPage = () => {
   const personInfo = useSelector(state => state.personDetails.mainInfo);
   const favoriteColor = useSelector(state => state.personDetails.favoriteColor);
   const [isPopupVisible, setPopupStatus] = useState(false)
+
+  const ref = useRef();
+  useTip(ref, 'See details', 40);
 
   useEffect(() => {
       if (personInfo) {
@@ -113,7 +117,7 @@ const PersonDetailsPage = () => {
                 <span>Foundation date: <span className={styles['favorite-color__date']}>{favoriteColor.year} year</span></span>
                 <div className={styles['favorite-color__sample-wrapper']}>
                   <span>Sample: </span>
-                  <span className={styles['favorite-color__sample']} style={{backgroundColor: favoriteColor.color}} onClick={goToColorPage}></span>
+                  <span ref={ref} className={styles['favorite-color__sample']} style={{backgroundColor: favoriteColor.color}} onClick={goToColorPage}></span>
                 </div>
               </article>
             </div>
