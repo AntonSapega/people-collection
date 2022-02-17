@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import styles from './PeopleList.module.scss';
 import PersonCard from '../PersonCard/PersonCard';
 import { useSelector } from "react-redux";
@@ -14,11 +14,26 @@ const PeopleList = () => {
   const peopleFromServer = useSelector(state => state.peoplePage.people);
   const totalPages = useSelector(state => state.peoplePage.pagesAmount);
 
+  const [inputValue] = useOutletContext();
+
   useEffect(() => {
     const filteredArray = filterByDeletedPeople();
     setPeople(filteredArray);
     filterByUser();
   }, [peopleFromServer]);
+
+  useEffect(() => {
+    if(inputValue.length > 1) {
+      const matched = peopleCollection.filter(person => {
+        const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
+        return fullName.includes(inputValue.toLowerCase());
+      })
+      setPeople(matched);
+    } else {
+      setPeople(filterByDeletedPeople());
+      filterByUser();
+    }
+  }, [inputValue]);
 
   function filterByDeletedPeople() {
     return peopleCollection.filter(personFromDB => {
