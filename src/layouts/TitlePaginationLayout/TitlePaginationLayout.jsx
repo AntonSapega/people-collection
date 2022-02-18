@@ -47,14 +47,14 @@
 
 
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styles from './TitlePaginationLayout.module.scss';
 import Pagination from "../../components/shared/Pagination/Pagination";
+import PrimaryInput from "../../components/shared/PrimaryInput/PrimaryInput";
 
 const TitlePaginationLayout = ( {children, title, description, page, totalPages} ) => {
   const navigate = useNavigate();
-
   const [inputValue, setInputValue] = useState('');
 
   function goToNextPage() {
@@ -77,10 +77,25 @@ const TitlePaginationLayout = ( {children, title, description, page, totalPages}
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>{title}</h1>
-      <span className={styles.description}>{description}</span>
-      <input type='text' placeholder="find someone" value={inputValue} onChange={handleInput} />
-      <h6>{inputValue}</h6>
+      <section className={styles.header}>
+        <div>
+          <h1 className={styles.title}>{title}</h1>
+          <span className={styles.description}>{description}</span>
+        </div>
+        <div className={styles.header__finder}>
+          <div className={`material-icons ${styles.header__finderIcon}`}>search</div>
+          <PrimaryInput
+            // labelTitle='Try to find'
+            inputType='text'
+            inputName='searcher'
+            inputPlaceholder="search"
+            // handleBlur={() => console.log('blur')}
+            handleChange={handleInput}
+            inputValue={inputValue}
+            // warningMessage={people}
+          />
+        </div>
+      </section>
 
       <div className={styles.children}>
         <Outlet context={[inputValue]} />

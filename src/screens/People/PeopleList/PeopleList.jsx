@@ -5,6 +5,8 @@ import PersonCard from '../PersonCard/PersonCard';
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../../enums/ROUTES";
 import { sessionController } from "../../../services/storage/sessionController";
+import { useDispatch } from "react-redux";
+import { getPeopleMiddleware, getParticularPeople } from '../../../store/peoplePage/actions';
 
 const PeopleList = () => {
   const navigate = useNavigate();
@@ -13,8 +15,13 @@ const PeopleList = () => {
   const peopleCollection = useSelector(state => state.peopleCollection.people);
   const peopleFromServer = useSelector(state => state.peoplePage.people);
   const totalPages = useSelector(state => state.peoplePage.pagesAmount);
+  const dispatch = useDispatch();
 
   const [inputValue] = useOutletContext();
+
+  useEffect(() => {
+    dispatch(getPeopleMiddleware(routeParams.page));
+  }, [routeParams]);
 
   useEffect(() => {
     const filteredArray = filterByDeletedPeople();
@@ -23,16 +30,26 @@ const PeopleList = () => {
   }, [peopleFromServer]);
 
   useEffect(() => {
+    // if(inputValue.length > 1) {
+    //   const matched = peopleCollection.filter(person => {
+    //     const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
+    //     return fullName.includes(inputValue.toLowerCase());
+    //   })
+    //   setPeople(matched);
+    // } else {
+    //   setPeople(filterByDeletedPeople());
+    //   filterByUser();
+    // }
+
     if(inputValue.length > 1) {
-      const matched = peopleCollection.filter(person => {
+      const matchedPeople = peopleCollection.filter(person => {
         const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
         return fullName.includes(inputValue.toLowerCase());
       })
-      setPeople(matched);
-    } else {
-      setPeople(filterByDeletedPeople());
-      filterByUser();
-    }
+      const peopleIds = matchedPeople.map(person => person.id);
+      // console.log(peopleIds)
+      dispatch(getParticularPeople(peopleIds));
+    } else dispatch(getPeopleMiddleware(routeParams.page))
   }, [inputValue]);
 
   function filterByDeletedPeople() {
