@@ -7,6 +7,8 @@ import { ROUTES } from "../../../enums/ROUTES";
 import { sessionController } from "../../../services/storage/sessionController";
 import { useDispatch } from "react-redux";
 import { getPeopleMiddleware, getParticularPeople } from '../../../store/peoplePage/actions';
+import useDebounce from '../../../hooks/useDebounce';
+import NothingFound from "../../../components/shared/NothingFound/NothingFound";
 
 const PeopleList = () => {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ const PeopleList = () => {
   const dispatch = useDispatch();
 
   const [inputValue] = useOutletContext();
+  const debouncedSearchTerm = useDebounce(inputValue, 600);
 
   useEffect(() => {
     dispatch(getPeopleMiddleware(routeParams.page));
@@ -30,27 +33,15 @@ const PeopleList = () => {
   }, [peopleFromServer]);
 
   useEffect(() => {
-    // if(inputValue.length > 1) {
-    //   const matched = peopleCollection.filter(person => {
-    //     const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
-    //     return fullName.includes(inputValue.toLowerCase());
-    //   })
-    //   setPeople(matched);
-    // } else {
-    //   setPeople(filterByDeletedPeople());
-    //   filterByUser();
-    // }
-
-    if(inputValue.length > 1) {
+    if(debouncedSearchTerm) {
       const matchedPeople = peopleCollection.filter(person => {
         const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
         return fullName.includes(inputValue.toLowerCase());
       })
       const peopleIds = matchedPeople.map(person => person.id);
-      // console.log(peopleIds)
       dispatch(getParticularPeople(peopleIds));
     } else dispatch(getPeopleMiddleware(routeParams.page))
-  }, [inputValue]);
+  }, [debouncedSearchTerm]);
 
   function filterByDeletedPeople() {
     return peopleCollection.filter(personFromDB => {
@@ -83,6 +74,11 @@ const PeopleList = () => {
             </div>
           )
         })
+      }
+      {people.length === 0 &&
+        <div className={styles.empty_page}>
+          <NothingFound />
+        </div>
       }
     </>
   )
