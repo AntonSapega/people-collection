@@ -13,7 +13,7 @@ function* handlePath({ payload }) {
       // yield call(peoplePageWorker, pathPieces[pathPieces.length-1]);
       break;
     case 'colors':
-      yield call(colorsPageWorker, pathPieces[pathPieces.length-1]);
+      // yield call(colorsPageWorker, pathPieces[pathPieces.length-1]);
       break;
     case 'person':
       yield call(personPageDetailsWorker, pathPieces[pathPieces.length-1]);
