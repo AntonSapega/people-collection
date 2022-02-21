@@ -6,6 +6,7 @@ import { loadColorDetailsMiddleware } from '../../store/colorDetailsPage/actions
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../enums/ROUTES";
 import { useRef } from "react";
+import BackByHistory from '../../components/shared/BackByHistory/BackByHistory';
 import useTip from "../../hooks/useTip";
 
 const ColorDetails = () => {
@@ -32,6 +33,10 @@ const ColorDetails = () => {
     <article className={styles['color-details']}>
       {colorInfo && creator && textPlaceholder &&
         <>
+          <div className={styles['color-details__history-nav']}>
+            <BackByHistory />
+          </div>
+
           <h1 className={styles['color-details__title']}>{colorInfo.name}</h1>
           <div ref={ref} className={styles['color-details__sample']} style={{backgroundColor: colorInfo.color}}></div>
 

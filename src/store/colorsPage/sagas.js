@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, debounce, put, takeEvery } from 'redux-saga/effects';
 import { getColorsPage } from '../../services/api/reqresApi';
 import { addColorsOnPage } from './actions';
 import { LOAD_PARTICULAR_COLORS, LOAD_COLORS } from '../../store/types';
@@ -36,5 +36,6 @@ export function* colorsPageWatcher() { //! It is not being used
 }
 
 export function* loadParticularColorsWatcher() {
-  yield takeEvery(LOAD_PARTICULAR_COLORS, getColors);
+  // yield takeEvery(LOAD_PARTICULAR_COLORS, getColors);
+  yield debounce(600, LOAD_PARTICULAR_COLORS, getColors);
 }

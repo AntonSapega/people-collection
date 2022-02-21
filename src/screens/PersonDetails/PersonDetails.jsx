@@ -11,6 +11,7 @@ import ImagePlaceholder from '../../components/shared/ImagePlaceholder/ImagePlac
 import { ROUTES } from '../../enums/ROUTES';
 import Modal from '../../components/Modal/Modal';
 import useTip from '../../hooks/useTip';
+import BackByHistory from '../../components/shared/BackByHistory/BackByHistory';
 
 const PersonDetailsPage = () => {
   const routeParams = useParams();
@@ -81,15 +82,11 @@ const PersonDetailsPage = () => {
 
   const avatarPlaceholder = `${personInfo?.first_name} ${personInfo?.last_name}`;
   const emailIcon = `${styles['email__icon']} material-icons`;
-  const goBackStyle = `${styles['go-back__arrow']} material-icons`;
   const deleteStyle = `${styles['delete-person']} material-icons`
 
   return (
     <>
-      <div className={styles['go-back']} onClick={goToPrevPage}>
-        <span className={goBackStyle}>arrow_back</span>
-      </div>
-
+      <BackByHistory />
       <div className={styles['person-details']}>
         {personInfo && favoriteColor &&
           <>

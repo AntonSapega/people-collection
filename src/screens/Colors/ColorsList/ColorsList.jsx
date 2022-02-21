@@ -16,7 +16,7 @@ const ColorsList = () => {
   const routeParams = useParams();
   const dispatch = useDispatch();
   const [inputValue] = useOutletContext();
-  const debouncedValue = useDebounce(inputValue, 600);
+  // const debouncedValue = useDebounce(inputValue, 600);
 
   useEffect(() => {
     console.log('useEffect')
@@ -24,12 +24,12 @@ const ColorsList = () => {
   }, [routeParams.page])
 
   useEffect(() => {
-    if (debouncedValue) {
+    if (inputValue) {
       dispatch(loadParticularColorsMiddleware(inputValue));
       return;
     }
     dispatch(loadColorsMiddleware(routeParams.page));
-  }, [debouncedValue]);
+  }, [inputValue]);
 
   function openColorDetails(colorId) {
     navigate(`/${ROUTES.color}/${colorId}`);

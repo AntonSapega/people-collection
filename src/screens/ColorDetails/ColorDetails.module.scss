@@ -4,6 +4,13 @@
   align-items: center;
   font-family: Fira Sans, sans-serif;
   color: var(--primary-text-color);
+  position: relative;
+
+  &__history-nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 
   &__title {
     font-weight: 600;
