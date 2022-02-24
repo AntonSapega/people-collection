@@ -3,7 +3,7 @@ import styles from './Logout.module.scss';
 import MainButton from '../../shared/MainButton/MainButton';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from '../../../store/user/actions';
+import { removeUser } from '../../../store/user/reducers';
 import { clearPeopleCollection, deletePerson } from '../../../store/peopleDB/actions';
 import { ROUTES } from "../../../enums/ROUTES";
 

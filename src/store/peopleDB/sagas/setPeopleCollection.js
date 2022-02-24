@@ -1,5 +1,5 @@
 import { call, fork, put, select } from 'redux-saga/effects';
-import { initPeopleCollection } from '../actions';
+import { initPeopleCollection } from '../reducers';
 import { getPeoplePage } from '../../../services/api/reqresApi';
 
 function* getPeopleCollection(pageNumber = 1) {

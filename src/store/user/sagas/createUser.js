@@ -1,5 +1,4 @@
 import { call, take } from "redux-saga/effects";
-import { CREATE_USER } from '../../types';
 import setUserToState from "./setUserToState";
 import setPeopleCollection from "../../peopleDB/sagas/setPeopleCollection";
 import { createNewUser } from '../../../services/api/reqresApi';
@@ -20,7 +19,7 @@ function* createMockUser(user) {
 
 export default function* createUser() {
   while (true) {
-    const newUser = yield take(CREATE_USER);
+    const newUser = yield take('user/createUser');
     const credentials = {
       email: newUser.payload.email,
       job: 'unknown'

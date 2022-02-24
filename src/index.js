@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createBrowserHistory } from 'history';
@@ -11,6 +11,7 @@ import { createReduxHistoryContext } from "redux-first-history";
 import { HistoryRouter } from "redux-first-history/rr6";
 import rootReducer from './store/reducer'
 import saga from './store/saga';
+import { configureStore } from '@reduxjs/toolkit';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,14 +19,27 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
   history: createBrowserHistory(),
 });
 
-export const store = createStore(rootReducer(routerReducer), compose(
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-    applyMiddleware(
-      routerMiddleware,
-      sagaMiddleware
-      )
-    )
-))
+// export const store = createStore(rootReducer(routerReducer), compose(
+//   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+    // applyMiddleware(
+    //   routerMiddleware,
+    //   sagaMiddleware
+    //   )
+//     )
+// ))
+
+// const store = configureStore({
+//   reducer: rootReducer(routerReducer),
+//   middleware: [applyMiddleware(
+//     routerMiddleware,
+//     sagaMiddleware
+//     )]
+// })
+
+const store = configureStore({
+  reducer: rootReducer(routerReducer),
+  middleware: [routerMiddleware, sagaMiddleware]
+})
 
 export const history = createReduxHistory(store);
 sagaMiddleware.run(saga);
