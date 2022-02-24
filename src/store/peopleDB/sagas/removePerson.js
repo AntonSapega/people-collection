@@ -16,5 +16,5 @@ function* removePersonWorker({ payload: id }) {
 }
 
 export default function* removePerson() {
-  yield takeEvery(DELETE_PERSON_MIDDLEWARE, removePersonWorker)
+  yield takeEvery('people/deletePersonMiddleware', removePersonWorker)
 }

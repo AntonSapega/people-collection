@@ -19,7 +19,7 @@ const rootReducer = (router) => {
     app: appReducer,
     peopleCollection: peopleDBReducer,
     user: userReducer,
-    // peoplePage: peoplePageReducer,
+    peoplePage: peoplePageReducer,
     // colorsPage: colorsPageReducer,
     // personDetails: personPageReducer,
     // colorDetailsPage: colorDetailsReducer

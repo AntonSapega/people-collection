@@ -33,7 +33,8 @@ const peopleDBSlice = createSlice({
   },
   reducers: {
     initPeopleCollection(state, action) {
-      state.people.concat(action.payload);
+      console.log('initPeopleCollection', action)
+      state.people = state.people.concat(action.payload);
     },
     clearPeopleCollection(state) {
       state.people = [];

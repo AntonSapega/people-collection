@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { useDispatch } from 'react-redux';
 import { getPersonDetails } from '../../store/personDetailsPage/actions';
-import { deletePersonMiddleware } from '../../store/peopleDB/actions';
+import { deletePersonMiddleware } from '../../store/peopleDB/reducers';
 import { useSelector } from 'react-redux';
 import DeletedStamp from '../../components/shared/DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../../components/shared/ImagePlaceholder/ImagePlaceholder';
