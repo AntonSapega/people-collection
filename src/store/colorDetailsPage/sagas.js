@@ -18,5 +18,5 @@ function* getDetailsWorker({ payload: colorId }) {
 }
 
 export default function* colorDetailsPage() {
-  yield takeEvery('color_details/loadColorDetailsMiddleware', getDetailsWorker);
+  yield takeEvery('color_details/loadColorDetails', getDetailsWorker);
 }

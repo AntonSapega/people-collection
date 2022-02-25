@@ -30,11 +30,10 @@ export function* getColors( {payload: inputValue} ) {
   yield put(addColorsOnPage({data: filteredColors}));
 }
 
-export function* colorsPageWatcher() { //! It is not being used
-  yield takeEvery('colors_page/loadColorsMiddleware', colorsPageWorker);
+export function* colorsPageWatcher() {
+  yield takeEvery('colors_page/loadColors', colorsPageWorker);
 }
 
 export function* loadParticularColorsWatcher() {
-  // yield takeEvery(LOAD_PARTICULAR_COLORS, getColors);
-  yield debounce(600, 'colors_page/loadParticularColorsMiddleware', getColors);
+  yield debounce(600, 'colors_page/loadParticularColors', getColors);
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from './ColorDetails.module.scss';
-import { loadColorDetailsMiddleware } from '../../store/colorDetailsPage/reducers';
+import { loadColorDetails } from '../../store/colorDetailsPage/reducers';
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../enums/ROUTES";
 import { useRef } from "react";
@@ -22,7 +22,7 @@ const ColorDetails = () => {
   useTip(ref, `${creator?.first_name} ${creator?.last_name}`, 150, document.getElementsByTagName('main')[0]);
 
   useEffect(() => {
-    dispatch(loadColorDetailsMiddleware(routeParams.id));
+    dispatch(loadColorDetails(routeParams.id));
   }, []);
 
   function goToCreator() {

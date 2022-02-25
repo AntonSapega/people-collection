@@ -1,7 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
+
+const nameSlice = 'colors_page';
+
+// Middleware
+export const loadColors = createAction(`${nameSlice}/loadColors`);
+export const loadParticularColors = createAction(`${nameSlice}/loadParticularColors`);
 
 const colorsPageSlice = createSlice({
-  name: 'colors_page',
+  name: nameSlice,
   initialState: {
     colors: [],
     pagesAmount: 0,
@@ -11,14 +17,8 @@ const colorsPageSlice = createSlice({
       state.colors = action.payload.data;
       state.pagesAmount = action.payload.total_pages;
     },
-    loadColorsMiddleware() {
-      // middleware
-    },
-    loadParticularColorsMiddleware() {
-      // middleware
-    }
   }
 })
 
-export const { addColorsOnPage, loadColorsMiddleware, loadParticularColorsMiddleware } = colorsPageSlice.actions;
+export const { addColorsOnPage } = colorsPageSlice.actions;
 export default colorsPageSlice.reducer;

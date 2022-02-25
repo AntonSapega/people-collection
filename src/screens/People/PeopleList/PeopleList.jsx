@@ -30,10 +30,9 @@ const PeopleList = () => {
       })
       const peopleIds = matchedPeople.map(person => person.id);
       dispatch(getParticularPeople(peopleIds));
-    } else {
-      console.log('else')
-      dispatch(getPeopleMiddleware(routeParams.page));
+      return;
     }
+    dispatch(getPeopleMiddleware(routeParams.page));
   }, [routeParams, debouncedSearchTerm]);
 
   useEffect(() => {
@@ -41,20 +40,6 @@ const PeopleList = () => {
     setPeople(filteredArray);
     filterByUser();
   }, [peopleFromServer]);
-
-  useEffect(() => {
-    // if(debouncedSearchTerm) {
-    //   const matchedPeople = peopleCollection.filter(person => {
-    //     const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
-    //     return fullName.includes(inputValue.toLowerCase());
-    //   })
-    //   const peopleIds = matchedPeople.map(person => person.id);
-    //   dispatch(getParticularPeople(peopleIds));
-    // } else {
-    //   console.log('else')
-    //   dispatch(getPeopleMiddleware(routeParams.page));
-    // }
-  }, [debouncedSearchTerm]);
 
   function filterByDeletedPeople() {
     return peopleCollection.filter(personFromDB => {

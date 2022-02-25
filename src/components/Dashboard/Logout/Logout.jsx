@@ -4,7 +4,7 @@ import MainButton from '../../shared/MainButton/MainButton';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from '../../../store/user/reducers';
-import { clearPeopleCollection, deletePerson } from '../../../store/peopleDB/reducers';
+import { clearPeopleCollection, deletePersonMiddleware } from '../../../store/peopleDB/reducers';
 import { ROUTES } from "../../../enums/ROUTES";
 
 const Logout = () => {
@@ -14,7 +14,7 @@ const Logout = () => {
 
   const handleLogoutClick = () => {
     dispatch(removeUser())
-    dispatch(deletePerson(user.id));
+    dispatch(deletePersonMiddleware(user.id));
     dispatch(clearPeopleCollection());
     navigate(`${ROUTES.initial}`, {replace: true});
   }
