@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { ROUTES } from "../../../enums/ROUTES";
 import { sessionController } from "../../../services/storage/sessionController";
 import { useDispatch } from "react-redux";
-import { getPeopleMiddleware, getParticularPeople } from '../../../store/peoplePage/actions';
+import { getPeopleMiddleware, getParticularPeople } from '../../../store/peoplePage/reducers';
 import useDebounce from '../../../hooks/useDebounce';
 import NothingFound from "../../../components/shared/NothingFound/NothingFound";
 
@@ -23,8 +23,18 @@ const PeopleList = () => {
   const debouncedSearchTerm = useDebounce(inputValue, 600);
 
   useEffect(() => {
-    dispatch(getPeopleMiddleware(routeParams.page));
-  }, [routeParams]);
+    if(debouncedSearchTerm) {
+      const matchedPeople = peopleCollection.filter(person => {
+        const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
+        return fullName.includes(inputValue.toLowerCase());
+      })
+      const peopleIds = matchedPeople.map(person => person.id);
+      dispatch(getParticularPeople(peopleIds));
+    } else {
+      console.log('else')
+      dispatch(getPeopleMiddleware(routeParams.page));
+    }
+  }, [routeParams, debouncedSearchTerm]);
 
   useEffect(() => {
     const filteredArray = filterByDeletedPeople();
@@ -33,14 +43,17 @@ const PeopleList = () => {
   }, [peopleFromServer]);
 
   useEffect(() => {
-    if(debouncedSearchTerm) {
-      const matchedPeople = peopleCollection.filter(person => {
-        const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
-        return fullName.includes(inputValue.toLowerCase());
-      })
-      const peopleIds = matchedPeople.map(person => person.id);
-      dispatch(getParticularPeople(peopleIds));
-    } else dispatch(getPeopleMiddleware(routeParams.page))
+    // if(debouncedSearchTerm) {
+    //   const matchedPeople = peopleCollection.filter(person => {
+    //     const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
+    //     return fullName.includes(inputValue.toLowerCase());
+    //   })
+    //   const peopleIds = matchedPeople.map(person => person.id);
+    //   dispatch(getParticularPeople(peopleIds));
+    // } else {
+    //   console.log('else')
+    //   dispatch(getPeopleMiddleware(routeParams.page));
+    // }
   }, [debouncedSearchTerm]);
 
   function filterByDeletedPeople() {

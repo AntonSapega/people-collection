@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import styles from './ColorsList.module.scss';
 import ColorCard from "../ColorCard/ColorCard";
 import { ROUTES } from "../../../enums/ROUTES";
-import { loadParticularColorsMiddleware } from '../../../store/colorsPage/actions';
+import { loadParticularColorsMiddleware } from '../../../store/colorsPage/reducers';
 import useDebounce from "../../../hooks/useDebounce";
-import { loadColorsMiddleware } from '../../../store/colorsPage/actions';
+import { loadColorsMiddleware } from '../../../store/colorsPage/reducers';
 import NothingFound from '../../../components/shared/NothingFound/NothingFound';
 
 const ColorsList = () => {
@@ -28,7 +28,8 @@ const ColorsList = () => {
       dispatch(loadParticularColorsMiddleware(inputValue));
       return;
     }
-    dispatch(loadColorsMiddleware(routeParams.page));
+    // dispatch(loadColorsMiddleware(routeParams.page));
+    console.log(inputValue)
   }, [inputValue]);
 
   function openColorDetails(colorId) {

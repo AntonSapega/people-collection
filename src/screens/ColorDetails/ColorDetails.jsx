@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from './ColorDetails.module.scss';
-import { loadColorDetailsMiddleware } from '../../store/colorDetailsPage/actions';
+import { loadColorDetailsMiddleware } from '../../store/colorDetailsPage/reducers';
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../enums/ROUTES";
 import { useRef } from "react";
