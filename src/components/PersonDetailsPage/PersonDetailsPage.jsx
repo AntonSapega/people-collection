@@ -1,19 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './PersonDetailsPage.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import axios from 'axios';
-import { UsersContext } from "../../utils/UsersContext";
+import { useDispatch } from 'react-redux';
+import { deletePerson } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 
 const PersonDetailsPage = () => {
 
   const [personInfo, setPersonInfo] = useState();
   const [favoriteColor, setFavoriteColor] = useState();
+  const mainUser = useSelector(state => state.user.info);
 
   const routeParams = useParams();
   const navigate = useNavigate();
-
-  const { deleteUserFromDB } = useContext(UsersContext);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     Promise.all([getPersonInfo(), getPersonFavoriteColor()])
@@ -21,7 +23,13 @@ const PersonDetailsPage = () => {
       setPersonInfo(response[0].data.data)
       setFavoriteColor(response[1].data.data)
     })
-    .catch(error => console.log(error.message))
+    .catch(error => {
+      if (error.response.status === 404) {
+        console.log(mainUser)
+        setPersonInfo(mainUser);
+        setFavoriteColor(true);
+      }
+    })
   }, [])
 
   function getPersonInfo() {
@@ -40,9 +48,11 @@ const PersonDetailsPage = () => {
     axios.delete(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`)
     .then(response => {
       if (response.status === 204) {
-        deleteUserFromDB(personInfo);
+        dispatch(deletePerson(personInfo.id))
         goToPrevPage();
       }
+    }).catch(error => {
+      console.log('error', error)
     })
   }
 

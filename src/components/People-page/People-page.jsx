@@ -1,59 +1,66 @@
-import React, { useState, useEffect, useContext } from "react";
-import styles from './Users-page.module.scss';
+import React, { useState, useEffect } from "react";
+import styles from './People-page.module.scss';
 import axios from "axios";
 import PersonCard from "../Person-card/PersonCard";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from '../Pagination/Pagination';
-import { UsersContext } from '../../utils/UsersContext';
+import { useSelector } from "react-redux";
 
-const UsersPage = () => {
-
+const PeoplePage = () => {
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
 
   const navigate = useNavigate();
   const routeParams = useParams();
-  const {usersDB} = useContext(UsersContext);
+  const mainUser = useSelector(state => state.user.info);
+  const peopleCollection = useSelector(state => state.peopleCollection.people);
 
   useEffect(() => {
-    getUsersPage(routeParams.page)
-  }, [routeParams])
-
-
+    if (mainUser) {
+      getUsersPage(routeParams.page);
+    }
+  }, [routeParams, mainUser])
 
   const getUsersPage = (number) => {
     axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${number}`).then(response => {
       setUsers(() => {
-        setTotalPages(() => response.data.total_pages)
-
-        const checkedUsersArray = response.data.data.filter(user => {
-          const isExistUser = usersDB.find(userFromDB => userFromDB.id === user.id);
-          if (isExistUser) {
-            return isExistUser;
-          }
-        })
-        
-        return [...checkedUsersArray];
+        setTotalPages(() => response.data.total_pages);
+        const filteredByDeletedPeople = filterByDeletedPeople(response.data.data);
+        return filterByUser(filteredByDeletedPeople, response.data.page, response.data.total_pages);
       })
     })
   }
 
+  function filterByDeletedPeople(array) {
+    return peopleCollection.filter(personFromDB => {
+      return array.find(personFromServer => personFromServer.id === personFromDB.id);
+    })
+  }
+
+  function filterByUser(people, page, totalPages) {
+    const userIsExistInPeopleState = peopleCollection.find(person => person.id === mainUser.id)
+    if (totalPages === page && !userIsExistInPeopleState) {
+      return people.concat([mainUser]);
+    }
+    return people
+  }
+
   function increasePageNumber() {
     const nextPage = Number(routeParams.page) + 1;
-    navigate(`/users/${nextPage}`, {replace: false});
+    navigate(`/people/${nextPage}`, {replace: false});
   }
 
   function decreasePageNumber() {
     const prevPage = Number(routeParams.page) - 1;
-    navigate(`/users/${prevPage}`, {replace: false});
+    navigate(`/people/${prevPage}`, {replace: false});
   }
 
   function handleChosenPage(num) {
-    navigate(`/users/${num}`, {replace: false});
+    navigate(`/people/${num}`, {replace: false});
   }
 
   function openPersonDetailsPage(id) {
-    navigate(`/users/user/${id}`)
+    navigate(`/people/person/${id}`)
   }
 
   const renderUsers = users.map(user => {
@@ -66,8 +73,8 @@ const UsersPage = () => {
 
   return (
     <div className={styles['users-page']}>
-      <h1 className={styles['users-page__title']}>Users</h1>
-      <span className={styles['users-page__description']}>List of users</span>
+      <h1 className={styles['users-page__title']}>People</h1>
+      <span className={styles['users-page__description']}>List of people</span>
 
       <div className={styles['users-page__users']}>
         {renderUsers}
@@ -86,4 +93,4 @@ const UsersPage = () => {
   )
 }
 
-export default UsersPage;
+export default PeoplePage;

@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 import styles from './ColorDetailsPage.module.scss';
 
 const ColorDetailsPage = () => {
@@ -35,7 +34,7 @@ const ColorDetailsPage = () => {
   }
 
   function goToCreator() {
-    navigate(`/users/user/${routeParams.id}`)
+    navigate(`/people/person/${routeParams.id}`)
   }
 
   return (

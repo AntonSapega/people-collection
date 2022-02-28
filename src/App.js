@@ -1,46 +1,35 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import LoginPage from './components/Login-page/Login-page';
 import { Routes, Route, } from 'react-router-dom';
 import RequireAuth from './hoc/RequireAuth';
 import Layout from './components/Layout/Layout';
 import HomePage from './components/Home-page/Home-page';
-import UsersPage from './components/Users-page/Users-page';
+import PeoplePage from './components/People-page/People-page';
 import SettingsPage from './components/Settings-page/Settings-page';
 import PersonDetailsPage from './components/PersonDetailsPage/PersonDetailsPage';
-import axios from 'axios';
-import { UsersContext } from './utils/UsersContext';
 import ColorsPage from './components/ColorsPage/ColorsPage';
 import ColorDetailsPage from './components/ColorDetailsPage/ColorDetailsPage';
-import addNewUserToUsersDB from './interceptors/CheckOnCreatedUser.interceptor';
+import { useDispatch, useSelector } from 'react-redux';
+import { initPeopleCollection } from './redux/actions';
+import retrieveUser from './interceptors/retrieveUser';
+import loaderController from './interceptors/loaderController';
 
 
 function App() {
 
-  const {initUsersDB, addNewUser} = useContext(UsersContext);
+  const user = useSelector(state => state.user.info);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    addNewUserToUsersDB();
-    getAllUsers(1);
+    dispatch(initPeopleCollection());
+    loaderController(dispatch);
   }, [])
 
-  async function getAllUsers(pageNumber) {
-    await usersRequest(pageNumber).then(response => {
-      initUsersDB(response.data.data);
-
-      if (response.data.page < response.data.total_pages) {
-        getAllUsers(pageNumber + 1)
-      }
-
-      if (response.data.page === response.data.total_pages && JSON.parse(sessionStorage.getItem('createdUser'))) {
-        const user = JSON.parse(sessionStorage.getItem('createdUser'));
-        addNewUser([user]);
-      }
-    })
-  }
-
-  function usersRequest(pageNumber) {
-    return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users?page=${pageNumber}`)
-  }
+  useEffect(() => {
+    if (!user) {
+      retrieveUser(dispatch);
+    }
+  }, [user]);
 
   return (
     <>
@@ -53,8 +42,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/colors/:page" element={<ColorsPage />} />
           <Route path="/colors/color-details/:id" element={<ColorDetailsPage />} />
-          <Route path={'users/:page'} element={<UsersPage />} />
-          <Route path={'users/user/:id'} element={<PersonDetailsPage />}/>
+          <Route path={'people/:page'} element={<PeoplePage />} />
+          <Route path={'people/person/:id'} element={<PersonDetailsPage />}/>
           <Route path={'settings'} element={<SettingsPage />} />
           <Route path="*" element={<HomePage />} />
         </Route>

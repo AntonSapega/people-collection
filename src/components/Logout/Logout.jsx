@@ -2,15 +2,17 @@ import React from "react";
 import styles from './Logout.module.scss';
 import MainButton from '../MainButton/MainButton';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePerson, removeUser } from "../../redux/actions";
 
 const Logout = () => {
-
+  const user = useSelector(state => state.user.info);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('createdUser');
+    dispatch(removeUser())
+    dispatch(deletePerson(user.id));
     navigate('/', {replace: true});
   }
 

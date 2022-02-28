@@ -1,13 +1,19 @@
 import axios from "axios";
 
-const addNewUserToUsersDB = () => {
+const addMockUserToPeoplePageResponse = (people) => {
+  const savedUser = JSON.parse(sessionStorage.getItem('user'));
+
   axios.interceptors.response.use(response => {
-    if (sessionStorage.getItem('createdUser') &&
-        response.request.responseURL.split('=')[0] === 'https://reqres.in/api/users?page') {
+    if (savedUser &&
+        response.request.responseURL.split('=')[0] === `${process.env.REACT_APP_REQ_RES_URL}api/users?page`) {
       if (response.data.total_pages === response.data.page) {
-        response.data.data.push(JSON.parse(sessionStorage.getItem('createdUser')));
+        const userInPeopleArray = people.find(person => person.id === savedUser.id);
+        console.log(userInPeopleArray)
+        if (!userInPeopleArray) {
+          response.data.data.push(savedUser);
+          console.log('INTERCEPTOR FOR ADD USER: ', response.data.data)
+        }
       }
-      // response.data.total_pages++;
     }
     return response;
   }, function (error) {
@@ -15,4 +21,4 @@ const addNewUserToUsersDB = () => {
   });
 }
 
-export default addNewUserToUsersDB;
+export default addMockUserToPeoplePageResponse;
