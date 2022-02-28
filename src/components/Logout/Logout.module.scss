@@ -1,0 +1,23 @@
+.logout {
+  background-color: rgb(109, 108, 108);
+  padding: 12px;
+  border-radius: 8px;
+
+  &__template {
+    width: 100%;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__question {
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+}

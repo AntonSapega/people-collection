@@ -15,8 +15,8 @@ export default class LoginForm extends React.Component {
     alert('You must log in');
   }
 
-
   render() {
+    const {onGetForm} = this.props;
     return (
       <div className={styles['login-form']}>
         <aside className={styles['login-form__left-side']}>
@@ -29,7 +29,7 @@ export default class LoginForm extends React.Component {
             <StringButton handleClick={this.handleHelpCall}>Need help?</StringButton>
           </div>
           
-          <AuthForm />
+          <AuthForm onGetForm={(formValue) => onGetForm(formValue)} />
         </div>
       </div>
     )

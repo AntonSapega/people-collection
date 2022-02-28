@@ -1,0 +1,53 @@
+.user-profile {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--primary-text-color);
+  cursor: pointer;
+
+  &__image {
+    border-radius: 50%;
+    height: 50px;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+  }
+
+  &__full-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__email {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  &__logout-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 12px;
+    box-sizing: border-box;
+    transition: all 240ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: -10;
+    cursor: default;
+  }
+}
+
+.user-profile:hover .user-profile__logout-container {
+  top: 100%;
+  z-index: 1;
+}

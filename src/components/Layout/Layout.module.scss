@@ -1,0 +1,43 @@
+.main-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #9796f0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  
+
+  &__content {
+    height: 85%;
+    width: 85%;
+    background-color: whitesmoke;
+    border-radius: 16px;
+  }
+}
+
+
+
+.main {
+  height: calc(100% - var(--header-height) - var(--footer-height));
+  padding: var(--main-padding);
+  padding-top: calc(2 * var(--main-padding));
+  box-sizing: border-box;
+  background-color: whitesmoke;
+  overflow-y: auto;
+}
+
+
+.footer {
+  width: 100%;
+  height: var(--footer-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__logo-wrapper {
+    font-size: 12px;
+  }
+}

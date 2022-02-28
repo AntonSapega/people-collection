@@ -25,6 +25,10 @@
     }
   }
 
+  &__confirm-password {
+    margin-top: 0.76rem;
+  }
+
   &__input {
     margin-top: 10px;
     width: 100%;
@@ -49,5 +53,9 @@
 
   &__tip-btn {
     align-self: flex-end;
+  }
+
+  &__primary-button-wrapper {
+    margin-top: 4rem;
   }
 }
