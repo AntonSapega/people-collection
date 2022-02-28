@@ -1,0 +1,43 @@
+.background {
+  position: absolute;
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.67);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.2rem;
+  width: 460px;
+  background-color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+
+}
+
+.popupHeader {
+  font-size: 16px;
+  display: inline-block;
+  padding: 6px 0;
+  background-color: var(--orange-color);
+  color: rgb(61, 61, 61);
+  font-weight: 400;
+  margin-bottom: 28px;
+}
+
+.popupActions {
+  margin: 28px 0;
+  width: 100%;
+}

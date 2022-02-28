@@ -2,6 +2,7 @@ import { ADD_LOADER_REQUEST, DECREASE_LOADER_REQUEST } from './types';
 
 const appState = {
   loader: {pendingRequests: 0},
+  popup: null,
 };
 
 export const appReducer = (state = appState, action) => {

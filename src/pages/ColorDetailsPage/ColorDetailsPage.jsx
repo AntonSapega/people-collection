@@ -1,37 +1,22 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from './ColorDetailsPage.module.scss';
+import { loadColorDetailsMiddleware } from '../../redux/actions';
+import { useSelector } from "react-redux";
 
 const ColorDetailsPage = () => {
-
-  const [colorInfo, setColorInfo] = useState(null);
-  const [creator, setCreator] = useState(null);
-  const [textPlaceholder, setTextPlaceholder] = useState(null);
-
   const routeParams = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const colorInfo = useSelector(state => state.colorDetailsPage.color);
+  const creator = useSelector(state => state.colorDetailsPage.creator);
+  const textPlaceholder = useSelector(state => state.colorDetailsPage.description);
 
   useEffect(() => {
-    Promise.all([fetchColorDetails(), fetchCreator(), fetchTextPlaceholder()])
-    .then(response => {
-      setColorInfo(response[0].data.data);
-      setCreator(response[1].data.data);
-      setTextPlaceholder(response[2].data);
-    })
-  }, [routeParams])
-
-  function fetchColorDetails() {
-    return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/unknown/${routeParams.id}`);
-  }
-
-  function fetchCreator() {
-    return axios.get(`${process.env.REACT_APP_REQ_RES_URL}api/users/${routeParams.id}`);
-  }
-
-  function fetchTextPlaceholder() {
-    return axios.get(`${process.env.REACT_APP_JSON_PLACEHOLDER}posts/${routeParams.id}`);
-  }
+    dispatch(loadColorDetailsMiddleware(routeParams.id));
+  }, []);
 
   function goToCreator() {
     navigate(`/people/person/${routeParams.id}`)

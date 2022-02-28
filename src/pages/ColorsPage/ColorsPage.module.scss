@@ -15,4 +15,8 @@
     flex-wrap: wrap;
     margin-top: 1.4rem;
   }
+
+  &__pagination {
+    align-self: end;
+  }
 }
