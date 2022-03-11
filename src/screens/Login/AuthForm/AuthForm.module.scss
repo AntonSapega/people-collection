@@ -5,12 +5,18 @@
   margin: auto 0;
   width: 74%;
 
+  @media (max-width: 768px) {
+    margin-top: 1.4rem;
+    margin: auto 0;
+  }
+
   &__title {
     font-size: 1.11rem;
     font-weight: 600;
     display: inline-block;
-    margin-bottom: 2rem;
+    margin-bottom: 1.6rem;
     align-self: center;
+    text-align: center;
   }
 
   &__confirm-password {
@@ -22,6 +28,6 @@
   }
 
   &__primary-button-wrapper {
-    margin-top: 4rem;
+    margin-top: 3rem;
   }
 }

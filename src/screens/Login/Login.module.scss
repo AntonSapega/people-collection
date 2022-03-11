@@ -7,6 +7,10 @@ $main-bgc: rgb(8, 255, 200);
   background-color: var(--primary-bgc-color);
   position: relative;
 
+  @media (max-width: 768px) {
+    background-color: $main-bgc;
+  }
+
   &__left-side {
     background-color: $main-bgc;
     width: 40%;
