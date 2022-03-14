@@ -13,7 +13,7 @@ const Modal = ( {children, title, type, userChoice} ) => {
       <div className={styles.wrapper}>
         <div className={styles.modal}>
           <div className={styles.content}>
-            <div>
+            <div className={styles.content__iconWrapper}>
               <div className={styles.content__icon}>
                 <span className={`material-icons ${styles.content__iconExclamationMark}`}>info</span>
               </div>
@@ -24,22 +24,22 @@ const Modal = ( {children, title, type, userChoice} ) => {
             </section>
           </div>
           <div className={styles.actions}>
-          {type === 'action' &&
-          <>
-            <MainButton
-              onCustomClick={() => handleUserAction(false)}
-              colorStyle={'positive'}>Cancel</MainButton>
-            <MainButton
-              onCustomClick={() => handleUserAction(true)}
-              colorStyle={'negative'}
-              btnStyles={{marginLeft: '1rem'}}>Delete</MainButton>
-          </>
-          }
-          {type === 'confirm' &&
-            <MainButton
-              onCustomClick={() => handleUserAction(false)}
-              colorStyle={'neutral'}>Confirm</MainButton>
-          }
+            {type === 'action' &&
+            <>
+              <MainButton
+                onCustomClick={() => handleUserAction(false)}
+                colorStyle={'positive'}>Cancel</MainButton>
+              <MainButton
+                onCustomClick={() => handleUserAction(true)}
+                colorStyle={'negative'}
+                btnStyles={{marginLeft: '1rem'}}>Delete</MainButton>
+            </>
+            }
+            {type === 'confirm' &&
+              <MainButton
+                onCustomClick={() => handleUserAction(false)}
+                colorStyle={'neutral'}>Confirm</MainButton>
+            }
           </div>
         </div>
       </div>

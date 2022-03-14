@@ -1,11 +1,13 @@
+@import '../enums/breakpoints.scss';
+
 :root {
   font-size: 18px;
 
-  @media (max-width: 768px) {
+  @media (max-width: $tablet-screen-size) {
     font-size: 16px;
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: $mobileL-screen-size) {
     font-size: 14px;
   }
 }

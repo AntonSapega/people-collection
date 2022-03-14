@@ -1,3 +1,5 @@
+@import '../../enums/breakpoints.scss';
+
 $main-bgc: rgb(8, 255, 200);
 
 .login-form {
@@ -7,7 +9,7 @@ $main-bgc: rgb(8, 255, 200);
   background-color: var(--primary-bgc-color);
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: $tablet-screen-size) {
     background-color: $main-bgc;
   }
 
