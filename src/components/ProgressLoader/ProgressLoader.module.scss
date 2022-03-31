@@ -1,3 +1,5 @@
+@import '../../enums/breakpoints.scss';
+
 .progress-bar-container {
   position: absolute;
   bottom: -2px;
@@ -5,6 +7,11 @@
   right: 0;
   height: 2px;
   z-index: 10;
+
+  @media (max-width: $tablet-screen) {
+    height: 1px;
+    bottom: -1px;
+  }
 }
 
 .progress-bar {

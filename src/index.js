@@ -15,16 +15,16 @@ import { configureStore } from '@reduxjs/toolkit';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({ 
+const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
 });
 
 // export const store = createStore(rootReducer(routerReducer), compose(
 //   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-    // applyMiddleware(
-    //   routerMiddleware,
-    //   sagaMiddleware
-    //   )
+// applyMiddleware(
+//   routerMiddleware,
+//   sagaMiddleware
+//   )
 //     )
 // ))
 
@@ -46,11 +46,11 @@ sagaMiddleware.run(saga);
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <App />
-        </HistoryRouter>
-      </Provider>
+    <Provider store={store}>
+      <HistoryRouter history={history}>
+        <App />
+      </HistoryRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

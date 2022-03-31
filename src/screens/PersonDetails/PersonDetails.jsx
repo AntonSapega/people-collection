@@ -125,6 +125,7 @@ const PersonDetailsPage = () => {
         <Modal
           title="Please confirm your actions"
           type={"action"}
+          agreementButtonName='Delete'
           userChoice={(result) => handlePopupAction(result)}>
           {`Are you sure you want to delete of ${personInfo.first_name} ${personInfo.last_name}?`}
         </Modal>

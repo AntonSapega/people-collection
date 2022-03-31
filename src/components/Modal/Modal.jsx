@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import MainButton from '../shared/MainButton/MainButton';
 import styles from './Modal.module.scss';
 
-const Modal = ( {children, title, type, userChoice} ) => {
+const Modal = ( {children, title, type, userChoice, agreementButtonName} ) => {
   function handleUserAction(result) {
     return userChoice(result);
   }
@@ -32,7 +32,7 @@ const Modal = ( {children, title, type, userChoice} ) => {
               <MainButton
                 onCustomClick={() => handleUserAction(true)}
                 colorStyle={'negative'}
-                btnStyles={{marginLeft: '1rem'}}>Delete</MainButton>
+                btnStyles={{marginLeft: '1rem'}}>{agreementButtonName}</MainButton>
             </>
             }
             {type === 'confirm' &&

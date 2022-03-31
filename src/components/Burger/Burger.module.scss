@@ -1,0 +1,72 @@
+@import '../../enums/breakpoints.scss';
+
+.burgerMenu {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+
+  visibility: hidden;
+  display: none;
+
+  @media (max-width: $mobileL-screen) {
+    display: block;
+  }
+}
+
+.burgerToggle {
+  display: none;
+  align-items: center;
+  height: 17px;
+  width: 24px;
+  position: relative;
+
+  &__slice {
+    width: 100%;
+    height: 2px;
+    background-color: grey;
+
+    &::before {
+      content: '';
+      width: 100%;
+      height: 2px;
+      background-color: grey;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: all 150ms ease;
+      transition-delay: 10ms;
+    }
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 2px;
+      background-color: grey;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: all 150ms ease;
+      transition-delay: 10ms;
+    }
+  }
+
+  @media (max-width: $mobileL-screen) {
+    display: flex;
+  }
+}
+
+.checkbox:checked ~ .burgerToggle > span::before {
+  transform: rotate(45deg);
+  top: 50%;
+}
+
+.checkbox:checked ~ .burgerToggle > span::after {
+  transform: rotate(-45deg);
+  top: 50%;
+}
+
+.checkbox:checked ~ .burgerToggle > span {
+  background-color: var(--primary-bgc-color);
+}

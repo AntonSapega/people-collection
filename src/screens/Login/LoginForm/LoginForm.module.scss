@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: row;
 
-  @media (max-width: $tablet-screen-size) {
+  @media (max-width: $tablet-screen) {
     background-color: var(--primary-bgc-color);
     height: 90%;
   }
@@ -24,14 +24,14 @@
     justify-content: center;
     align-items: center;
 
-    @media (max-width: $tablet-screen-size) {
+    @media (max-width: $tablet-screen) {
       width: 0;
       position: relative;
     }
   }
 
   &__brand-logo {
-    @media (max-width: $tablet-screen-size) {
+    @media (max-width: $tablet-screen) {
       position: absolute;
       top: 0;
       left: 0;
@@ -48,7 +48,7 @@
     box-sizing: border-box;
     overflow: auto;
 
-    @media (max-width: $tablet-screen-size) {
+    @media (max-width: $tablet-screen) {
       width: 100%;
     }
   }

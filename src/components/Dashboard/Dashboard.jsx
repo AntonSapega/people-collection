@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Dashboard.module.scss';
-import Logout from './Logout/Logout';
+import Logout from '../Logout/Logout';
 import ImagePlaceholder from '../shared/ImagePlaceholder/ImagePlaceholder';
 import { useSelector } from "react-redux";
 
