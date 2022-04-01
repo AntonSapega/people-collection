@@ -1,18 +1,11 @@
 @import '../../enums/breakpoints.scss';
 
 .main {
-  height: calc(100% - var(--header-height) - var(--footer-height));
+  height: 100%;
+  flex-shrink: 1;
   padding: var(--main-padding);
   padding-top: calc(2 * var(--main-padding));
   box-sizing: border-box;
-  background-color: whitesmoke;
+  background-color: var(--smoke);
   overflow-y: auto;
-
-  @media (max-width: $laptop-screen) {
-    height: calc(100% - var(--header-laptop-height) - var(--footer-height));
-  }
-
-  @media (max-width: $mobileL-screen) {
-    height: calc(100% - var(--header-mobile-height) - var(--footer-height));
-  }
 }

@@ -1,97 +1,22 @@
-// import React, { useRef, useState } from 'react';
-// import styles from './Header.module.scss';
-// import { NavLink } from 'react-router-dom';
-// import Logo from '../../components/shared/Logo/Logo';
-// import Dashboard from '../../components/Dashboard/Dashboard';
-// import ProgressLoader from '../../components/ProgressLoader/ProgressLoader';
-// import { ROUTES } from '../../enums/ROUTES';
-// import Burger from '../../components/Burger/Burger';
-// import useLogout from '../../hooks/useLogout';
-
-// const Header = () => {
-//   let isActiveConditional = ({isActive}) => styles['header__link'] + (isActive ? ` ${styles['header__link_active-mobile']}` : '');
-//   const ref = useRef();
-//   const logout = useLogout();
-
-//   const [isShowMenu, setIsShowMenu] = useState(false);
-//   const navStyle = isShowMenu ? styles['header__nav_mobile-version'] : styles['header__nav_mobile-version_hidden'];
-
-//   function toggleNavMenu() {
-//     setTimeout(() => {
-//       setIsShowMenu(state => state = !isShowMenu);
-//     }, 320);
-//   }
-
-//   function handleLogout() {
-//     logout();
-//   }
-
-//   return (
-//     <header className={styles['header']}>
-//       <Logo />
-
-//       <div className={styles.header__placeholder}></div>
-
-//       <nav className={styles['header__nav_laptop-version']}>
-//         <NavLink className={isActiveConditional} to={ROUTES.initial}>Home</NavLink>
-//         <NavLink className={isActiveConditional} to={`${ROUTES.colors}`}>Colors</NavLink>
-//         <NavLink className={isActiveConditional} to={`${ROUTES.people}`}>People</NavLink>
-//         <NavLink className={isActiveConditional} to={ROUTES.settings}>Settings</NavLink>
-//       </nav>
-
-//       <div className={styles['header__burger-menu']}>
-//         {/* <input
-//           ref={ref}
-//           className={styles.checkbox}
-//           type="checkbox"
-//           id="menu__toggle" />
-//         <label className={styles.burgerToggle} htmlFor="menu__toggle">
-//           <span className={styles.burgerToggle__slice}></span>
-//         </label> */}
-//         <Burger className={styles['header__burger-menu_burger']} isChecked={isShowMenu} changeCheckboxStatus={() => setIsShowMenu(state => state = !isShowMenu)} />
-
-//         <nav className={navStyle}>
-//           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={ROUTES.initial}>Home</NavLink>
-//           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={`${ROUTES.colors}`}>Colors</NavLink>
-//           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={`${ROUTES.people}`}>People</NavLink>
-//           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={ROUTES.settings}>Settings</NavLink>
-//           <a className={`${styles['header__link']} ${styles['header__link_logout']}`} onClick={handleLogout}>Log out</a>
-//         </nav>
-//       </div>
-
-//       <div className={styles['header__user-profile']}>
-//         <Dashboard />
-//       </div>
-
-//       <ProgressLoader />
-//     </header>
-//   )
-// }
-
-// export default Header;
-
-
-
-
-
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../components/shared/Logo/Logo';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import ProgressLoader from '../../components/ProgressLoader/ProgressLoader';
 import { ROUTES } from '../../enums/ROUTES';
-import Burger from '../../components/Burger/Burger';
+import Burger from '../../components/BurgerMenu/BurgerMenu';
 import useLogout from '../../hooks/useLogout';
 import useOutsideAlerter from '../../hooks/useOutsideClick';
+import Modal from '../../components/Modal/Modal';
 
 const Header = () => {
-  let isActiveConditional = ({isActive}) => styles['header__link'] + (isActive ? ` ${styles['header__link_active-mobile']}` : '');
+  let isActiveConditional = ({isActive}) => styles['navigation__link'] + (isActive ? ` ${styles['navigation__link_active']}` : '');
   const ref = useRef();
   const burgerMenuRef = useRef();
   const logout = useLogout();
-
   const outsideClick = useOutsideAlerter(burgerMenuRef);
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
     if (outsideClick) {
@@ -105,48 +30,53 @@ const Header = () => {
     }, 320);
   }
 
-  function handleLogout() {
-    logout();
+  function handleLogout(userResult) {
+    if (userResult) {
+      logout();
+      return;
+    }
+    setPopupVisible(false);
+  }
+
+  function handlePopupAction() {
+    setPopupVisible(true);
   }
 
   return (
     <header className={styles['header']}>
       <Logo />
-
-      <div className={styles.header__placeholder}></div>
-
-      <nav className={styles['header__nav_laptop-version']}>
+      <nav className={styles['navigation']}>
         <NavLink className={isActiveConditional} to={ROUTES.initial}>Home</NavLink>
         <NavLink className={isActiveConditional} to={`${ROUTES.colors}`}>Colors</NavLink>
         <NavLink className={isActiveConditional} to={`${ROUTES.people}`}>People</NavLink>
         <NavLink className={isActiveConditional} to={ROUTES.settings}>Settings</NavLink>
       </nav>
 
-      <div ref={burgerMenuRef} className={styles['header__burger-menu']}>
-        <input
-          className={styles.checkbox}
-          ref={ref}
-          tabIndex='2'
-          type="checkbox"
-          id="menu__toggle" />
-        <label className={styles.burgerToggle} htmlFor="menu__toggle">
-          <span className={styles.burgerToggle__slice}></span>
-        </label>
-
-        <nav className={styles['header__nav_mobile-version']}>
+      <div ref={burgerMenuRef} className={styles['burger-menu']}>
+        <Burger ref={ref}>
           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={ROUTES.initial}>Home</NavLink>
           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={`${ROUTES.colors}`}>Colors</NavLink>
           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={`${ROUTES.people}`}>People</NavLink>
           <NavLink className={isActiveConditional} onClick={toggleNavMenu} to={ROUTES.settings}>Settings</NavLink>
-          <a className={`${styles['header__link']} ${styles['header__link_logout']}`} onClick={handleLogout}>Log out</a>
-        </nav>
+          <a className={`${styles['navigation__link']} ${styles['navigation__link-logout']}`} onClick={handlePopupAction}>Log out</a>
+        </Burger>
       </div>
 
-      <div className={styles['header__user-profile']}>
+      <div className={styles['user-profile']}>
         <Dashboard />
       </div>
 
       <ProgressLoader />
+
+      {isPopupVisible &&
+        <Modal
+          title="Log out"
+          type={"action"}
+          agreementButtonName='Sure'
+          userChoice={(result) => handleLogout(result)}>
+          {`Are you sure you want log out?`}
+        </Modal>
+      }
     </header>
   )
 }
