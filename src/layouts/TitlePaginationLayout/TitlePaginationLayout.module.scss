@@ -5,6 +5,24 @@
   flex-direction: column;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__finder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__finderIcon {
+    color: var(--neutral-color);
+    font-size: 1.6rem;
+    margin-right: 0.4rem;
+  }
+}
+
 .title {
   font-weight: 600;
   font-size: 2.5rem;

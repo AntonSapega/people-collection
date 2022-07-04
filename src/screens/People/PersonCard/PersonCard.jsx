@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './PersonCard.module.scss';
 import ImagePlaceholder from '../../../components/shared/ImagePlaceholder/ImagePlaceholder';
+import useScaleStyle from '../../../hooks/useScaleStyle';
 
 const PersonCard = ({user, onCardClick}) => {
+  const ref = useRef();
+  const isScaling = useScaleStyle(ref);
+
   const pictureStyles = {
     marginRight: '16px',
     height: '120px',
@@ -12,7 +16,7 @@ const PersonCard = ({user, onCardClick}) => {
   }
 
   return (
-    <div className={styles['person-id-card']} onClick={() => onCardClick(user.id)}>
+    <div ref={ref} className={styles['person-id-card']} style={{...isScaling}} onClick={() => onCardClick(user.id)}>
       <section className={styles['person-id-card__main-info']}>
         {user.avatar &&
           <img style={pictureStyles} src={user.avatar} alt="person" />

@@ -5,6 +5,8 @@ import setMainData from './app/sagas/setMainData';
 import routePathWatcher from './app/sagas/routePathWatcher';
 import removePerson from './peopleDB/sagas/removePerson';
 import colorDetailsPage from './colorDetailsPage/sagas';
+import { peoplePageWatcher, getPeopleSetWatcher } from './peoplePage/sagas';
+import { loadParticularColorsWatcher, colorsPageWatcher } from './colorsPage/sagas';
 
 export default function* rootSaga() {
   const sagas = [
@@ -13,7 +15,11 @@ export default function* rootSaga() {
     auth,
     routePathWatcher,
     removePerson,
-    colorDetailsPage
+    colorDetailsPage,
+    peoplePageWatcher,
+    getPeopleSetWatcher,
+    colorsPageWatcher,
+    loadParticularColorsWatcher
   ];
 
   const retrySagas = yield sagas.map(saga => {

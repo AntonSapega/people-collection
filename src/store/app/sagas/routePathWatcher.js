@@ -10,10 +10,10 @@ function* handlePath({ payload }) {
   const pathPieces = location.pathname.split('/').filter(string => string.length > 0);
   switch (pathPieces[pathPieces.length-2]) {
     case 'people':
-      yield call(peoplePageWorker, pathPieces[pathPieces.length-1]);
+      // yield call(peoplePageWorker, pathPieces[pathPieces.length-1]);
       break;
     case 'colors':
-      yield call(colorsPageWorker, pathPieces[pathPieces.length-1]);
+      // yield call(colorsPageWorker, pathPieces[pathPieces.length-1]);
       break;
     case 'person':
       yield call(personPageDetailsWorker, pathPieces[pathPieces.length-1]);

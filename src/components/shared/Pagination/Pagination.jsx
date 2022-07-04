@@ -3,6 +3,9 @@ import styles from './Pagination.module.scss';
 import NavBtn from './NavBtn/NavBtn';
 
 const Pagination = ({activePage, totalPages, onBtnNumber, onIncreasePage, onDecreasePageNumber}) => {
+  if (!totalPages) {
+    return null;
+  }
   const buttons = [];
 
   for (let i = 1; i <= totalPages; i++) {

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import styles from './PeopleList.module.scss';
 import PersonCard from '../PersonCard/PersonCard';
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../../enums/ROUTES";
 import { sessionController } from "../../../services/storage/sessionController";
+import { useDispatch } from "react-redux";
+import { getPeopleMiddleware, getParticularPeople } from '../../../store/peoplePage/actions';
+import useDebounce from '../../../hooks/useDebounce';
+import NothingFound from "../../../components/shared/NothingFound/NothingFound";
 
 const PeopleList = () => {
   const navigate = useNavigate();
@@ -13,12 +17,31 @@ const PeopleList = () => {
   const peopleCollection = useSelector(state => state.peopleCollection.people);
   const peopleFromServer = useSelector(state => state.peoplePage.people);
   const totalPages = useSelector(state => state.peoplePage.pagesAmount);
+  const dispatch = useDispatch();
+
+  const [inputValue] = useOutletContext();
+  const debouncedSearchTerm = useDebounce(inputValue, 600);
+
+  useEffect(() => {
+    dispatch(getPeopleMiddleware(routeParams.page));
+  }, [routeParams]);
 
   useEffect(() => {
     const filteredArray = filterByDeletedPeople();
     setPeople(filteredArray);
     filterByUser();
   }, [peopleFromServer]);
+
+  useEffect(() => {
+    if(debouncedSearchTerm) {
+      const matchedPeople = peopleCollection.filter(person => {
+        const fullName = `${person.first_name.toLowerCase()} ${person.last_name.toLowerCase()}`;
+        return fullName.includes(inputValue.toLowerCase());
+      })
+      const peopleIds = matchedPeople.map(person => person.id);
+      dispatch(getParticularPeople(peopleIds));
+    } else dispatch(getPeopleMiddleware(routeParams.page))
+  }, [debouncedSearchTerm]);
 
   function filterByDeletedPeople() {
     return peopleCollection.filter(personFromDB => {
@@ -51,6 +74,11 @@ const PeopleList = () => {
             </div>
           )
         })
+      }
+      {people.length === 0 &&
+        <div className={styles.empty_page}>
+          <NothingFound />
+        </div>
       }
     </>
   )

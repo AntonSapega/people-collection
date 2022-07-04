@@ -4,6 +4,13 @@
   align-items: center;
   font-family: Fira Sans, sans-serif;
   color: var(--primary-text-color);
+  position: relative;
+
+  &__history-nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 
   &__title {
     font-weight: 600;
@@ -40,10 +47,6 @@
     box-sizing: border-box;
     border-right: 2px solid rgb(226, 226, 226);
     width: 25%;
-
-    & span, & h4 {
-      // margin-bottom: 0.766rem;
-    }
   }
 
   &__details {
