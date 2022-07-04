@@ -7,6 +7,7 @@
   padding: 1rem;
 
   &__img {
+    aspect-ratio: 1/1;
     height: 150px;
     border-radius: 50%;
   }
@@ -21,6 +22,11 @@
     border-bottom: 1px solid rgb(226, 226, 226);
     padding-bottom: 1rem;
     box-sizing: border-box;
+
+    @media (max-width: 660px) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &__necessary-info {
@@ -33,9 +39,13 @@
   &__full-name {
     font-size: 2.4rem;
     font-weight: 600;
-  }
+    text-align: center;
 
-  
+    @media (max-width: 660px) {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+  }
 }
 
 .email {
@@ -96,4 +106,10 @@
   font-size: 1.4rem;
   user-select: none;
   cursor: pointer;
+
+  @media (max-width: 660px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }

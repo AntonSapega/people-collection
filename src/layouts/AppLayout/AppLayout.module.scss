@@ -16,6 +16,10 @@
     padding: 20px;
   }
 
+  @media (max-height: 480px) {
+    padding: 8px 16px;
+  }
+
   &__content {
     height: 100%;
     width: 100%;

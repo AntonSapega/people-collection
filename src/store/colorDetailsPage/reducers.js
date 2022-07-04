@@ -1,6 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 
-const sliceName = 'color_details'
+const sliceName = 'color_details';
 
 // Middleware
 export const loadColorDetails = createAction(`${sliceName}/loadColorDetails`);

@@ -1,9 +1,12 @@
+@import '../../../../enums/breakpoints.scss';
+
 .navButton {
   display: flex;
   align-items: center;
   border: 1px solid rgb(209, 209, 209);
   border-radius: 6px;
-  background-color: #fff;
+  background-color: var(--primary-bgc-color);
+  font-size: 12px;
   padding: 4px 8px;
   cursor: pointer;
   height: 100%;
@@ -20,11 +23,17 @@
   &:hover {
     background-color: rgb(247, 247, 247);
   }
+
+  @media (max-width: $tablet-screen) {
+    padding: 2px 8px;
+    font-size: 10px;
+  }
 }
 
 .navButton_active {
   background-color: var(--deep-orange);
-  color: #fff;
+  color: var(--primary-bgc-color);
+
   &:hover {
     background-color: var(--deep-orange-hover);
   }

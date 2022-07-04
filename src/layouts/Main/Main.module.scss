@@ -5,7 +5,9 @@
   flex-shrink: 1;
   padding: var(--main-padding);
   padding-top: calc(2 * var(--main-padding));
+  padding-bottom: 0;
   box-sizing: border-box;
   background-color: var(--smoke);
   overflow-y: auto;
+  position: relative;
 }

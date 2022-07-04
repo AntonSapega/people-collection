@@ -43,12 +43,11 @@ const ColorDetails = () => {
           <div className={styles['color-details__full-info']}>
             <section className={styles['color-details__main-info']}>
               <h4>Color Name: <span className={styles['color-details__details']}>{colorInfo.name}</span></h4>
-              <span style={{marginBottom: '0.766rem'}}>Sample:
+              <span>Sample:
                 <span style={{backgroundColor: colorInfo.color}} className={styles['color-details__color-sample']}></span>
               </span>
               <span>Code: <span className={styles['color-details__details']}>{colorInfo.color}</span></span>
               <span>Year: <span className={styles['color-details__details']}>{colorInfo.year}</span></span>
-              <span>Created By:</span>
               <figure ref={ref} className={styles['color-details__creator']} onClick={goToCreator}>
                 <img  className={styles['color-details__creator-avatar']} src={creator.avatar} alt="creator" />
                 <figcaption  className={styles['color-details__creator-full-name']}>{creator.first_name} {creator.last_name}</figcaption>

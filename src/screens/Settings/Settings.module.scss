@@ -1,0 +1,38 @@
+.universe {
+  background-color: black;
+  height: 100%;
+  position: relative;
+}
+
+.sun {
+  background-color: yellow;
+  height: 24px;
+  width: 24px;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px -1px 240px 240px rgba(247, 240, 0, 0.25);
+}
+
+.mars-orbit {
+  height: 340px;
+  width: 340px;
+  border: 1px solid rgb(89, 255, 47);
+  box-sizing: border-box;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mars {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+  background-color: rgb(135, 75, 53);
+  // position: absolute;
+}
