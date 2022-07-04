@@ -72,7 +72,7 @@ const PersonDetailsPage = () => {
   }
 
   function goToColorPage() {
-    navigate(`${ROUTES.color}/${routeParams.id}`);
+    navigate(`/${ROUTES.color}/${routeParams.id}`);
   }
 
   const avatarPlaceholder = `${personInfo?.first_name} ${personInfo?.last_name}`;

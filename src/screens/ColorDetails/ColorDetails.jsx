@@ -20,7 +20,7 @@ const ColorDetails = () => {
   }, []);
 
   function goToCreator() {
-    navigate(`${ROUTES.person}/${routeParams.id}`);
+    navigate(`/${ROUTES.person}/${routeParams.id}`);
   }
 
   return (

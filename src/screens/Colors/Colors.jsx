@@ -1,64 +1,24 @@
 import React from 'react';
-import styles from './Colors.module.scss';
-import { useParams, useNavigate } from 'react-router-dom';
-import ColorCard from './ColorCard/ColorCard';
-import Pagination from '../../components/shared/Pagination/Pagination';
+import { useParams, useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ROUTES } from '../../enums/ROUTES';
+import { useEffect } from 'react';
+import TitlePaginationLayout from '../../layouts/TitlePaginationLayout/TitlePaginationLayout';
 
 const Colors = () => {
   const routeParams = useParams();
   const navigate = useNavigate();
+  const totalPages = useSelector(state => state.colorsPage.pagesAmount);
 
-  const colors = useSelector(state => state.colorsPage.colors);
-  const totalPages = useSelector(state => state.colorsPage.pagesAmount)
-
-  function increasePageNumber() {
-    const nextPage = Number(routeParams.page) + 1;
-    navigate(`${ROUTES.colors}/${nextPage}`, {replace: false});
-  }
-
-  function decreasePageNumber() {
-    const prevPage = Number(routeParams.page) - 1;
-    navigate(`${ROUTES.colors}/${prevPage}`, {replace: false});
-  }
-
-  function handleChosenPage(num) {
-    navigate(`${ROUTES.colors}/${num}`, {replace: false});
-  }
-
-  function openColorDetails(colorId) {
-    navigate(`${ROUTES.color}/${colorId}`)
-  }
-
-  const renderColors = colors?.map(color => {
-    return (
-      <ColorCard
-        key={color.name}
-        color={color.color}
-        name={color.name}
-        style={{margin: '0 1.6rem 1.6rem 0'}}
-        onColorCard={() => openColorDetails(color.id)} />
-    )
-  })
+  useEffect(() => {
+    if (!routeParams.page) {
+      navigate('1');
+    }
+  }, [routeParams])
 
   return (
-    <div className={styles['colors-page']}>
-      <h1 className={styles['colors-page__title']}>Amazing Colors</h1>
-      <div className={styles['colors-page__colors']}>
-        {renderColors}
-      </div>
-
-      <div className={styles['colors-page__pagination']}>
-        <Pagination
-          activePage={routeParams.page}
-          totalPages={totalPages}
-          onBtnNumber={handleChosenPage}
-          onIncreasePage={increasePageNumber}
-          onDecreasePageNumber={decreasePageNumber}
-        />
-      </div>
-    </div>
+    <TitlePaginationLayout page={routeParams.page} totalPages={totalPages}>
+      <Outlet />
+    </TitlePaginationLayout>
   )
 }
 

@@ -1,11 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import styles from './Main.module.scss';
 
-const Main = () => {
+const Main = ( {children}) => {
   return (
     <main className={styles["main"]}>
-      <Outlet />
+      {children}
     </main>
   )
 }
