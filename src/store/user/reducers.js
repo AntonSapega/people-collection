@@ -1,29 +1,42 @@
-import {
-  SET_USER,
-  REMOVE_USER,
-  USER_WAS_NOT_FOUND,
-  RESET_USER_WAS_NOT_FOUND_FIELD
-} from '../types';
+import { createSlice } from "@reduxjs/toolkit";
+import { sessionController } from "../../services/storage/sessionController";
 
-const user = {
-  info: null,
-  userNotFound: false,
-};
-
-export const userReducer = (state = user, action) => {
-  switch (action.type) {
-    case SET_USER:
-      if (!state.info) {
-        return {...state, info: action.payload};
+const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    info: null,
+    userNotFound: false,
+  },
+  reducers: {
+    createUser() {
+      // middleware
+    },
+    authUser() {
+      // middleware
+    },
+    setUser(state, {payload}) { //!!!!!! NOT PURE FUNCTION!
+      if (!sessionController.getToken()) {
+        sessionController.setToken(payload.token);
+        sessionController.setUser(payload);
       }
-      return state;
-    case REMOVE_USER:
-      return {...state, info: null};
-    case USER_WAS_NOT_FOUND:
-      return {...state, userNotFound: true};
-    case RESET_USER_WAS_NOT_FOUND_FIELD:
-      return {...state, userNotFound: false};
-    default:
-      return state;
+      if (!state.info) {
+        state.info = payload;
+      }
+    },
+    removeUser(state) { //!!!!!! NOT PURE FUNCTION!
+      sessionController.removeUser();
+      sessionController.removeToken();
+
+      state.info = null;
+    },
+    userWasNotFound(state) {
+      state.userNotFound = true;
+    },
+    resetUserWasNotFoundField(state) {
+      state.userNotFound = false;
+    }
   }
-}
+})
+
+export const { createUser, authUser, setUser, removeUser, userWasNotFound, resetUserWasNotFoundField } = userSlice.actions;
+export default userSlice.reducer;

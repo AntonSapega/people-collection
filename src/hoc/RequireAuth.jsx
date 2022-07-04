@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
 import { sessionController } from "../services/storage/sessionController";
-import { removeUser } from '../store/user/actions';
+import { removeUser } from '../store/user/reducers';
 
 const RequireAuth = ( {children} ) => {
   const location = useLocation();

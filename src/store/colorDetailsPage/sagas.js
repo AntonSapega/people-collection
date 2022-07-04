@@ -1,8 +1,7 @@
 import { fork, join, put, takeEvery } from 'redux-saga/effects';
-import  { LOAD_COLOR_DETAILS_MIDDLEWARE } from '../types';
 import { getColor, getPerson } from '../../services/api/reqresApi';
 import { getTextPlaceholder } from '../../services/api/jsonPlaceholderApi';
-import { setColorDetails } from './actions';
+import { setColorDetails } from './reducers';
 
 function* getDetailsWorker({ payload: colorId }) {
   const fullInfo = yield join([
@@ -19,5 +18,5 @@ function* getDetailsWorker({ payload: colorId }) {
 }
 
 export default function* colorDetailsPage() {
-  yield takeEvery(LOAD_COLOR_DETAILS_MIDDLEWARE, getDetailsWorker);
+  yield takeEvery('color_details/loadColorDetails', getDetailsWorker);
 }

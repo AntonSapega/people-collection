@@ -1,7 +1,6 @@
 import { call, debounce, put, takeEvery } from 'redux-saga/effects';
 import { getColorsPage } from '../../services/api/reqresApi';
-import { addColorsOnPage } from './actions';
-import { LOAD_PARTICULAR_COLORS, LOAD_COLORS } from '../../store/types';
+import { addColorsOnPage } from './reducers';
 
 // export function* colorsPageWorker(pageNumber) {
 //   const { data } = yield call(getColorsPage, pageNumber);
@@ -31,11 +30,10 @@ export function* getColors( {payload: inputValue} ) {
   yield put(addColorsOnPage({data: filteredColors}));
 }
 
-export function* colorsPageWatcher() { //! It is not being used
-  yield takeEvery(LOAD_COLORS, colorsPageWorker);
+export function* colorsPageWatcher() {
+  yield takeEvery('colors_page/loadColors', colorsPageWorker);
 }
 
 export function* loadParticularColorsWatcher() {
-  // yield takeEvery(LOAD_PARTICULAR_COLORS, getColors);
-  yield debounce(600, LOAD_PARTICULAR_COLORS, getColors);
+  yield debounce(600, 'colors_page/loadParticularColors', getColors);
 }

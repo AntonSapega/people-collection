@@ -1,15 +1,24 @@
-import { ADD_PEOPLE_ON_PAGE } from '../types';
+import { createSlice } from "@reduxjs/toolkit";
 
-const initial = {
-  people: [],
-  pagesAmount: 0,
-};
-
-export const peoplePageReducer = (state = initial, action) => {
-  switch (action.type) {
-    case ADD_PEOPLE_ON_PAGE:
-      return {...state, people: action.payload.data, pagesAmount: action.payload.total_pages};
-    default:
-      return state;
+const peoplePageSlice = createSlice({
+  name: 'people_page',
+  initialState: {
+    people: [],
+    pagesAmount: 0,
+  },
+  reducers: {
+    loadPeoplePage(state, action) {
+      state.people = action.payload.data;
+      state.pagesAmount = action.payload.total_pages;
+    },
+    getPeopleMiddleware() {
+      // middleware
+    },
+    getParticularPeople() {
+      // middleware
+    }
   }
-}
+})
+
+export const { loadPeoplePage, getPeopleMiddleware, getParticularPeople } = peoplePageSlice.actions;
+export default peoplePageSlice.reducer;

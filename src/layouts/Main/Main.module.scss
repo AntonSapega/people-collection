@@ -1,8 +1,13 @@
+@import '../../enums/breakpoints.scss';
+
 .main {
-  height: calc(100% - var(--header-height) - var(--footer-height));
+  height: 100%;
+  flex-shrink: 1;
   padding: var(--main-padding);
   padding-top: calc(2 * var(--main-padding));
+  padding-bottom: 0;
   box-sizing: border-box;
-  background-color: whitesmoke;
+  background-color: var(--smoke);
   overflow-y: auto;
+  position: relative;
 }

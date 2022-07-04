@@ -1,3 +1,5 @@
+@import '../../enums/breakpoints.scss';
+
 .user-profile {
   height: 100%;
   position: relative;
@@ -10,6 +12,14 @@
   &__image {
     border-radius: 50%;
     height: 50px;
+
+    @media (max-width: $laptop-screen) {
+      height: 46px;
+    }
+
+    @media (max-width: $tablet-screen) {
+      height: 40px;
+    }
   }
 
   &__description {
@@ -20,8 +30,16 @@
 
   &__full-name {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 0.889rem;
     font-weight: 600;
+
+    @media (max-width: $laptop-screen) {
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: $tablet-screen) {
+      font-size: 0.889rem;
+    }
   }
 
   &__email {
@@ -49,5 +67,5 @@
 
 .user-profile:hover .user-profile__logout-container {
   top: 100%;
-  z-index: 1;
+  z-index: 4;
 }

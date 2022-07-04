@@ -1,8 +1,8 @@
 import { call, fork, put, select } from 'redux-saga/effects';
-import { initPeopleCollection } from '../actions';
+import { initPeopleCollection } from '../reducers';
 import { getPeoplePage } from '../../../services/api/reqresApi';
 
-function* getPeopleCollection(pageNumber = 1) {
+function* getAllPeople(pageNumber = 1) {
   const isUserExistInState = yield select(state => state.user.info);
   if (isUserExistInState) {
     const req = yield call(getPeoplePage, pageNumber);
@@ -10,11 +10,11 @@ function* getPeopleCollection(pageNumber = 1) {
 
     if (req.data.page < req.data.total_pages) {
       const nextPage = req.data.page + 1;
-      yield call(getPeopleCollection, [nextPage]);
+      yield call(getAllPeople, [nextPage]);
     }
   }
 }
 
 export default function* setPeopleCollection() {
-  yield fork(getPeopleCollection);
+  yield fork(getAllPeople);
 }

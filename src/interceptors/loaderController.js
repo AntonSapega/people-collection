@@ -1,5 +1,6 @@
 import axios from "axios";
-import { onLoader, offLoader } from "../store/app/actions";
+// import { onLoader, offLoader } from "../store/app/actions";
+import { onLoader, offLoader } from "../store/app/reducers";
 
 const loaderController = (dispatchFn) => {
   axios.interceptors.request.use(function (request) {

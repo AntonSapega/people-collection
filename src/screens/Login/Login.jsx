@@ -3,7 +3,7 @@ import LoginForm from './LoginForm/LoginForm';
 import styles from './Login.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser, authUser, resetUserWasNotFoundField } from '../../store/user/actions';
+import { createUser, authUser, resetUserWasNotFoundField } from '../../store/user/reducers';
 import Modal from '../../components/Modal/Modal';
 
 const Login = () => {

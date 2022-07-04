@@ -1,24 +1,33 @@
-import { INIT_LIST_OF_PEOPLE, ADD_NEW_PERSON, DELETE_PERSON, CLEAR_LIST_OF_PEOPLE } from '../types';
+import { createAction, createSlice } from "@reduxjs/toolkit";
 
-const peopleCollection = {
-  people: [],
-};
+const nameSlice = 'people';
 
-export const peopleDBReducer = (state = peopleCollection, action) => {
-  switch (action.type) {
-    case INIT_LIST_OF_PEOPLE:
-      return {...state, people: state.people.concat(action.payload)};
-    case CLEAR_LIST_OF_PEOPLE:
-      return {...state, people: []};
-    case ADD_NEW_PERSON:
+// Middleware
+export const deletePersonMiddleware = createAction(`${nameSlice}/deletePersonMiddleware`);
+
+const peopleDBSlice = createSlice({
+  name: nameSlice,
+  initialState: {
+    people: [],
+  },
+  reducers: {
+    initPeopleCollection(state, action) {
+      state.people = state.people.concat(action.payload);
+    },
+    clearPeopleCollection(state) {
+      state.people = [];
+    },
+    addNewPerson(state, action) {
       const isAlreadyAdded = state.people.find(person => person.id === action.payload.id);
       if (!isAlreadyAdded) {
-        return {...state, people: state.people.concat([action.payload])};
+        state.people.concat([action.payload]);
       }
-      return state;
-    case DELETE_PERSON:
-      return {...state, people: state.people.filter(person => person.id !== action.payload)}
-    default:
-      return state;
+    },
+    deletePerson(state, action) {
+      state.people = state.people.filter(person => person.id !== action.payload);
+    },
   }
-}
+})
+
+export const { initPeopleCollection, clearPeopleCollection, addNewPerson, deletePerson } = peopleDBSlice.actions;
+export default peopleDBSlice.reducer;

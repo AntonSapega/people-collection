@@ -1,7 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { deletePerson } from '../../../services/api/reqresApi';
-import { DELETE_PERSON_MIDDLEWARE } from '../../types';
-import { deletePerson as deletePersonAction } from '../actions';
+import { deletePerson as deletePersonAction } from '../reducers';
 
 function* removePersonWorker({ payload: id }) {
   try {
@@ -16,5 +15,5 @@ function* removePersonWorker({ payload: id }) {
 }
 
 export default function* removePerson() {
-  yield takeEvery(DELETE_PERSON_MIDDLEWARE, removePersonWorker)
+  yield takeEvery('people/deletePersonMiddleware', removePersonWorker);
 }

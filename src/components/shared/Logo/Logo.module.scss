@@ -1,3 +1,5 @@
+@import '../../../enums/breakpoints.scss';
+
 .logo {
   text-decoration: none;
   display: flex;
@@ -7,20 +9,22 @@
 
   &__img {
     padding: 2px;
-    background-color: var(--orange-color);
+    background-color: var(--deep-blue);
     border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 6px;
+    margin-right: 4px;
+    font-size: 18px;
 
     &_negative {
       background-color: rgb(167, 167, 167);
+      font-size: 1rem !important;
     }
   }
 
   &__img-icon {
-    font-size: 18px;
+    font-size: inherit;
     color: #fff;
 
     &_negative {
@@ -30,14 +34,24 @@
 
   &__title {
     font-family: 'Roboto', sans-serif;
-    font-size: inherit;
+    font-size: 18px;
     font-weight: 600;
-    color: var(--primary-text-color);
+    color: var(--orange-color);
     text-transform: capitalize;
     vertical-align: middle;
 
     &_negative {
+      font-size: inherit;
       color: rgb(192, 192, 192);
+    }
+  }
+
+  &__ordinaryText {
+    display: inline-block;
+    text-transform: lowercase;
+
+    @media (max-width: calc($mobileL-screen + 36px)) {
+      display: none;
     }
   }
 }

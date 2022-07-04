@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import styles from './ColorsList.module.scss';
 import ColorCard from "../ColorCard/ColorCard";
 import { ROUTES } from "../../../enums/ROUTES";
-import { loadParticularColorsMiddleware } from '../../../store/colorsPage/actions';
-import useDebounce from "../../../hooks/useDebounce";
-import { loadColorsMiddleware } from '../../../store/colorsPage/actions';
+import { loadParticularColors } from '../../../store/colorsPage/reducers';
+import { loadColors } from '../../../store/colorsPage/reducers';
 import NothingFound from '../../../components/shared/NothingFound/NothingFound';
 
 const ColorsList = () => {
@@ -16,20 +15,14 @@ const ColorsList = () => {
   const routeParams = useParams();
   const dispatch = useDispatch();
   const [inputValue] = useOutletContext();
-  // const debouncedValue = useDebounce(inputValue, 600);
-
-  useEffect(() => {
-    console.log('useEffect')
-    dispatch(loadColorsMiddleware(routeParams.page));
-  }, [routeParams.page])
 
   useEffect(() => {
     if (inputValue) {
-      dispatch(loadParticularColorsMiddleware(inputValue));
+      dispatch(loadParticularColors(inputValue));
       return;
     }
-    dispatch(loadColorsMiddleware(routeParams.page));
-  }, [inputValue]);
+    dispatch(loadColors(routeParams.page));
+  }, [inputValue, routeParams.page]);
 
   function openColorDetails(colorId) {
     navigate(`/${ROUTES.color}/${colorId}`);

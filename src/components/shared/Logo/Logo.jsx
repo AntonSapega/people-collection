@@ -21,7 +21,10 @@ const Logo = ({ logoStyle = 'positive' }) => {
       <div className={`${styles.logo__img} ${negativeStyle.imgBase}`}>
         <span className={`material-icons ${styles['logo__img-icon']} ${negativeStyle.icon}`}>people_alt</span>
       </div>
-      <h1 className={`${styles['logo__title']} ${negativeStyle.title}`}>PeopleCollection</h1>
+      <h1 className={`${styles.logo__title} ${negativeStyle.title}`}>
+        Pe<span className={styles.logo__ordinaryText}>ople</span>
+        Co<span className={styles.logo__ordinaryText}>llection</span>
+      </h1>
     </NavLink>
   )
 }

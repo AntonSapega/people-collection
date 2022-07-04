@@ -1,11 +1,17 @@
+@import '../../enums/breakpoints.scss';
+
 .logout {
-  background-color: rgb(109, 108, 108);
+  background-color: var(--primary-bgc-color);
   padding: 12px;
   border-radius: 8px;
+  border: 1px solid rgb(182, 182, 182);
+
+  @media (max-width: $mobileL-screen) {
+    display: none;
+  }
 
   &__template {
     width: 100%;
-    color: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     display: flex;
@@ -19,5 +25,6 @@
   &__question {
     display: inline-block;
     margin-bottom: 14px;
+    text-align: center;
   }
 }

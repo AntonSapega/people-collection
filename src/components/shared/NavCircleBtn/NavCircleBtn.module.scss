@@ -1,0 +1,38 @@
+.navigation {
+  top: 50%;
+  font-size: 32px;
+  border-radius: 50%;
+  background-color: rgba(89, 89, 89, 0.1);
+  color: rgb(135, 135, 135);
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  transition: all 120ms ease;
+
+  &:active {
+    outline: 0;
+    box-shadow: var(--outline-button);
+  }
+}
+
+.navigation_left {
+  left: 0;
+}
+
+.navigation_right {
+  right: 0;
+}
+
+.navigation_disabled {
+  background-color: rgba(89, 89, 89, 0.03);
+  color: rgb(178, 178, 178);
+
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}

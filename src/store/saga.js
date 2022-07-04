@@ -7,6 +7,7 @@ import removePerson from './peopleDB/sagas/removePerson';
 import colorDetailsPage from './colorDetailsPage/sagas';
 import { peoplePageWatcher, getPeopleSetWatcher } from './peoplePage/sagas';
 import { loadParticularColorsWatcher, colorsPageWatcher } from './colorsPage/sagas';
+import loadHeroes from './heroes/sagas';
 
 export default function* rootSaga() {
   const sagas = [
@@ -19,7 +20,8 @@ export default function* rootSaga() {
     peoplePageWatcher,
     getPeopleSetWatcher,
     colorsPageWatcher,
-    loadParticularColorsWatcher
+    loadParticularColorsWatcher,
+    loadHeroes,
   ];
 
   const retrySagas = yield sagas.map(saga => {

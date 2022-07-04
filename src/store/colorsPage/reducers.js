@@ -1,15 +1,24 @@
-import { ADD_COLORS_SET} from '../types';
+import { createAction, createSlice } from "@reduxjs/toolkit";
 
-const initial = {
-  colors: [],
-  pagesAmount: 0,
-};
+const nameSlice = 'colors_page';
 
-export const colorsPageReducer = (state = initial, action) => {
-  switch (action.type) {
-    case ADD_COLORS_SET:
-      return {...state, colors: action.payload.data, pagesAmount: action.payload.total_pages};
-    default:
-      return state;
+// Middleware
+export const loadColors = createAction(`${nameSlice}/loadColors`);
+export const loadParticularColors = createAction(`${nameSlice}/loadParticularColors`);
+
+const colorsPageSlice = createSlice({
+  name: nameSlice,
+  initialState: {
+    colors: [],
+    pagesAmount: 0,
+  },
+  reducers: {
+    addColorsOnPage(state, action) {
+      state.colors = action.payload.data;
+      state.pagesAmount = action.payload.total_pages;
+    },
   }
-}
+})
+
+export const { addColorsOnPage } = colorsPageSlice.actions;
+export default colorsPageSlice.reducer;

@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './AuthForm.module.scss';
 import PrimaryInput from '../../../components/shared/PrimaryInput/PrimaryInput';
 
 const FormInput = ({

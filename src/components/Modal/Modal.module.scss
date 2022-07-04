@@ -1,3 +1,4 @@
+@import '../../enums/breakpoints.scss';
 $side-padding: 1.4rem;
 
 .background {
@@ -25,7 +26,7 @@ $side-padding: 1.4rem;
   transform: translateY(-100%);
   opacity: 0;
   width: 600px;
-  background-color: #fff;
+  background-color: var(--primary-bgc-color);
   border-radius: 10px;
   box-sizing: border-box;
   padding-top: 1.91rem;
@@ -38,6 +39,16 @@ $side-padding: 1.4rem;
   animation-play-state: running;
   animation-delay: 250ms;
   animation-fill-mode: forwards;
+
+  @media (max-width: $tablet-screen) {
+    width: 380px;
+    padding-top: 1rem;
+  }
+
+  @media (max-width: $mobileL-screen) {
+    width: 240px;
+    padding-top: 1rem;
+  }
 }
 
 @keyframes show-modal{
@@ -64,7 +75,24 @@ $side-padding: 1.4rem;
   padding: 0 $side-padding;
   margin-bottom: 3rem;
   display: flex;
+  flex-direction: row;
   font-family: 'Open Sans', sans-serif;
+
+  @media (max-width: $tablet-screen) {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: $mobileL-screen) {
+    padding: 0 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  &__iconWrapper {
+    align-self: end;
+  }
 
   &__icon {
     height: 1.06rem;
@@ -76,6 +104,13 @@ $side-padding: 1.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: $tablet-screen) {
+      margin-bottom: 0.6rem;
+      height: 0.4rem;
+      width: 0.4rem;
+      align-self: self-end;
+    }
   }
 
   &__iconExclamationMark {
@@ -83,10 +118,18 @@ $side-padding: 1.4rem;
     font-size: 1.6rem;
     position: absolute;
     z-index: 100;
+
+    @media (max-width: $tablet-screen) {
+      font-size: 1.2rem;
+    }
   }
 
   &__text {
     margin-left: $side-padding;
+
+    @media (max-width: $tablet-screen) {
+      margin-left: 0;
+    }
   }
 
   &__title {
@@ -105,10 +148,23 @@ $side-padding: 1.4rem;
 
 .actions {
   height: 28%;
-  background-color: whitesmoke;
+  background-color: var(--primary-bgc-color);
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-end;
   box-sizing: border-box;
   padding: 1rem $side-padding;
+
+  @media (max-width: $mobileL-screen) {
+    & button:first-child {
+      margin-right: auto;
+      margin-left: 0;
+    }
+
+    & button:last-child {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
 }

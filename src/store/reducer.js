@@ -1,22 +1,24 @@
 import { combineReducers } from "redux";
-import { appReducer } from './app/reducers';
-import { peopleDBReducer } from './peopleDB/reducers';
-import { userReducer } from './user/reducers';
-import { peoplePageReducer } from './peoplePage/reducers';
-import { colorsPageReducer } from './colorsPage/reducers';
-import { personPageReducer } from './personDetailsPage/reducers';
-import { colorDetailsReducer } from './colorDetailsPage/reducers';
+import appSlice from './app/reducers';
+import userSlice from './user/reducers';
+import peopleDBSlice from './peopleDB/reducers';
+import peoplePageSlice from './peoplePage/reducers';
+import personPageSlice from './personDetailsPage/reducers';
+import colorsPageSlice from './colorsPage/reducers';
+import colorDetailsSlice from './colorDetailsPage/reducers';
+import heroesSlice from './heroes/reducers';
 
 const rootReducer = (router) => {
   return combineReducers({
     router,
-    app: appReducer,
-    peopleCollection: peopleDBReducer,
-    user: userReducer,
-    peoplePage: peoplePageReducer,
-    colorsPage: colorsPageReducer,
-    personDetails: personPageReducer,
-    colorDetailsPage: colorDetailsReducer
+    app: appSlice,
+    peopleCollection: peopleDBSlice,
+    user: userSlice,
+    peoplePage: peoplePageSlice,
+    personDetails: personPageSlice,
+    colorsPage: colorsPageSlice,
+    colorDetailsPage: colorDetailsSlice,
+    heroes: heroesSlice
   })
 }
 

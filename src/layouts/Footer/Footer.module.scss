@@ -4,6 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-height: 400px) {
+    display: none;
+  }
 }
 
 .logoWrapper {

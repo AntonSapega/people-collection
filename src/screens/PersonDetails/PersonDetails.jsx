@@ -3,8 +3,8 @@ import styles from './PersonDetails.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import { useDispatch } from 'react-redux';
-import { getPersonDetails } from '../../store/personDetailsPage/actions';
-import { deletePersonMiddleware } from '../../store/peopleDB/actions';
+import { getPersonDetails } from '../../store/personDetailsPage/reducers';
+import { deletePersonMiddleware } from '../../store/peopleDB/reducers';
 import { useSelector } from 'react-redux';
 import DeletedStamp from '../../components/shared/DeletedStamp/DeletedStamp';
 import ImagePlaceholder from '../../components/shared/ImagePlaceholder/ImagePlaceholder';
@@ -125,6 +125,7 @@ const PersonDetailsPage = () => {
         <Modal
           title="Please confirm your actions"
           type={"action"}
+          agreementButtonName='Delete'
           userChoice={(result) => handlePopupAction(result)}>
           {`Are you sure you want to delete of ${personInfo.first_name} ${personInfo.last_name}?`}
         </Modal>

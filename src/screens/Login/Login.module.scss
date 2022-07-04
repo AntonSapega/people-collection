@@ -1,3 +1,5 @@
+@import '../../enums/breakpoints.scss';
+
 $main-bgc: rgb(8, 255, 200);
 
 .login-form {
@@ -6,6 +8,10 @@ $main-bgc: rgb(8, 255, 200);
   flex-direction: row;
   background-color: var(--primary-bgc-color);
   position: relative;
+
+  @media (max-width: $tablet-screen) {
+    background-color: $main-bgc;
+  }
 
   &__left-side {
     background-color: $main-bgc;

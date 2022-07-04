@@ -3,9 +3,9 @@ import styles from './LoginForm.module.scss';
 import AuthForm from '../AuthForm/AuthForm';
 import StringButton from '../../../components/shared/String-button/String-button';
 import Modal from '../../../components/Modal/Modal';
+import BrandLogo from '../components/BrandLogo/BrandLogo';
 
 export default class LoginForm extends React.Component {
-
   constructor() {
     super();
     this.handleHelpCall = this.handleHelpCall.bind(this);
@@ -29,15 +29,15 @@ export default class LoginForm extends React.Component {
       <>
         <div className={styles['login-form']}>
           <aside className={styles['login-form__left-side']}>
-            <span className={`material-icons ${styles['login-form__icon']}`}>perm_identity</span>
-            <h1 className={styles['login-form__title']}>{this.props.title}</h1>
-            <span className={styles['login-form__description']}>{this.props.description}</span>
+            <div className={styles['login-form__brand-logo']}>
+              <BrandLogo title={this.props.title} description={this.props.description} />
+            </div>
           </aside>
           <div className={styles['login-form__right-side']}>
             <div className={styles['login-form__btn-tip']}>
               <StringButton handleClick={this.handleHelpCall}>Need help?</StringButton>
             </div>
-            
+
             <AuthForm onGetForm={(formValue) => onGetForm(formValue)} />
           </div>
         </div>
